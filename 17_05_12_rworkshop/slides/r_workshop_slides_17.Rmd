@@ -1,0 +1,390 @@
+---
+title: "R-Workshop"
+author: Simon Roth 
+date: 31.03.2017
+output: 
+  revealjs::revealjs_presentation:
+    incremental: false
+    theme: simple
+    highlight: monochrome
+    center: true
+    transition: slide
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(#echo = T # Whether to display code along with its results
+                      #, eval = T # Whether to evaluate the code and include its results
+                      results = "hide" # this at deafult is in end much more efficient
+                      , cache = F # Whether to cache results for future renders (efficient!)
+                      , warning = F # Whether to display errors
+                      , message = F # Whether to display messages
+                      , error = F # mybe turn on
+                      , tidy = F # Whether to reformat code in a tidy way when displaying it
+                      #, root.dir = normalizePath('/Users/simonroth/Dropbox/methods/git/tidy_textmining/my_summary/') 
+                      #, root.dir = normalizePath("E:/Dropbox/methods/git/tidy_textmining")
+                      # in order to calculate relative paths
+                      , fig.width = 6
+                      , fig.height = 4
+                      , fig.align = "center"
+                      )
+```
+
+# Introduction
+## Why R? Popularity
+```{r, echo = F, eval = F}
+# devtools::install_github("PMassicotte/gtrendsR")
+library(gtrendsR)
+dat_w <- gtrends(c("R", "SPSS", "SAS", "Stata"), time = "all") 
+dat_w_time <- dat_w$interest_over_time
+dat_w_geo <- dat_w$interest_by_region
+dat_w_city <- dat_w$interest_by_city
+
+
+unique(gtrendsR::countries[, "country_code"])
+dat_g <- gtrends(c("R", "SPSS", "SAS", "Stata"), geo = "DE", time = "all") 
+dat_g_time  <- dat_g$interest_over_time
+
+head(dat_w_time)
+head(dat_g_time)
+
+dat_time <- rbind(dat_g_time, dat_w_time)
+
+#save(dat_time, file = "softwares_time.Rdata")
+#save(dat_w_geo, file = "softwares_geo.Rdata")
+#save(dat_w_city, file = "softwares_city.Rdata")
+```
+
+
+```{r pl, eval = T, echo = F, plotly = T, fig.width = 10, fig.height = 5, results='asis'}
+load("softwares_time.Rdata")
+
+library(dplyr)
+library(ggplot2)
+
+dat_time %>%
+  ggplot(aes(date, hits, colour = keyword)) + 
+    geom_line(alpha = 0.5) +
+    geom_smooth(se=F) +
+    facet_wrap(~ geo, ncol = 2) + 
+    ggthemes::scale_color_gdocs() +
+    #tidyquant::scale_color_tq() +
+    tidyquant::theme_tq() +
+    labs(x = "", y = "Google's popularity index")
+
+# library(plotly)
+# devtools::install_github('ropensci/plotly')
+# ggplotly(gg1)
+```
+<font size=4>
+Note: Numbers represent search interest relative to the highest point on the
+chart for the given region and time. A value of 100 is the peak popularity for
+the term. A value of 50 means that the term is half as popular. Likewise a score
+of 0 means the term was less than 1% as popular as the peak [Google Trends](https://trends.google.com/trends/).
+</font>
+
+
+
+<!-- ## NASA map -->
+<!-- ```{r, echo = F, eval = T, results = 'asis'} -->
+<!-- #Library -->
+<!-- library(leaflet) -->
+
+<!-- # Background 1: NASA -->
+<!-- m <- leaflet() %>% addTiles() %>% setView( lng = 2.34, lat = 48.85, zoom = 5 ) %>%  addProviderTiles("NASAGIBS.ViirsEarthAtNight2012") -->
+<!-- m -->
+<!-- ``` -->
+
+## Internationally seen... {data-background="gray60"}
+
+```{r, echo = F, eval = T, results = 'asis', fig.width = 10, fig.height = 7}
+# download.file("http://thematicmapping.org/downloads/TM_WORLD_BORDERS_SIMPL-0.3.zip" , # destfile="world_shape_file.zip")
+# system("unzip world_shape_file.zip")
+
+#dir()
+library(maptools)
+area <- readShapePoly("TM_WORLD_BORDERS_SIMPL-0.3.shp")
+
+library(rworldmap)
+library(ggplot2)
+
+#dir()
+load("softwares_geo.Rdata")
+
+library(countrycode)
+dat_w_geo$cnames <- countrycode(dat_w_geo$location, origin = "country.name", destination = "country.name")
+
+area$cnames <- countrycode(area$NAME, origin = "country.name", destination = "country.name")
+
+library(tidyr)
+### spread data into wide format
+dat_w_geo1 <- dat_w_geo %>%
+  select(cnames, keyword, hits) %>%
+  group_by(cnames, keyword) %>%
+  summarise(hits2 = mean(hits, na.rm= T)) %>%
+  #filter(cnames %in% "DE") %>%
+  #mutate(id2 = sequence(n())) %>%
+  spread(keyword, hits2, fill = 0)
+
+x_map_poly <- merge(area, dat_w_geo1, 
+                    by.x = "cnames", 
+                    all.x = T, 
+                    duplicateGeoms = TRUE)
+
+library(leaflet)
+pal <- colorNumeric("inferno", NULL, reverse = T)
+
+popup_info = paste(sep = " <br/> ","<font size = '2';color='black'>",
+                  paste0("<b>", x_map_poly$cnames, "</b>"),
+                  paste0("  R = ", round(x_map_poly$R, 2)),
+                  paste0("  SAS = ", round(x_map_poly$SAS, 2)),
+                  paste0("  SPSS =", round(x_map_poly$SPSS, 2)),
+                  paste0("  Stata =", round(x_map_poly$Stata, 2)),
+                  "</font>")
+  
+m <- leaflet(data = x_map_poly, options = leafletOptions(doubleClickZoom= FALSE)) %>%
+  addTiles(options = tileOptions(minZoom=2, maxZoom=3)) %>%
+  #addProviderTiles() %>%
+  setView(lat = 10, lng = 0 , zoom = 2) %>%
+  addPolygons(fillColor = ~ pal(R), 
+              fillOpacity = 0.8, 
+              color = "gray40",
+              smoothFactor = 0.5,
+              popup = ~ popup_info,
+              stroke = F
+              )
+m
+```
+
+## Why R? Costs!
+
+| Statistical Package | Base           | Standard                   | Pro                              | Professional                             | Source                                                                               |
+|---------------------|----------------|----------------------------|----------------------------------|------------------------------------------|--------------------------------------------------------------------------------------|
+|  <img src='images/spss_logo.png' width="70" />| $1210/y   * LM | $2690/y   * GLM * Logistic | $5400/y   * Regularization * PCA | $8050/y * Time Series * Machine Learning | [IBM](https://www.ibm.com/us-en/marketplace/spss-statistics/purchase#product-header) |
+| <img src='images/sas_logo.png' width="70" />                 | $8000/y        |                            |                                  |                                          | [Quora](https://www.quora.com/How-much-does-SAS-cost)                                |
+| <img src='images/stata_logo.png' width="70" />               | $595/y $1195   | $845/y $1695               | $6,445  Server Version           |                                          | [Stata](http://www.stata.com/order/new/bus/single-user-licenses/)                    |
+| <img src='images/r_logo.png' width="70" />                 | free           | free                       | free^[There is proffesional support, but...]                            | free                                     | [RStudio](https://www.rstudio.com/pricing/)                                          |
+
+
+
+
+## Why R? Vitial Community
+```{r, eval = F, echo = F}
+library(rvest)
+# First, grab the page source
+tab1 <- html("https://cran.r-project.org/web/packages/available_packages_by_date.html") %>%
+  # then extract the first node with class of cran package table
+  html_node(xpath = "/html/body/table") %>% 
+  # then convert the HTML table into a data frame
+  html_table() 
+
+str(tab1)
+head(tab1)
+library(lubridate)
+tab1$date <- ymd(tab1$Date)
+tab1$my <- floor_date(tab1$date, "month")
+range(tab1$date)
+
+save(tab1, file = "packages_cran_9apr17.Rdata")
+```
+
+
+```{r, echo = F, eval = T, results = 'asis', fig.width = 8, fig.height = 5, plotly = T, fig.align = "center"}
+# dir()
+load("packages_cran_9apr17.Rdata")
+
+tab1 %>%
+  group_by(my) %>%
+  summarise(n = n()) %>%
+  mutate(csum = cumsum(n)) %>%
+  #tally %>%
+  ggplot() +
+    geom_point(aes(my, csum), size = 1) +
+    geom_bar(aes(my, n), stat = "identity") + 
+    theme_bw() + 
+    labs(x = "", y = "Numbers of Monthly Published Packages")
+
+# library(plotly)
+# ggplotly(pack_time)
+```
+
+
+## Work Directory (Ordnerpfad)
+```{r}
+data_path <- "/Users/simonroth/Dropbox/methods/git/r_workshops/scripts/data/"
+setwd(data_path) # warning!
+getwd()
+dir()
+```
+
+
+## themes avaible
+
+- default
+- simple 
+- sky
+- beige
+- serif
+- solarized
+- blood
+- moon
+- night
+- black
+- league (dark)
+- white
+
+
+## code highlighting
+
+* tango
+* pygments
+* kate
+* monochrome 
+* espresso
+* zenburn
+* haddock
+
+
+## multicol?
+
+1. item 1
+1. item 2
+
+- Eat eggs
+- Drink coffee
+
+
+
+## transition mods {data-transition="slide"}
+
+Slide transition style:
+
+* default
+* fade 
+* slide
+* convex
+* concave
+* zoom
+* none
+
+
+# Transitions
+## latex {data-transition="zoom"}
+
+LaTeX math $\sum_{i=1}^n \alpha_i$ = \(\sum_{i=1}^n \alpha_i\)
+ 
+ 
+## new
+footnotes ^[A footnote here.]
+citations [@joe2014]
+
+# Embeddings and background customaisation
+
+```{r}
+## CSS color background {data-background=#ff0000}
+## Full size image background {data-background="background.jpeg"}
+## Video background {data-background-video="background.mp4"}
+## Embed a web page as a background {data-background-iframe="http://www.systats.com"}
+```
+
+## black stuff {data-background=#ff0000}
+m
+
+## webpage {data-background-iframe="http://www.systats.com"}
+m
+
+# Latex
+## Formular
+
+1. $$y_i \backsim Normal(\mu_i, \sigma)$$
+1. $$\mu_i = \alpha + \beta x_i$$
+1. $$\sigma \backsim Uniform(0, 1)$$
+1. $$\beta \backsim Normal(0, 10)$$
+1. $$\alpha \backsim Normal(0, 10)$$
+
+- `Likelihood`
+- `Linear model`
+- `sigma prior`
+- `beta prior`
+- `alpha prior`
+
+
+## Display Modes
+* 'f' enable fullscreen mode
+* 'w' toggle widescreen mode
+* 'o' enable overview mode
+* 'h' enable code highlight mode
+* 'p' show presenter notes
+
+## Standard Normal Distribution
+
+
+$$ f(x) = \frac {1}{\sigma \sqrt{2\pi }} e^{-\frac {1}{2}\left(\frac{x-\mu }{\sigma }\right)^{2}}$$
+$$ x \backsim Normal(\mu,\sigma)$$
+
+
+```{r, echo = F}
+n <- 1000
+x <- rnorm(n, mean = 0, sd = 1)
+#hist(x)
+
+library(ggplot2)
+library(dplyr)
+library(ggthemes)
+
+data.frame(id = 1:length(x), x) %>%
+  ggplot(aes(x)) +
+    geom_histogram() +
+    theme_bw() +
+    scale_x_continuous(breaks = c(-3:3), limits = c(-3,3)) +
+    geom_vline(xintercept = mean(x)) + 
+    geom_vline(xintercept = sd(x)*1, linetype = 2) + 
+    geom_vline(xintercept = sd(x)*-1, linetype = 2) 
+```
+
+
+
+
+## Approximation
+
+Law of big numbers
+
+```{r}
+obs <- c(100,200,500,1000,2000,10000)
+sim_data <- data.frame()
+for(i in seq_along(obs)){
+  value <- rnorm(obs[i], mean = 0, sd = 1)
+  sample  <- rep(obs[i], obs[i])
+  sim_data <- rbind(sim_data, cbind(sample, value))
+}
+
+sim_data$sample1 <- paste0("N = ", sim_data$sample)
+
+sim_data %>%
+  ggplot(aes(value)) + 
+  geom_histogram() +
+  facet_wrap( ~ reorder(sample1, sample),
+              nrow = 2, scales = "free")
+
+```
+
+## multivariate distribution
+
+ggplot2 is a part of the tidyverse, an ecosystem of packages designed with common APIs and a shared philosophy. Learn more at tidyverse.org.
+
+
+
+
+
+Erwartungen und Anforderungen
+Das kann diese Schulung vermitteln:
+I Eine praxisnahe Einfuhrung in die statistische ¨
+Programmiersprache R
+I Erlernen einer Programmier-Strategie
+I
+”
+Guten Stil“
+I Die Vorzuge grafischer Datenanalyse

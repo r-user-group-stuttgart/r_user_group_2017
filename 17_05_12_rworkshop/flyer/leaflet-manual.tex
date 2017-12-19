@@ -1,0 +1,138 @@
+%%
+%% This is file `leaflet-manual.tex',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% leaflet.dtx  (with options: `manual')
+%% 
+%% Copyright (C) 2003, 2004
+%% Rolf Niepraschk, Rolf.Niepraschk@ptb.de
+%% Hubert Gaesslein, HubertJG@open.mind.de
+%% 
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2003/12/01 or later.
+%% 
+%% This work has the LPPL maintenance status "author-maintained".
+%% 
+\def\filename{leaflet-manual.tex}
+\def\fileversion{v1.0d}   % change this when leaflet-manual changed, too.
+\def\filedate{2012/06/04}
+\def\docdate {2012/06/04} % change this when leaflet-manual changed, too.
+\listfiles
+\errorcontextlines=99
+\documentclass[
+%%notumble,
+%%nofoldmark,
+%%dvipdfm,
+%%portrait,
+%%titlepage,
+%%nocombine,
+%%a3paper,
+%%debug,
+%%nospecialtricks,
+%%draft,
+]{leaflet}
+
+
+\renewcommand*\foldmarkrule{.3mm}
+\renewcommand*\foldmarklength{5mm}
+
+
+\RequirePackage[utf8]{inputenc}
+\RequirePackage{amsmath}
+\RequirePackage{amsfonts}
+\RequirePackage{amssymb}
+\RequirePackage{graphicx}
+\RequirePackage{float}
+\RequirePackage{verbatim}
+\RequirePackage{subcaption}
+\RequirePackage{caption}
+\RequirePackage{listings}
+\RequirePackage{setspace}
+\RequirePackage{microtype}
+\RequirePackage{booktabs}
+\RequirePackage{lmodern}
+\RequirePackage{url}
+
+
+\usepackage{textcomp}
+\usepackage{mathptmx}
+\usepackage[scaled=0.9]{helvet}
+\makeatletter
+\def\ptmTeX{T\kern-.1667em\lower.5ex\hbox{E}\kern-.075emX\@}
+\DeclareRobustCommand{\ptmLaTeX}{L\kern-.3em
+        {\setbox0\hbox{T}%
+         %\vb@xt@ % :-)
+         \vbox to\ht0{\hbox{%
+                            \csname S@\f@size\endcsname
+                            \fontsize\sf@size\z@
+                            \math@fontsfalse\selectfont
+                            A}%
+                      \vss}%
+        }%
+        \kern-.12em
+        \ptmTeX}
+\makeatother
+\let\TeX=\ptmTeX
+\let\LaTeX=\ptmLaTeX
+\usepackage{shortvrb}
+\MakeShortVerb{\|}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage[dvipsnames,usenames]{color}
+\definecolor{LIGHTGRAY}{gray}{.9}
+
+%%%%\renewcommand{\descfont}{\normalfont}
+\newcommand\Lpack[1]{\textsf{#1}}
+\newcommand\Lclass[1]{\textsf{#1}}
+\newcommand\Lopt[1]{\texttt{#1}}
+\newcommand\Lprog[1]{\textit{#1}}
+
+\newcommand*\defaultmarker{\textsuperscript\textasteriskcentered}
+
+\title{R-Workshop}
+\author{R-Group \\
+Universität Stuttgart\\
+Sozialwissenschaften\\
+Studentische Gruppe}
+\date{}
+
+\CutLine*{1}% Dotted line without scissors
+\CutLine{6}%  Dotted line with scissors
+
+\AddToBackground{5}{%  Background of a small page
+  \put(0,0){\textcolor{Cerulean}{\rule{\paperwidth}{\paperheight}}}}
+
+%\AddToBackground*{2}{% Background of a large page
+%  \put(\LenToUnit{.5\paperwidth},\LenToUnit{.5\paperheight}){%
+%    \makebox(0,0)[c]{%
+%      \resizebox{.9\paperwidth}{!}{\rotatebox{35.26}{%
+%        \textsf{\textbf{\textcolor{LIGHTGRAY}{BACKGROUND}}}}}}}}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+%%\LARGE
+%%\tableofcontents
+
+\section{Wannfindet der Workshop statt?}
+12. Mai 2017, 9-17 Uhr
+
+\section{Was ist R?}
+
+R ist eine Statistik-Software die eine kostenlose Alternative zu SPSS und Stata darstellt. 
+
+
+%\loggingall
+\end{document}
+%\endinput
+%%
+%% End of file `leaflet-manual.tex'.

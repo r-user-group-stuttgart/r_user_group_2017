@@ -1,0 +1,49 @@
+---
+title: "R-Workshop"
+output:
+  prettydoc::html_pretty:
+    highlight: github
+    theme: architect
+  html_notebook:
+    highlight: tango
+    theme: spacelab
+    toc: yes
+    toc_float: yes
+---
+
+<img src= "bestearthpicever.jpg">
+
+Liebe R-User,
+
+Wir haben uns sehr gefreut, dass der R-Workshop am 12.05. so gut besucht wurde. Das Ziel des Workshops war es einen einfachen Einstieg in die Materie zu ermöglichen. Damit habt ihr den schwierigsten Part hinter euch - der Anfang. Der Workshop wurde zum ersten Mal gehalten und soll für die Zukunft weiterentwickelt werden. Dazu brauchen wir deine Meinung! Bitte nimm dir 3-5 Minuten Zeit und gib uns **anonym** ein kurzes Feedback.
+
+
+<div align ="center"><a href="https://goo.gl/forms/YvRrsCjSE1nWr2212" 
+style="background-color:#2273ec;border-radius:px;color:#ffffff;display:inline-block;font-family:sans-serif;font-size:20px;font-weight:bold;line-height:50px;text-align:center;text-decoration:none;width:200px;-webkit-text-size-adjust:none;">FEEDBACK</a></div>
+
+
+Wir hoffen, dass viele von euch auch weiterhin in die R-Group kommen (nächstes Treffen 18.05. Donnerstag 17:30h, CIP Pool Breitscheidestraße!), damit ihr noch mehr Input bekommt. Neben den thematischen Schwerpunkten besteht natürlich auch Zeit um über euren persönlichen Code zu schauen. 
+
+## Termine der R-Group (Stand 13.05.)
+
+- **18.05.2017**: *Reproduciable research*. Die Formate `RMarkdown` und $\LaTeX$ sind wichtig für eine robuste und nachvollziebare Dokumentation wenn man mit Daten arbeitet. Einige templates werden zum sofortigen Durchstarten bereitstellen. Perfekt für Hausarbeiten und Reports. Rebecca Litauer. 
+
+- **01.06.2017**: *Introduction to Multi-level Regression and Viszualization*. Daten welche unterschieldiche Kontexte (z.B. Länder, Schulen, Zeitpunkte) beinhalten, weisen je nach Gruppe variierende Effekte auf. Die Struktur der Daten erfodert eine Multi-Level Regression, welche die Heterogenität (Verschiedenheit) zwischen den Gruppen berücksichtigt. Die grafische Darstellung varrierender Efekte wird ein Fokus darstellen. Fabio Votta.
+
+<!-- - **15.06.2017**: *Panel Regression*. Moderne Methoden der Kausalforschung benötigen über die Zeit hinweg wiederholende Messungen der gleichen Untersuchungseinheit. Nur so kann ein überprüft werden, ob sich ein Wirkmechanismus mit der Zeit entfaltet. Da die Ausprägung von $x_{t}$ die Messung von $x_{t+1}$ beinflusst müssen Schätzverfahren eingesetzt werden, die diese Autokorrelation in den Daten berücksichtigt. Dr. Hannes Weber.  -->
+
+- **15.06.2017**: *Panel Regression*. Die Analyse von Paneldaten gehört zu den schwierigeren, aber auch vielversprechenden Verfahren in den Sozialwissenschaften. Nur Paneldaten erlauben die Identifizierung kausaler Effekte - etwa bei Fragen wie: Wie wirken sich Bildungsreformen auf Schulleistungen aus? Warum gelingt manchen Entwicklungsländern eine Reduktion der Armut und anderen nicht? Was kann die Entwicklung der Einkommen, Wählerwanderungen zwischen Bundestagswahlen, uvm., erklären? Mehrere etablierte Methoden stehen zur Auswahl, welche in R einfach und schnell umgesetzt werden können. Dr. Hannes Weber.
+
+- **29.06.2017**: noch offen.
+
+- **13.07.2017**: Summer of Code: Kaggle Competition: Practice real data science.
+
+
+## Kontakt
+
+Die R Group wird von einigen Masterstudenten der Universität Stuttgart selbst organisiert. Wir treffen uns zweimal monatlich, ein Termin für Beginner und ein weiterer mit fortgeschrittenen Themen. Der erste Termin (18.05) nach dem Workshop wird ein Beginner-Treffen sein. 
+
+[R Group Stuttgart auf Facebook](https://www.facebook.com/groups/rstuttgart/)
+
+[R Group Homepage](r-group-stuttgart.github.io)
+
