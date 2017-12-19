@@ -1,0 +1,10 @@
+---
+title: "Package Installation"
+subtitle: "R-Einführungsworkshop"
+output: html_document
+---
+
+```{r}
+needed_packages <- c("devtools", "rmarkdown", "knitr", "learnr", "shiny", "haven", "tidyverse", "car", "htmltools", "ggthemes", "ggpubr", "sjPlot", "sjmisc", "sjstats", "ggdendro", "waffle", "ggparliament", "tabplot", "tidyr", "ggfortify", "viridis")
+install.packages(needed_packages)
+```

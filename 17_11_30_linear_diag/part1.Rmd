@@ -1,0 +1,155 @@
+---
+title: "part1"
+author: "Simon"
+date: "28 11 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+* Quiz zu Signifikanz.
+
+* Cluster
+* Auto
+
+* Bilder in App left align + Beschreibung
+
+
+# Packages
+```{r}
+rm(list=ls())
+lubripack::lubripack("dplyr", "stringr", "ggplot2", "ggthemes")
+```
+
+```{r}
+# load data
+load(url('https://github.com/systats/workshop_data_science/raw/master/Rnotebook/data/ess_workshop.Rdata'))
+# filter data
+
+library(dplyr)
+ess_ger <- ess %>%
+  filter(country == "DE")
+```
+
+
+
+```{r}
+
+fit_null <- ess_ger %>%
+  lm(imm_econ ~ 1, data = .)
+fit_1 <- ess_ger %>%
+  lm(imm_econ ~ edu, data = .)
+fit_2 <- ess_ger %>%
+  lm(imm_econ ~ edu + income, data = .)
+
+
+
+library(MASS)
+summary(fit_3)
+ess_ger %>%
+  lm(imm_econ ~ edu + income + scale(age) + I(age^2), data = .) %>%
+  stargazer::stargazer(type="html", out = "regression_table.html")
+
+
+library(GGally)
+ess_ger %>% 
+  mutate(age2 = age^2) %>%
+  select(imm_econ, edu, income, age, age2) %>%
+  GGally::ggpairs(lower = list(continuous = wrap("smooth", method = "lm", color = "red")))
+
+
+library(ggfortify)
+autoplot(fit_3)
+
+library(sjPlot)
+sjp.lm(fit_3, type = "ma")
+```
+
+```{r}
+fit_3 <- ess_ger %>%
+  lm(imm_econ ~ edu + income + age + vote_right, data = .)
+summary(fit_3)
+```
+
+```{r}
+fit_robust <- ess_ger %>%
+  rlm(imm_econ ~ edu + income + age + vote_right, data = .)
+summary(fit_robust)
+```
+
+# cluster
+
+```{r, fig.height = 5, fig.width=7}
+
+sim_multi <- function(ngroup = 10, ncases = 100, slope = 1/2, within_var = 1, between_var = 3, type = "auto", group_het = T){
+  
+  if(group_het){
+    group_effect <- rnorm(ngroup, sd = within_var)
+  } else {
+    group_effect <- rnorm(ngroup, sd = between_var)
+  }
+  
+  case_effect <- rnorm(ncases*ngroup, sd = within_var)
+
+  if(type == "cluster"){
+    x <- rnorm(ncases, 5, 2)
+  } 
+  if(type == "auto"){
+    x = 1:ncases
+  }
+  
+  dt <- data.frame(
+    x = x,
+    group_id = rep(1:ngroup, each = ncases) %>% as.factor,
+    group_effect = rep(group_effect, each = ncases),
+    case_id = 1:(ncases*ngroup),
+    case_effect = case_effect
+  ) %>%
+    mutate(y = slope*x + group_effect + case_effect)
+  return(dt)
+}
+
+library(viridis)
+# Autokorrelation
+sim_data1 <- sim_multi(ncases = 15, slope = .3, within_var = 2, between_var = 10, ngroup = 7, group_het = F)
+
+auto <- sim_data1 %>%
+  ggplot(aes(x, y, colour = group_id))+
+  geom_point() +
+  geom_smooth(method = "lm", se = F) +
+  geom_line(alpha = .5) +
+  scale_colour_viridis(name = "Gruppen", discrete = T) +
+  theme_minimal() +
+  theme(legend.position = "bottom") +
+  labs(x = "Zeit t", y = "Abhängige Variable Y")
+
+ggsave(auto, filename = "auto.png", width = 7, height = 5)
+
+
+# Cluster
+sim_data2 <- sim_multi(ncases = 200, slope = .5, within_var = 8, between_var = 10, ngroup = 5, type = "cluster")
+
+cluster <- sim_data2 %>%
+  ggplot(aes(x, y, colour = group_id))+
+  geom_point(alpha = .5) +
+  geom_smooth(method = "lm", se = F) +
+  #geom_line(alpha = .5) +
+  scale_colour_viridis(name = "Gruppen", discrete = T) +
+  theme_minimal()+
+  theme(legend.position = "bottom") +
+  labs(x = "Unabhängige Variable X", y = "Abhängige Variable Y")
+
+
+library(sjPlot)
+library(arm)
+fit_lmer2 <- lmer(y ~ x + (1|group_id), data = sim_data2)
+# 
+# sim22 <- plot_model(fit_lmer2, type = "re", sort.est = T, ncol = 1) +
+#   scale_colour_viridis(discrete = T) +
+#   theme_minimal()+ 
+#   geom_hline(yintercept = 0, color = "red") 
+
+ggsave(cluster, filename = "cluster.png", width = 7, height = 5)
+```

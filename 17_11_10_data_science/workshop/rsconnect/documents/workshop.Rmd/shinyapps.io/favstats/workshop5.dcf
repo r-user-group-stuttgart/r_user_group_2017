@@ -1,0 +1,12 @@
+name: workshop5
+title: workshop5
+username:
+account: favstats
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 233714
+bundleId: 1067574
+url: https://favstats.shinyapps.io/workshop5/
+when: 1510258554.96101
+asMultiple: FALSE
+asStatic: FALSE

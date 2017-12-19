@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>R Notebook</title>
+
+<script src="grid_images_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="grid_images_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="grid_images_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="grid_images_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="grid_images_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="grid_images_files/navigation-1.1/tabsets.js"></script>
+<link href="grid_images_files/highlightjs-1.1/default.css" rel="stylesheet" />
+<script src="grid_images_files/highlightjs-1.1/highlight.js"></script>
+<link href="grid_images_files/semantic-ui-2.1.8/semantic.min.css" rel="stylesheet" />
+<script src="grid_images_files/semantic-ui-2.1.8/semantic.min.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">R Notebook</h1>
+
+</div>
+
+
+<body style="min-height: 611px;">
+<div class="wrapper" width="100%">
+<div class="ui three cards">
+<a class="ui card">
+<img src="images/ggthemr_1_flat.png" width="100%"/>
+<div class="content">
+<strong>flat</strong>
+<img src="images/pal_flat.png" class="ui small right floated image"/>
+</div>
+</a>
+<a class="ui card">
+<img src="images/ggthemr_2_flat%20dark.png" width="100%"/>
+<div class="content">
+<strong>flat dark</strong>
+<img src="images/pal_flat.png" class="ui small right floated image"/>
+</div>
+</a>
+<a class="ui card">
+<img src="images/ggthemr_3_copper.png" width="100%"/>
+<div class="content">
+<strong>copper</strong>
+<img src="images/pal_copper.png" class="ui small right floated image"/>
+</div>
+</a>
+<a class="ui card">
+<img src="images/ggthemr_4_camoflauge.png" width="100%"/>
+<div class="content">
+<strong>camoflauge</strong>
+<img src="images/pal_camoflauge.png" class="ui small right floated image"/>
+</div>
+</a>
+<a class="ui card">
+<img src="images/ggthemr_5_chalk.png" width="100%"/>
+<div class="content">
+<strong>chalk</strong>
+<img src="images/pal_chalk.png" class="ui small right floated image"/>
+</div>
+</a>
+<a class="ui card">
+<img src="images/ggthemr_6_copper.png" width="100%"/>
+<div class="content">
+<strong>copper</strong>
+<img src="images/pal_copper.png" class="ui small right floated image"/>
+</div>
+</a>
+<a class="ui card">
+<img src="images/ggthemr_7_dust.png" width="100%"/>
+<div class="content">
+<strong>dust</strong>
+<img src="images/pal_dust.png" class="ui small right floated image"/>
+</div>
+</a>
+<a class="ui card">
+<img src="images/ggthemr_8_earth.png" width="100%"/>
+<div class="content">
+<strong>earth</strong>
+<img src="images/pal_earth.png" class="ui small right floated image"/>
+</div>
+</a>
+<a class="ui card">
+<img src="images/ggthemr_9_fresh.png" width="100%"/>
+<div class="content">
+<strong>fresh</strong>
+<img src="images/pal_fresh.png" class="ui small right floated image"/>
+</div>
+</a>
+<a class="ui card">
+<img src="images/ggthemr_10_grape.png" width="100%"/>
+<div class="content">
+<strong>grape</strong>
+<img src="images/pal_grape.png" class="ui small right floated image"/>
+</div>
+</a>
+<a class="ui card">
+<img src="images/ggthemr_11_grass.png" width="100%"/>
+<div class="content">
+<strong>grass</strong>
+<img src="images/pal_grass.png" class="ui small right floated image"/>
+</div>
+</a>
+<a class="ui card">
+<img src="images/ggthemr_12_greyscale.png" width="100%"/>
+<div class="content">
+<strong>greyscale</strong>
+<img src="images/pal_greyscale.png" class="ui small right floated image"/>
+</div>
+</a>
+<a class="ui card">
+<img src="images/ggthemr_13_light.png" width="100%"/>
+<div class="content">
+<strong>light</strong>
+<img src="images/pal_light.png" class="ui small right floated image"/>
+</div>
+</a>
+<a class="ui card">
+<img src="images/ggthemr_14_lilac.png" width="100%"/>
+<div class="content">
+<strong>lilac</strong>
+<img src="images/pal_lilac.png" class="ui small right floated image"/>
+</div>
+</a>
+<a class="ui card">
+<img src="images/ggthemr_15_pale.png" width="100%"/>
+<div class="content">
+<strong>pale</strong>
+<img src="images/pal_pale.png" class="ui small right floated image"/>
+</div>
+</a>
+<a class="ui card">
+<img src="images/ggthemr_16_sea.png" width="100%"/>
+<div class="content">
+<strong>sea</strong>
+<img src="images/pal_sea.png" class="ui small right floated image"/>
+</div>
+</a>
+<a class="ui card">
+<img src="images/ggthemr_17_sky.png" width="100%"/>
+<div class="content">
+<strong>sky</strong>
+<img src="images/pal_sky.png" class="ui small right floated image"/>
+</div>
+</a>
+<a class="ui card">
+<img src="images/ggthemr_18_solarized.png" width="100%"/>
+<div class="content">
+<strong>solarized</strong>
+<img src="images/pal_wsj.png" class="ui small right floated image"/>
+</div>
+</a>
+</div>
+</div>
+</body>
+<body style="min-height: 611px;">
+<div class="wrapper" width="100%">
+<div class="ui three cards">
+<a class="ui card">
+<img src="images/ggthemes_1_default.png" width="100%"/>
+<div class="content">
+<strong>default</strong>
+<img src="images/pal_default.png" class="ui small right floated image"/>
+</div>
+</a>
+<a class="ui card">
+<img src="images/ggthemes_2_economist.png" width="100%"/>
+<div class="content">
+<strong>economist_white</strong>
+<img src="images/pal_eco.png" class="ui small right floated image"/>
+</div>
+</a>
+<a class="ui card">
+<img src="images/ggthemes_3_economist_white.png" width="100%"/>
+<div class="content">
+<strong>economist</strong>
+<img src="images/pal_eco.png" class="ui small right floated image"/>
+</div>
+</a>
+<a class="ui card">
+<img src="images/ggthemes_4_fivethirtyeight.png" width="100%"/>
+<div class="content">
+<strong>fivethirtyeight</strong>
+<img src="images/pal_fivethirtyeight.png" class="ui small right floated image"/>
+</div>
+</a>
+<a class="ui card">
+<img src="images/ggthemes_5_gdocs.png" width="100%"/>
+<div class="content">
+<strong>gdocs</strong>
+<img src="images/pal_gdocs.png" class="ui small right floated image"/>
+</div>
+</a>
+<a class="ui card">
+<img src="images/ggthemes_7_wsj.png" width="100%"/>
+<div class="content">
+<strong>wsj</strong>
+<img src="images/pal_hc.png" class="ui small right floated image"/>
+</div>
+</a>
+<a class="ui card">
+<img src="images/ggthemes_8_solarized.png" width="100%"/>
+<div class="content">
+<strong>solarized</strong>
+<img src="images/pal_solarized.png" class="ui small right floated image"/>
+</div>
+</a>
+<a class="ui card">
+<img src="images/ggthemes_9_few.png" width="100%"/>
+<div class="content">
+<strong>few</strong>
+<img src="images/pal_few.png" class="ui small right floated image"/>
+</div>
+</a>
+</div>
+</div>
+</body>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

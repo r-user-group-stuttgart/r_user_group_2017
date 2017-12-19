@@ -1,0 +1,46 @@
+---
+title: "R Notebook"
+output: html_document
+---
+
+In order to model the binary data structure a logistic regression is used. Logistic regression allows us to estimate the probability of a categorical response based on one or more predictor variables (X). It allows one to say that the presence of a predictor increases (or decreases) the probability of a given outcome by a specific percentage. This paper analysis the two possible outcomes. 
+
+$$
+y_i = \left\{
+\begin{array}{l}
+1:\text{ if voted for a populist party}\\
+0:\text{ if not}
+\end{array}\right.
+$$
+
+Logistic regression belongs to the generalized linear models (GLM). These have the special characteristica that we model the probability p(X) by using a function that transforms the outputs to range of 0 and 1 for all values of X. Many functions meet this Criterion. In logistic regression, we use the logistic function, which is defined as follows:
+
+
+
+$$
+\begin{array}{l}
+z_i = \beta_0+ \beta_1 X_i + \varepsilon_i\\
+p(X) = \frac{e^{z_i}}{1 + e^{z_i}\\
+p(X) = \frac{1}{1 + e^{-z_i}\\
+\end{array}
+$$
+
+This monotone transformation is called the log odds or logit transformation of $p(X)$.
+
+$$\left( \frac{p(X)}{1+p(X)} \right)=\beta_0+X\beta$$
+
+
+The algorithm used for glm is maximum likelihood. First we estimate parameters for $\beta_0$ and $\beta_1$ such that the predicted probability is the lowest error rate according to the empricial observations. This procedure yields a number close to one for all individuals who voted for right wing populists, and a number close to zero for all individuals who did not. This intuition can be formalized using a mathematical equation called a likelihood function:
+
+$$\ell ( \beta_0, \beta) = \prod_{i:y_i=1} p(x_i) \times \prod_{i:y_i=1} (1-p(x_i))$$
+
+This likelihood gives the joint probability of the observed sequence of zeros and ones in the data. We pick $\beta_0$ and $\beta_1$ to maximize the likelihood of the observed data.
+
+
+
+
+
+
+
+
+

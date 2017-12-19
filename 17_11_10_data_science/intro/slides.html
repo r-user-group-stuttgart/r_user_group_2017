@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Einführung in Data Science</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Simon Roth &amp;   Fabio Votta" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Einführung in Data Science
+## mit R
+### Simon Roth &amp; <br/> Fabio Votta
+### 2017/11/10
+
+---
+
+
+
+
+background-image: url(https://r-group-stuttgart.github.io/r_group_logo.jpg)
+background-size: contain
+
+---
+
+&lt;img src = "images/foeps.png" width = "80%"&gt;
+
+---
+
+background-image: url(https://www.datenschutzbeauftragter-info.de/wp-content/uploads/2014/04/daten-36.jpg)
+background-size: cover
+class: inverse, center, middle
+
+# Daten?
+
+---
+
+background-image: url(https://tr3.cbsistatic.com/hub/i/r/2017/04/04/694d6d6e-6602-4aa8-a7af-b5d2f66fff05/resize/770x/d59387bad8400bc8b2b3d51107d2e599/aexcelpowerbi.png)
+class: inverse, center, middle
+
+---
+
+
+![](images/abstraction1.png)
+
+
+---
+
+![](images/abstraction2.png)
+---
+![](images/abstraction3.png)
+---
+![](images/abstraction4.png)
+---
+![](images/abstraction5.png)
+
+
+---
+
+![](images/data_cycle1.png)
+
+--
+
+![](images/data_cycle2.png)
+
+--
+
+![](images/data_cycle3.png)
+
+--
+
+![](images/data_cycle4.png)
+
+---
+
+
+
+
+
+
+
+
+# Open Science
+
+![](images/open_science.png)
+
+
+---
+
+# Data Science
+
+... und der heutige Fahrplan:
+
+1. Reproducibal Research 
+    + Rmarkdown Reports (Code + Text)
+2. Exploratory Data Analysis
+    + Datenbearbeitung `dplyr`
+    + Datenvisualisierung mit `ggplot2`
+3. ~~Statistical Modeling~~ wird erst in den kommenden Sitzungen der R-Group besprochen. 
+    + Linear Regression
+    + Logistic Regression
+    + PCA
+    + ...
+
+---
+
+&lt;img src="images/ESS_Logo.jpg" align = "right" width = "30%"&gt;
+
+# Die Daten 
+
+.pull-left[
+* Größtes Europäisches Surveyprojekt (18. Länder) mit über 34.000 Befragten
+* Fragen zu sozialen und politischen Themen (seit 2002)
+* Finanziell unterstützt durch die EU
+* Soz. Daten werden allen interessierten Nutzer transparent, qualitativ hochwertig und kostenlos zur Verfügung gestellt.
+* [Homepage](http://www.europeansocialsurvey.org/methodology/)
+]
+
+.pull-right[
+&lt;img src="images/eu_ess.jpg" align = "right" width = "100%"&gt;
+]
+
+
+---
+
+&lt;img src="images/ESS_Logo.jpg" align = "right" width = "30%"&gt;
+
+# Die Daten 
+
+Der dataframe `ess` beinhaltet folgende Variablen.
+
+* `country`: Land der Befragung
+* `gender`: Geschlecht [Weiblich, Männlich]
+* `age`: Lebensalter   
+* `edu`: Höchster Bildungsabschluss (ISCED) [1-7]
+* `income`: Neto Haushaltseinkommen in Dezentilen (1-10 Kategorien zu einkommen in 10% Schritten)
+* `pol_inter`: Politisches Interesse [1: überhaupt nicht interessiert; 4: sehr interessiert]
+* `left_right`: Selbsteinschätzung Links-Rechtsskala [1: Links, 10: Rechts]
+* `gay_tolerance`: Lesben und Schwule können sich frei entfalten [1: lehne ab; 5: stimme zu]
+* `religious`: Religiösität [1: gar nicht, 5: sehr]
+* `imm_poor`: Armutsmigration von außerhalb Europa's [1: Keine, 4: Viele]
+* `imm_econ`: Ist Einwanderung gut oder schlecht für die Wirtschaft? [0: schlecht, 10: gut]
+&lt;!-- * `fake_refugee`: Meisten Flüchtlinge sind nicht wirklich verfolgt [1: Stimme nicht zu, 5: Stimme zu] --&gt;
+&lt;!-- * `safety`: Fühlst du dich nachts sicher? [1: Sehr unsicher; 4: Sehr sicher] --&gt;
+&lt;!-- * `party_right`: Idenifikation mit einer populistischen Partei (europaweit) [...] --&gt;
+&lt;!-- * `vote_right`: Indikator - Idenifikation mit einer populistischen Partei (europaweit) [0, 1] --&gt;
+&lt;!-- * `party_ger`: Parteiidentifikation (DE) [Linke, Grüne, SPD, Union, AfD] --&gt;
+
+
+
+
+---
+
+&lt;img src="images/rladies.png" width = "100%"&gt;
+
+
+---
+
+background-image: url(https://scontent-frt3-2.xx.fbcdn.net/v/t1.0-9/18698439_1518141938238092_7825475589048591284_n.jpg?oh=191197e106b045d4cea5800dad5a5756&amp;oe=5A7210CD)
+background-size: contain
+
+---
+class: center, middle
+
+
+# Let's start!
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

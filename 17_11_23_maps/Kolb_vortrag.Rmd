@@ -1,0 +1,24 @@
+---
+title: "FÖPS läd ein."
+output: html_notebook
+---
+Antragsteller: Simon Roth 
+
+Antragbegünstigte: Alle technisch-affinen SOWIs
+
+Kooperationspartner: R-Group Stuttgart
+
+In Kooperation mit der R-Group lädt **FÖPS** Dr. Jan-Phillip Kolb von GESIS Mannheim (ESS Panel) ein. Der 1,5-2h Talk soll am 23. oder 30. November 2017 um 17:30h im CIP Pool der Breitscheidtstraße 2., 5 Stock statt finden. Ein Honorar von 250€ inklusive Fahrtkosten wurde in Aussicht gestellt.
+
+Mögliche Themen: 
+
+* Regressionsmodelle in R (lineare Regression, Regression Trees, Mehrebenenmodelle etc)
+* Die Räumliche Visualisierung in Karten
+* Interaktive Graphiken mit R (mit verschiedenen Javascript Bibliotheken)
+* Reproduzierbare Forschung (bspw. Nutzung von Markdown und die Erstellung von Präsentationen, Notebooks, Reports und Dokumenten)
+
+Weitere (nicht-relevante):
+
+* Webscraping und Verarbeitung von JSON und XML Objekten
+* Die Nutzung von Datenbanken in R
+* Die Erstellung von Shiny Apps

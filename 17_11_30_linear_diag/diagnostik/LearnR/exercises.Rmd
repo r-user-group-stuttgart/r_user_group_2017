@@ -1,0 +1,238 @@
+---
+title: "exercises"
+author: "Fabio Votta"
+date: "28 November 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache = F # Whether to cache results for future renders (efficient!)
+                      , warning = F # Whether to display errors
+                      , message = F # Whether to display messages
+                      , error = F # mybe turn on
+                      , tidy = F 
+                      , fig.width = 10
+                      , fig.height = 6
+                      , fig.align = "center"
+                      )
+```
+
+## R Data Simulation
+
+```{r cars}
+library(arm)
+library(purrr)
+library(MASS)
+library(broom) 
+library(ggthemes)
+library(tidyverse)
+library(ecodist)
+library(viridis)
+library(gridExtra)
+library(grid)
+
+
+
+generate_multi <- function(n, corseq){
+  set.seed(2017)
+  x <- runif(n, 1, 10)
+#  corseq <- seq(0,.99,0.01)
+  models <- list()
+  std.models <- list()
+  for (jj in seq_along(corseq)) {
+    dat <- data.frame(corgen(x = x, r = corseq[jj],  epsilon = 0))
+    colnames(dat) <- c("x1", "x2")
+    dat$y <- 0.5 * dat$x1 + 0.5 * dat$x2 + rnorm(n, sd = 10)
+    models[[jj]] <- tidy(lm(y ~ x1 + x2, data = dat))
+    std.models[[jj]] <- data.frame(lm.beta::coef.lm.beta((lm.beta::lm.beta(lm(y ~ x1 + x2, data = dat)))))
+    colnames(std.models[[jj]]) <- c("std.estimate")  
+    models[[jj]] <- std.models[[jj]] %>% 
+                      bind_cols(models[[jj]]) 
+    models[[jj]]$cors <- corseq[jj]
+#    cat(jj, "\n")
+  }
+  sim_dat <- bind_rows(models)
+  sim_dat$col <- n
+  return(sim_dat)
+}
+
+draw.data <- function(type, slope = 3, error = 8, n = 150){
+  if(type=="linear.up"){
+    x <- c(runif(n-2, 0, 4), 2, 2.1)
+    y <- slope * x + rnorm(n, sd=error)
+  }
+  if(type=="linear.down"){
+    x <- c(runif(n-2, 0, 4), 2, 2.1)
+    y <- -slope * x + rnorm(n, sd=error)
+  }
+  if(type=="curved.up"){
+    x <- c(runif(n-2, 0, 4), 2, 2.1)
+    y <- slope * x^4 + rnorm(n, sd=error)
+  }
+  if(type=="curved.down"){
+    x <- c(runif(n-2, 0, 4), 2, 2.1)
+    y <- -slope * x^4 + rnorm(n, sd=error)
+  }
+  if(type=="curved.lowhigh"){
+    x <- rep(1:100,1)
+    y  <- slope * x + rnorm(n, sd = c(50:1, 1:50)*error) 
+  }
+  if(type=="fan.shaped"){
+    x = seq(0,3.99,200/n)
+    y = slope * x + rnorm(n, sd = sqrt(x^2.3))
+  }
+  if(type=="auto.corr"){
+    x <- rep(1:100,1)
+    intercept <- c(rep(c(1,3,6,9,12), each = 20))
+    y  <- intercept + slope * x + rnorm(100, sd = 5) 
+    return(data.frame(x=x,y=y,col=as.factor(intercept)))
+  }
+  if(type=="exec1"){
+    x = seq(0,3.99,200/n)
+    y = slope * exp(x^2+20) + rnorm(n, sd = error^5)
+  }
+  if(type=="exec2"){
+    x = seq(0,3.99,200/n)
+    y = slope * -sqrt(exp(x^2+20)) - 23*x + rnorm(n, sd = exp(error))
+  }
+  if(type=="exec3"){
+    x <- rep(1:100,1)
+    y = slope * x + rnorm(n, sd = c(exp(0:1), sqrt(4:20))*error)
+  }
+  if(type=="exec4"){
+    x <- rnorm(10000,2,1)
+    y = slope * x + rnorm(n, sd = error)
+  }
+  if(type=="exec5"){
+    x = seq(1000,2,-10/n)
+    y = slope * -x + log(x) + rnorm(n, sd = sqrt(error))
+  }
+  if(type=="multicol"){
+    corseq <- seq(0,.99,0.01)
+    n <- seq(50, 3000, by = 500)
+    sim.list <- list()
+    for(jj in seq_along(n)) {
+      sim.list[[jj]] <- generate_multi(n = n[jj], corseq)
+      sim.list[[jj]]$n <- n[jj]
+    } 
+    sim_data <- bind_rows(sim.list)
+    return(sim_data)
+  }
+  data.frame(x=x,y=y)
+}
+
+plot_it2 <- function(type, method = "lm", ...){
+  dat <- draw.data(type = type, ...) %>% 
+  lm(y ~ x, data = .) %>% 
+  broom::augment() 
+
+
+gg1 <- dat %>%
+  ggplot(aes(x, .std.resid)) + 
+  geom_point(aes(color = .std.resid)) +  
+  scale_color_gradient2(low = "blue", mid = "lightgrey", high = "red") +
+  guides(color = F, alpha = F) +
+#  geom_segment(aes(x, .std.resid,
+#                   xend = x, 
+#                   yend = 0, 
+#                   alpha = .2)) +
+  geom_smooth(method = method) +
+  xlab("Unabhängige Variable X") + ylab("Standardisierte Residuen") + 
+  theme_minimal()
+
+if(type %in% c("curved.up", "curved.down")){
+  gg1 <- gg1 + geom_smooth(method = "loess", color = "red")
+}
+
+gg1
+
+}
+
+```
+
+## Exercises
+
+
+```{r}
+plot_it2("linear.up", n =2500, error = 2.5)
+ggsave(filename = "images/exec1.png", width = 10)
+
+```
+
+
+```{r}
+plot_it2("curved.down", n =5500, error = 200)
+ggsave(filename = "images/exec2.png", width = 10)
+
+```
+
+```{r}
+plot_it2("curved.up", n =5500, error = 200)
+
+ggsave(filename = "images/exec3.png", width = 10)
+
+```
+
+
+```{r}
+plot_it2("fan.shaped", n = 2000, error = 2)
+ggsave(filename = "images/exec4.png", width = 10)
+
+```
+
+
+```{r}
+plot_it2("curved.lowhigh", n = 5000, error = 60000)
+ggsave(filename = "images/exec5.png", width = 10)
+
+```
+
+
+```{r}
+plot_it2("fan.shaped", slope = -100, n = 2000, error = 2) + scale_x_reverse()
+ggsave(filename = "images/exec6.png", width = 10)
+
+```
+
+
+```{r}
+plot_it2(type="exec1", n=1000, error = 900)
+ggsave(filename = "images/exec7.png", width = 10)
+
+plot_it2(type="exec2", n=1000, error = 17) + scale_x_reverse()
+ggsave(filename = "images/exec8.png", width = 10)
+
+plot_it2(type="exec3", n=1000, error = 2)
+ggsave(filename = "images/exec9.png", width = 10)
+
+plot_it2(type="exec4", n=1000, error = 0.9, method = NA) + scale_color_viridis()
+ggsave(filename = "images/exec10.png", width = 10)
+
+
+plot_it2(type="exec5", n=150, error = 0.1, method = NA) + scale_color_viridis()
+ggsave(filename = "images/accidental1.png", width = 10)
+```
+
+```{r}
+plot_it2(type="exec5", n=500, error = 2, method = NA) + scale_color_viridis(option = "D") 
+ggsave(filename = "images/accidental2.png", width = 10)
+
+
+plot_it2(type="exec5", n=500, error = 2, method = NA) + scale_color_viridis(option = "D") + scale_y_log10()
+ggsave(filename = "images/accidental3.png", width = 10)
+
+
+plot_it2(type="exec5", n=200, error = 2, method = NA) + scale_color_viridis(option = "B") + scale_y_log10()
+ggsave(filename = "images/accidental4.png", width = 10)
+
+```
+
+
+```{r}
+
+plot_it2(type="exec4", n=1000, error = 0.9, method = NA) + scale_color_viridis() + scale_y_log10()
+ggsave(filename = "images/accidental5.png", width = 10)
+
+
+```
+

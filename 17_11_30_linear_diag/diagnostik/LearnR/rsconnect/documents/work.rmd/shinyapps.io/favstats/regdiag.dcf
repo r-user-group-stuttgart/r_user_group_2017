@@ -1,0 +1,13 @@
+name: regdiag
+title: regdiag
+username:
+account: favstats
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 241058
+bundleId: 1103901
+url: https://favstats.shinyapps.io/regdiag/
+when: 1511957048.45301
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: work.html

@@ -1,0 +1,43 @@
+---
+title: "Lineare Regression"
+author: "Fabio & Simon"
+date: "16 11 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = T, warning = F, error = F, message = F)
+```
+
+## Packages
+
+```{r, echo = T}
+lubripack::lubripack("knitr", "rmarkdown", "ggplot2", "ggpubr", "dplyr", "sjPlot", "ggthemr", silent = T)
+```
+
+
+## Aufgaben
+
+1. Erstelle ein bivariates Modell für `imm_econ` als abhängige und `left_right` als unabhängige Variable. 
+
+    - 1a. Interpretiere den $\beta$ Koeffizienten und das $R^2$.
+    - 1b. Dann visualisiere das Modell.
+
+2. Kopiere das letzte Modell und ergänze es um `gender`.
+
+    - 2a. Interpretiere die $\beta$ Koeffizienten und das $R^2$.
+    - 2b. Dann visualisiere das Modell.
+
+3. Vergleiche das Modell aus 1 und 2. Was fällt auf?
+
+
+```{r}
+# load data
+load(url('https://github.com/systats/workshop_data_science/raw/master/Rnotebook/data/ess_workshop.Rdata'))
+```
+
+
+
+
+
+

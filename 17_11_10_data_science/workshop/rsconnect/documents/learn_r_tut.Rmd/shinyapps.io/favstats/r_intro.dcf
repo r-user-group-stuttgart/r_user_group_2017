@@ -1,0 +1,12 @@
+name: r_intro
+title: r_intro
+username:
+account: favstats
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 228578
+bundleId: 1044675
+url: https://favstats.shinyapps.io/r_intro/
+when: 1508953749.56183
+asMultiple: FALSE
+asStatic: FALSE

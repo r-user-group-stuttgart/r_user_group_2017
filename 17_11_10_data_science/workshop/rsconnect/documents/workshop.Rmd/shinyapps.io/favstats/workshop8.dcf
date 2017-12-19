@@ -1,0 +1,13 @@
+name: workshop8
+title: workshop8
+username:
+account: favstats
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 233727
+bundleId: 1067632
+url: https://favstats.shinyapps.io/workshop8/
+when: 1510259778.43397
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .dropbox|~$R-Workshop.pptx|desktop.ini|R-Workshop.pptx|workshop.html

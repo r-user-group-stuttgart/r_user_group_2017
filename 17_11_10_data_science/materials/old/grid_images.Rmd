@@ -1,0 +1,155 @@
+---
+title: "R Notebook"
+output: 
+  html_document:
+    self_contained: no
+---
+
+
+
+```{r, echo = F, eval =T} 
+library(shiny)
+library(shiny.semantic)
+
+shiny.semantic::semanticPage(
+  #div(sytle = "body {overflow:auto}",
+    div(class="ui three cards",
+      a(class="ui card",
+        img(src="images/ggthemr_1_flat.png", width = "100%"),
+        div(class="content", strong("flat"), img(src="images/pal_flat.png", class="ui small right floated image"))
+      ),
+     a(class="ui card",
+        img(src="images/ggthemr_2_flat dark.png", width = "100%"),
+        div(class="content", strong("flat dark"), img(src="images/pal_flat.png", class="ui small right floated image"))
+      ),
+      a(class="ui card",
+        img(src="images/ggthemr_3_copper.png", width = "100%"),
+        div(class="content", strong("copper"), img(src="images/pal_copper.png", class="ui small right floated image"))
+      ),
+      a(class="ui card",
+        img(src="images/ggthemr_4_camoflauge.png", width = "100%"),
+        div(class="content", strong("camoflauge"), img(src="images/pal_camoflauge.png", class="ui small right floated image"))
+      ),
+      a(class="ui card",
+        img(src="images/ggthemr_5_chalk.png", width = "100%"),
+        div(class="content", strong("chalk"), img(src="images/pal_chalk.png", class="ui small right floated image"))
+      ),
+      a(class="ui card",
+        img(src="images/ggthemr_6_copper.png", width = "100%"),
+        div(class="content", strong("copper"), img(src="images/pal_copper.png", class="ui small right floated image"))
+      ),
+      a(class="ui card",
+        img(src="images/ggthemr_7_dust.png", width = "100%"),
+        div(class="content", strong("dust"), img(src="images/pal_dust.png", class="ui small right floated image"))
+      ),
+     a(class="ui card",
+        img(src="images/ggthemr_8_earth.png", width = "100%"),
+        div(class="content", strong("earth"), img(src="images/pal_earth.png", class="ui small right floated image"))
+      ),
+      a(class="ui card",
+        img(src="images/ggthemr_9_fresh.png", width = "100%"),
+        div(class="content", strong("fresh"), img(src="images/pal_fresh.png", class="ui small right floated image"))
+      ),
+     a(class="ui card",
+        img(src="images/ggthemr_10_grape.png", width = "100%"),
+        div(class="content", strong("grape"), img(src="images/pal_grape.png", class="ui small right floated image"))
+      ),
+      a(class="ui card",
+        img(src="images/ggthemr_11_grass.png", width = "100%"),
+        div(class="content", strong("grass"), img(src="images/pal_grass.png", class="ui small right floated image"))
+      ),
+      a(class="ui card",
+        img(src="images/ggthemr_12_greyscale.png", width = "100%"),
+        div(class="content", strong("greyscale"), img(src="images/pal_greyscale.png", class="ui small right floated image"))
+      ),
+      a(class="ui card",
+        img(src="images/ggthemr_13_light.png", width = "100%"),
+        div(class="content", strong("light"), img(src="images/pal_light.png", class="ui small right floated image"))
+      ),
+      a(class="ui card",
+        img(src="images/ggthemr_14_lilac.png", width = "100%"),
+        div(class="content", strong("lilac"), img(src="images/pal_lilac.png", class="ui small right floated image"))
+      ),
+      a(class="ui card",
+        img(src="images/ggthemr_15_pale.png", width = "100%"),
+        div(class="content", strong("pale"), img(src="images/pal_pale.png", class="ui small right floated image"))
+      ),
+      a(class="ui card",
+        img(src="images/ggthemr_16_sea.png", width = "100%"),
+        div(class="content", strong("sea"), img(src="images/pal_sea.png", class="ui small right floated image"))
+      ),
+      a(class="ui card",
+        img(src="images/ggthemr_17_sky.png", width = "100%"),
+        div(class="content", strong("sky"), img(src="images/pal_sky.png", class="ui small right floated image"))
+      ),
+      a(class="ui card",
+        img(src="images/ggthemr_18_solarized.png", width = "100%"),
+        div(class="content", strong("solarized"), img(src="images/pal_wsj.png", class="ui small right floated image"))
+      )
+    ), 
+    width = "100%"
+  #)
+)
+
+# library(ggthemes)
+# cols <- few_pal()(6)
+# 
+# nn <- grid + 
+#   scale_colour_manual(values = cols) +
+#   coord_fixed(ratio = 1) + 
+#   theme(plot.margin=unit(c(0,0,0,0), "null")) +
+#   theme(panel.spacing=unit(c(0,0,0,0), "null"))
+# 
+# ggsave(nn, file = "")
+# citation("ggthemr")
+```
+
+
+```{r, echo = F, eval = T}
+library(shiny)
+library(shiny.semantic)
+
+shiny.semantic::semanticPage(
+  #div(sytle = "body {overflow:auto}",
+    div(class="ui three cards",
+      a(class="ui card",
+        img(src="images/ggthemes_1_default.png", width = "100%"),
+        div(class="content", strong("default"), img(src="images/pal_default.png", class="ui small right floated image"))
+      ),
+      a(class="ui card",
+        img(src="images/ggthemes_2_economist.png", width = "100%"),
+        div(class="content", strong("economist_white"), img(src="images/pal_eco.png", class="ui small right floated image"))
+      ),
+      a(class="ui card",
+        img(src="images/ggthemes_3_economist_white.png", width = "100%"),
+        div(class="content", strong("economist"), img(src="images/pal_eco.png", class="ui small right floated image"))
+      ),
+      a(class="ui card",
+        img(src="images/ggthemes_4_fivethirtyeight.png", width = "100%"),
+        div(class="content", strong("fivethirtyeight"), img(src="images/pal_fivethirtyeight.png", class="ui small right floated image"))
+      ),
+      a(class="ui card",
+        img(src="images/ggthemes_5_gdocs.png", width = "100%"),
+        div(class="content", strong("gdocs"), img(src="images/pal_gdocs.png", class="ui small right floated image"))
+      ),
+      a(class="ui card",
+        img(src="images/ggthemes_7_wsj.png", width = "100%"),
+        div(class="content", strong("wsj"), img(src="images/pal_hc.png", class="ui small right floated image"))
+      ),
+      a(class="ui card",
+        img(src="images/ggthemes_8_solarized.png", width = "100%"),
+        div(class="content", strong("solarized"), img(src="images/pal_solarized.png", class="ui small right floated image"))
+      ),
+      a(class="ui card",
+        img(src="images/ggthemes_9_few.png", width = "100%"),
+        div(class="content", strong("few"), img(src="images/pal_few.png", class="ui small right floated image"))
+      )
+    ), 
+    width = "100%"
+  #)
+)
+
+```
+
+
+

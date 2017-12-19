@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+<meta name="progressive" content="true" />
+<meta name="allow-skip" content="true" />
+
+<title>R-Workshop</title>
+
+
+<!-- highlightjs -->
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+</head>
+
+<body>
+
+
+
+<div class="pageContent band">
+<div class="bandContent page">
+
+<div class="topics">
+
+<div id="section-start" class="section level2">
+<h2>Start</h2>
+<p><img src="images/workshop.png" style="width:99.0%" /> <br></p>
+<p>R ist eine Open-Source-Programmiersprache welche speziell für statistische Berechnungen und Visualisierung von Daten und Modellen entwickelt wurde.</p>
+<blockquote>
+<p>We believe free and open source data analysis software is a foundation for innovative and important work in science, education, and industry <a href="https://www.rstudio.com/">(RStudio Homepage)</a>.</p>
+</blockquote>
+<p>Für die erleichterte Anwendung von R werden wir das IDE (Integrated Development Environment) namens Rstudio benutzen. Mit Rstudio wird R viel intuitiver durch Syntax Highlighting, Auto-Vervollständigung und einer besseren übersicht über Grafiken, Packages und Datensätze. Die Software ist komplett kostenlos und wird unter einer GPL (GNU General Public License) zugänglich gemacht.</p>
+<div id="section-installation" class="section level3">
+<h3>Installation</h3>
+<p>Um R benutzen zu können müssen wir erst die nötige Software auf unseren Computer installieren.</p>
+<p>Unter folgendem Link kann R heruntergeladen werden</p>
+<div class="figure">
+<img src="images/Rlogo.svg" width="50" />
+
+</div>
+<p><a href="https://cloud.r-project.org/"><strong>DOWNLOAD R</strong></a></p>
+<p>Unter folgendem Link kann Rstudio heruntergeladen werden</p>
+<div class="figure">
+<img src="images/RStudio-Logo-Blue-Gradient.png" width="100" />
+
+</div>
+<p><a href="https://www.rstudio.com/products/rstudio/download/"><strong>DOWNLOAD RStudio</strong></a></p>
+<p><strong>Latex zum Erstellen von .pdf Reports</strong></p>
+<p>Unter folgenden Links kann die Latex Verteilung MiKTeX (Windows) bzw. MacTeX (Mac) heruntergeladen werden.</p>
+<div class="figure">
+<img src="images/miktex-logo-slogan.png" width="100" />
+
+</div>
+<p><a href="https://miktex.org/download"><strong>DOWNLOAD MiKTeX (Windows)</strong></a></p>
+<div class="figure">
+<img src="images/mactexlogoX5.png" width="100" />
+
+</div>
+<p><a href="https://tug.org/mactex/mactex-download.html"><strong>DOWNLOAD MacTeX (Mac)</strong></a></p>
+</div>
+</div>
+<div id="section-grundlagen" class="section level2">
+<h2>Grundlagen</h2>
+<div id="section-r-als-taschenrechner" class="section level3">
+<h3>R als Taschenrechner</h3>
+<ul>
+<li><code>+</code> addieren</li>
+<li><code>-</code> subtrahieren</li>
+<li><code>*</code> multiplizieren</li>
+<li><code>/</code> dividieren</li>
+<li><code>^</code> exponieren</li>
+</ul>
+<p><img src="images/light.png" width="30" /> <strong>Rechenaufgaben:</strong></p>
+<ol style="list-style-type: decimal">
+<li><p><span class="math inline">\(34+77\)</span></p></li>
+<li><p><span class="math inline">\(\frac{500}{125} + 3*6^2\)</span></p></li>
+<li><p>Berechne die Differenz zwischen 2017 und dem Jahr, an dem du begonnen hast zu studieren und dividiere das durch die Differenz zwischen 2017 und dem Jahr, in dem du geboren wurdest. Multipliziere dies mit 100, um den Prozentsatz deines Lebens zu erhalten, den du an die Uni verbracht hast.</p></li>
+</ol>
+<div class="tutorial-exercise" data-label="zzz" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
+</div>
+<div class="tutorial-exercise-support" data-label="zzz-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>34 + 77 
+500/125 + 3*6^2
+(2017 - study)/(2017 - birth)*100 
+#ersetze study durch dein Studienbeginnsjahr und birth durch dein Geburtsjahr</code></pre>
+</div>
+</div>
+<div id="section-objekte-und-zuweisung" class="section level3">
+<h3>Objekte und Zuweisung</h3>
+<p>In R kann man je nach Rechenleistung zehntausende Datensätze auf einmal laden und verarbeiten. Das wird möglich da jeder Datensatz seinen eigenen Namen besitzt. Dieser muss mit einem Buchstaben beginnen, kann aber durchaus auch <code>.</code> oder <code>_</code> oder Zahlen enthalten. Um einem Objekt einen Namen zuzuweisen wird das Zeichen <code>&lt;-</code> (Zuweisungspfeil) eingesetzt. Objekte können einzelne Zahlen, Variablen oder auch Datensätze sein. Mit den Objektennamen können Daten jeglicher Art abgespeichert und abgerufen werden.</p>
+<div class="tutorial-exercise" data-label="obj1" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>x &lt;- 1   #definiere x als 1
+
+x</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
+</div>
+<p><img src="images/light.png" width="30" /> <strong>Aufgabe:</strong></p>
+<p>Adddiere <code>x</code> und <code>y</code> und speichere das Ergebnis in z. Gebe z aus!</p>
+<div class="tutorial-exercise" data-label="obj2" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>x &lt;- 1   #definiere x als 1
+y &lt;- 2   #definiere y als 2</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
+</div>
+<div class="tutorial-exercise-support" data-label="obj2-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>z &lt;- x + y    #addiere x und y und speicher das Ergebnis in z
+z             #geb das Ergebnis aus</code></pre>
+</div>
+<p><strong>Boolean</strong></p>
+<ul>
+<li><code>&amp;</code> (logisch) und</li>
+<li><code>|</code> (logisch) oder</li>
+<li><code>!</code> (logisch) nicht</li>
+</ul>
+<div class="figure">
+<img src="images\transform-logical.png" style="width:80.0%" />
+
+</div>
+<p><strong>Weitere Operatoren</strong></p>
+<ul>
+<li><code>==</code> (logisch) ist gleich</li>
+<li><code>!=</code> (logisch) ist ungleich</li>
+<li><code>%in%</code> (string) ist gleich</li>
+<li><code>&gt;</code> größer als</li>
+<li><code>&lt;</code> kleiner als</li>
+<li><code>&gt;=</code> größer gleich</li>
+<li><code>&lt;=</code> kleiner gleich</li>
+<li><code>is.na()</code> ist gleich NA (fehlender Wert)</li>
+<li><code>!is.na()</code> ist ungleich NA</li>
+</ul>
+<p><strong>Beispiele</strong></p>
+<div class="tutorial-exercise" data-label="com" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>3 == 3    #ist 3 gleich 3?
+4 &gt; 5     #ist 4 größer als 5?
+&quot;albert&quot; == &quot;albert&quot;   #kommt albert in albert vor?</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
+</div>
+<p>R gibt hier entweder <code>TRUE</code> oder <code>FALSE</code> aus, abhängig davon ob der benutzte logische Operator zutrifft oder nicht.</p>
+</div>
+<div id="section-vektoren" class="section level3">
+<h3>Vektoren</h3>
+<p>Vektoren in R sind einfach mehrere Werte die aneinander gebunden werden. Diese können Zahlen aber auch strings (Buchstabenfolgen) sein. Hiflreich dabei ist die <code>c()</code> Funktion (c steht für <em>concatenate</em> = verketten auf Deutsch).</p>
+<p><strong>Beispiele:</strong></p>
+<div class="tutorial-exercise" data-label="vec1" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>vektor &lt;- c(1,2,3,4,5) #definiere Vektor mit den Werten 1,2,3,4 und 5
+vektor</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
+</div>
+<p>Operatoren können auch ganz einfach mit Vektoren angewandt werden.</p>
+<div class="tutorial-exercise" data-label="vec2" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>vektor * vektor     #vektor mit sich selbst mal nehmen
+vektor == vektor    #sind alle Werte von vektor gleich alle Werte von vektor?</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
+</div>
+<p><img src="images/light.png" width="30" /> <strong>Aufgabe</strong></p>
+<p>Bilde einen Vektor mit dem Namen <code>cm</code> und den folgenden Größen in Zentimeter:</p>
+<ul>
+<li><code>190</code></li>
+<li><code>152</code></li>
+<li><code>174</code></li>
+</ul>
+<p>Teile dann <code>cm</code> durch Hundert um die Größen in Meter zu erhalten!</p>
+<div class="tutorial-exercise" data-label="flu" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
+</div>
+<div class="tutorial-exercise-support" data-label="flu-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>cm &lt;- c(190, 152, 174) #Höhen zu cm zuordnen
+cm / 100               # cm geteilt durch 100 um m zu erhalten</code></pre>
+</div>
+</div>
+<div id="section-funktionen" class="section level3">
+<h3>Funktionen</h3>
+<p>Das Ziel einer Funktion ist es Daten zu verarbeiten. Dazu gibt es einen <em>input</em> und einen <em>output</em>.</p>
+<p>Definieren wir doch mal eine Funktion, welche Werte die man als <em>input</em> eingibt wieder quadriert als <em>output</em> gibt. Dazu benutzen wir <code>function()</code> und bestimmen dabei die Argumente welche wir jeweils eintippen wollen. Die Funktion selber wird in geschweiften Klammern <code>{}</code> codiert.</p>
+<p><strong>Beispiele:</strong></p>
+<div class="tutorial-exercise" data-label="function1" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>quadrieren &lt;- function(input) { 
+  output &lt;- input^2        #nehme den input hoch 2 und speichere ihn in output
+  output                   #gebe output aus
+}
+
+#Funktion ausprobieren!
+quadrieren(2)              </code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
+</div>
+<p>Wir können auch zwei oder mehrere Argumente zu einer Funktion hinzufügen. Probieren wir das gleiche doch mal mit einer Funktion die jeder aus dem Physik - Unterricht kennen sollte: <span class="math display">\[Distanz \; \; = \; \; \frac{Geschwindigkeit}{Zeit}  \; \; \; \widehat{=} \; \; \; s \;  = \frac{v}{t}\]</span></p>
+<div class="tutorial-exercise" data-label="function2" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>distanz &lt;- function(v, t) {
+ s &lt;- v / t       #teile v / t und definiere deren Ergebnis als s
+ s                #gebe s aus
+}
+
+#Funktion ausprobieren!
+distanz(50,6)</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
+</div>
+<p>Nun müssen wir allerdings nicht immer selber Funktionen definieren. Im Gegenteil! <code>Base R</code> und die vielen Packages haben unzählige Funktionen, die Datenbearbeitung einfach machen. Beispielsweise gibt <code>mean()</code> den Mittelwert eines Vektors aus und <code>sd()</code> gibt die Standardabweichung.</p>
+<div class="tutorial-exercise" data-label="func1" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>mean(vektor)   #gib den Mittelwert von vektor aus
+sd(vektor)     #gib die Standardabweichung von vektor aus</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
+</div>
+</div>
+<div id="section-wie-bekommt-man-hilfe" class="section level3">
+<h3>Wie bekommt man Hilfe?</h3>
+<p>Technische Dokumentation für die meisten Funktionen: <code>help(name)</code> oder den Cursor über den Funktionsnamen ausrichten und <strong>F1</strong> drücken. Nutze ? um Hilfe für Funktionen zu bekommen.</p>
+<p><em>Beispiel:</em></p>
+<div class="tutorial-exercise" data-label="func2" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>?mean   #gib die Hilfe für mean aus!</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
+</div>
+<p><strong>Die beste Hilfe</strong></p>
+<p><img src = "images/google.jpg"></p>
+<p>Google weiß einfach alles.</p>
+<p><img src = "images/stackoverflow-logo.png" width="60%"></p>
+<p>Eine weitere gute Möglichkeit ist <a href="https://stackoverflow.com/">Stackoverflow</a> für alle Fragen rund ums Programmieren. Dort findet man viele verschiedene Software-Packages und alle Details zu Theorie und Anwendung.</p>
+</div>
+</div>
+<div id="section-dataframes-und-base-r" class="section level2">
+<h2>Dataframes und Base R</h2>
+<p>Zunächst einmal eine kleine Übersicht:</p>
+<p><strong>Es gibt drei Variablen-Haupttypen</strong></p>
+<ul>
+<li><p><strong>Character :</strong> aka “String” oder ‘String’, veränderbarer Text.</p></li>
+<li><p><strong>Factor :</strong> Unveränderliche Ausprägungen (z.B. Gender, Religion).</p></li>
+<li><p><strong>Numeric :</strong> Jeglicher Zahleninput mit dem man rechnen kann.</p></li>
+</ul>
+<div class="tutorial-exercise" data-label="character" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>char &lt;- c(&quot;Männlich&quot;, &quot;Weiblich&quot;)
+fac &lt;- factor(c(&quot;Männlich&quot;, &quot;Weiblich&quot;))
+num &lt;- c(1, 2, 3)
+
+class(char)
+class(fac)
+class(num)</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
+</div>
+<p><strong>Tranformation zwischen den Datentypen</strong></p>
+<ul>
+<li><p><code>as.character()</code></p></li>
+<li><p><code>as.factor()</code></p></li>
+<li><p><code>as.numeric()</code></p></li>
+</ul>
+<div class="tutorial-exercise" data-label="ascharacter" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>as.character(num)
+as.factor(char)
+as.numeric(fac)</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
+</div>
+<p><strong>Lasst uns mal einen Beispieldatensatz einladen.</strong></p>
+<p><img src = "images/ess_logo.jpg" width="60%"></p>
+<p><a href="http://www.europeansocialsurvey.org/data/round-index.html"><strong>DOWNLOAD European Social Survey Data</strong></a></p>
+<p>Der <em>European Social Survey 8</em> ist gerade erst erschienen und hat sehr interessante Daten. Dieses transnationale Survey-Projekt enthält über 34.000 Befragte und hunderte von Variablen zu politischen und sozio-ökonomischen Fragestellungen.</p>
+<p>Hier ein kleiner Ausschnitt aus dem Datensatz, welches nur das Subset <em>Deutschland</em> zeigt:</p>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["id"],"name":[1],"type":["int"],"align":["right"]},{"label":["gender"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["age"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["left_right"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["party_ger"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["fake_refugee"],"name":[6],"type":["chr"],"align":["left"]}],"data":[{"1":"1","2":"1","3":"22","4":"2","5":"2","6":"Agree"},{"1":"2","2":"1","3":"58","4":"5","5":"2","6":"Neither agree nor disagree"},{"1":"3","2":"1","3":"64","4":"5","5":"2","6":"Neither agree nor disagree"},{"1":"4","2":"1","3":"52","4":"8","5":"NA","6":"Agree strongly"},{"1":"5","2":"1","3":"67","4":"7","5":"5","6":"Agree"},{"1":"6","2":"1","3":"73","4":"5","5":"NA","6":"Agree strongly"},{"1":"7","2":"2","3":"34","4":"6","5":"NA","6":"Agree"},{"1":"8","2":"2","3":"40","4":"3","5":"2","6":"Disagree"},{"1":"9","2":"2","3":"77","4":"6","5":"1","6":"Neither agree nor disagree"},{"1":"10","2":"1","3":"30","4":"5","5":"NA","6":"Disagree"},{"1":"11","2":"2","3":"41","4":"0","5":"1","6":"Agree"},{"1":"12","2":"1","3":"70","4":"4","5":"NA","6":"Agree"},{"1":"13","2":"2","3":"58","4":"3","5":"1","6":"Agree"},{"1":"14","2":"1","3":"48","4":"4","5":"NA","6":"Agree"},{"1":"15","2":"1","3":"44","4":"3","5":"2","6":"Disagree"},{"1":"16","2":"2","3":"41","4":"5","5":"2","6":"Agree"},{"1":"17","2":"2","3":"17","4":"0","5":"NA","6":"Agree"},{"1":"18","2":"2","3":"33","4":"6","5":"NA","6":"Neither agree nor disagree"},{"1":"19","2":"2","3":"92","4":"8","5":"1","6":"Neither agree nor disagree"},{"1":"20","2":"2","3":"53","4":"0","5":"4","6":"Neither agree nor disagree"},{"1":"21","2":"1","3":"64","4":"3","5":"NA","6":"Disagree"},{"1":"22","2":"1","3":"80","4":"3","5":"NA","6":"Neither agree nor disagree"},{"1":"23","2":"2","3":"31","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"24","2":"2","3":"50","4":"4","5":"4","6":"Disagree"},{"1":"25","2":"1","3":"26","4":"2","5":"NA","6":"Agree"},{"1":"26","2":"2","3":"40","4":"NA","5":"NA","6":"Agree"},{"1":"27","2":"2","3":"85","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"28","2":"2","3":"48","4":"4","5":"NA","6":"Neither agree nor disagree"},{"1":"29","2":"2","3":"70","4":"4","5":"NA","6":"Neither agree nor disagree"},{"1":"30","2":"2","3":"40","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"31","2":"2","3":"61","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"32","2":"2","3":"42","4":"5","5":"NA","6":"Agree"},{"1":"33","2":"1","3":"54","4":"6","5":"1","6":"Neither agree nor disagree"},{"1":"34","2":"2","3":"36","4":"5","5":"NA","6":"Disagree"},{"1":"35","2":"2","3":"52","4":"6","5":"1","6":"Disagree"},{"1":"36","2":"2","3":"35","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"37","2":"1","3":"72","4":"4","5":"2","6":"Neither agree nor disagree"},{"1":"38","2":"2","3":"25","4":"4","5":"NA","6":"Neither agree nor disagree"},{"1":"39","2":"2","3":"63","4":"6","5":"1","6":"Agree"},{"1":"40","2":"1","3":"38","4":"4","5":"2","6":"Disagree"},{"1":"41","2":"1","3":"73","4":"5","5":"NA","6":"Agree strongly"},{"1":"42","2":"1","3":"22","4":"5","5":"NA","6":"Agree"},{"1":"43","2":"2","3":"32","4":"3","5":"NA","6":"Disagree strongly"},{"1":"44","2":"1","3":"17","4":"7","5":"1","6":"Disagree"},{"1":"45","2":"1","3":"31","4":"3","5":"NA","6":"Disagree"},{"1":"46","2":"2","3":"45","4":"7","5":"2","6":"Disagree"},{"1":"47","2":"2","3":"64","4":"2","5":"2","6":"Neither agree nor disagree"},{"1":"48","2":"1","3":"54","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"49","2":"1","3":"16","4":"1","5":"NA","6":"Disagree"},{"1":"50","2":"2","3":"46","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"51","2":"2","3":"68","4":"5","5":"5","6":"Neither agree nor disagree"},{"1":"52","2":"2","3":"16","4":"1","5":"4","6":"Disagree"},{"1":"53","2":"2","3":"17","4":"2","5":"NA","6":"Neither agree nor disagree"},{"1":"54","2":"1","3":"62","4":"3","5":"NA","6":"Agree strongly"},{"1":"55","2":"2","3":"48","4":"0","5":"NA","6":"NA"},{"1":"56","2":"1","3":"72","4":"6","5":"1","6":"Disagree"},{"1":"57","2":"1","3":"74","4":"5","5":"9","6":"Agree"},{"1":"58","2":"2","3":"79","4":"6","5":"NA","6":"Disagree"},{"1":"59","2":"1","3":"65","4":"2","5":"2","6":"Neither agree nor disagree"},{"1":"60","2":"2","3":"54","4":"3","5":"2","6":"Disagree"},{"1":"61","2":"1","3":"67","4":"3","5":"2","6":"Disagree"},{"1":"62","2":"1","3":"21","4":"6","5":"NA","6":"Agree"},{"1":"63","2":"2","3":"44","4":"5","5":"1","6":"Neither agree nor disagree"},{"1":"64","2":"1","3":"55","4":"4","5":"4","6":"Disagree strongly"},{"1":"65","2":"2","3":"46","4":"4","5":"2","6":"Disagree"},{"1":"66","2":"2","3":"81","4":"5","5":"1","6":"Disagree"},{"1":"67","2":"1","3":"76","4":"8","5":"1","6":"Agree"},{"1":"68","2":"2","3":"61","4":"3","5":"NA","6":"NA"},{"1":"69","2":"1","3":"31","4":"5","5":"1","6":"Neither agree nor disagree"},{"1":"70","2":"1","3":"49","4":"5","5":"4","6":"Disagree"},{"1":"71","2":"2","3":"26","4":"6","5":"5","6":"Neither agree nor disagree"},{"1":"72","2":"2","3":"77","4":"8","5":"1","6":"Neither agree nor disagree"},{"1":"73","2":"2","3":"30","4":"5","5":"1","6":"Disagree"},{"1":"74","2":"2","3":"53","4":"3","5":"4","6":"Disagree strongly"},{"1":"75","2":"1","3":"28","4":"6","5":"NA","6":"Neither agree nor disagree"},{"1":"76","2":"1","3":"76","4":"5","5":"9","6":"Neither agree nor disagree"},{"1":"77","2":"2","3":"36","4":"0","5":"4","6":"NA"},{"1":"78","2":"1","3":"32","4":"4","5":"4","6":"NA"},{"1":"79","2":"1","3":"33","4":"5","5":"5","6":"Neither agree nor disagree"},{"1":"80","2":"1","3":"59","4":"1","5":"3","6":"Disagree strongly"},{"1":"81","2":"1","3":"33","4":"4","5":"1","6":"Disagree"},{"1":"82","2":"1","3":"54","4":"5","5":"NA","6":"Agree"},{"1":"83","2":"1","3":"73","4":"NA","5":"NA","6":"Disagree"},{"1":"84","2":"2","3":"34","4":"5","5":"4","6":"Disagree"},{"1":"85","2":"1","3":"16","4":"5","5":"9","6":"Disagree"},{"1":"86","2":"2","3":"61","4":"5","5":"NA","6":"Disagree strongly"},{"1":"87","2":"1","3":"36","4":"4","5":"2","6":"Agree"},{"1":"88","2":"1","3":"47","4":"6","5":"4","6":"Neither agree nor disagree"},{"1":"89","2":"1","3":"27","4":"5","5":"NA","6":"Disagree"},{"1":"90","2":"2","3":"17","4":"4","5":"NA","6":"NA"},{"1":"91","2":"1","3":"75","4":"5","5":"NA","6":"Disagree"},{"1":"92","2":"2","3":"58","4":"5","5":"2","6":"Agree strongly"},{"1":"93","2":"1","3":"45","4":"3","5":"2","6":"Agree"},{"1":"94","2":"2","3":"72","4":"5","5":"1","6":"Disagree"},{"1":"95","2":"1","3":"41","4":"4","5":"2","6":"Disagree"},{"1":"96","2":"2","3":"80","4":"8","5":"1","6":"Disagree"},{"1":"97","2":"1","3":"73","4":"3","5":"2","6":"Neither agree nor disagree"},{"1":"98","2":"2","3":"66","4":"3","5":"4","6":"Neither agree nor disagree"},{"1":"99","2":"2","3":"41","4":"5","5":"2","6":"Neither agree nor disagree"},{"1":"100","2":"1","3":"41","4":"4","5":"NA","6":"Agree strongly"},{"1":"101","2":"1","3":"33","4":"5","5":"NA","6":"Agree"},{"1":"102","2":"1","3":"16","4":"3","5":"NA","6":"Disagree"},{"1":"103","2":"2","3":"63","4":"6","5":"NA","6":"Agree"},{"1":"104","2":"2","3":"70","4":"3","5":"2","6":"Disagree"},{"1":"105","2":"2","3":"38","4":"5","5":"NA","6":"Agree"},{"1":"106","2":"1","3":"27","4":"5","5":"NA","6":"Disagree"},{"1":"107","2":"2","3":"23","4":"7","5":"NA","6":"Agree"},{"1":"108","2":"1","3":"53","4":"5","5":"1","6":"Neither agree nor disagree"},{"1":"109","2":"1","3":"53","4":"4","5":"2","6":"Disagree"},{"1":"110","2":"1","3":"20","4":"0","5":"9","6":"Disagree strongly"},{"1":"111","2":"1","3":"59","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"112","2":"1","3":"64","4":"5","5":"1","6":"Agree"},{"1":"113","2":"2","3":"31","4":"6","5":"1","6":"Disagree"},{"1":"114","2":"2","3":"27","4":"0","5":"4","6":"Disagree"},{"1":"115","2":"2","3":"68","4":"3","5":"2","6":"Neither agree nor disagree"},{"1":"116","2":"2","3":"52","4":"5","5":"NA","6":"Agree"},{"1":"117","2":"1","3":"45","4":"4","5":"2","6":"Disagree"},{"1":"118","2":"1","3":"63","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"119","2":"2","3":"38","4":"3","5":"NA","6":"Agree"},{"1":"120","2":"2","3":"79","4":"5","5":"2","6":"Agree"},{"1":"121","2":"1","3":"46","4":"4","5":"NA","6":"Disagree"},{"1":"122","2":"1","3":"49","4":"3","5":"4","6":"Disagree strongly"},{"1":"123","2":"2","3":"27","4":"5","5":"4","6":"Disagree"},{"1":"124","2":"1","3":"17","4":"7","5":"NA","6":"Disagree"},{"1":"125","2":"1","3":"46","4":"7","5":"6","6":"Disagree"},{"1":"126","2":"1","3":"49","4":"4","5":"2","6":"Neither agree nor disagree"},{"1":"127","2":"2","3":"76","4":"7","5":"NA","6":"Neither agree nor disagree"},{"1":"128","2":"2","3":"80","4":"7","5":"1","6":"NA"},{"1":"129","2":"1","3":"15","4":"4","5":"2","6":"Neither agree nor disagree"},{"1":"130","2":"2","3":"23","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"131","2":"2","3":"50","4":"2","5":"2","6":"Agree"},{"1":"132","2":"1","3":"42","4":"6","5":"NA","6":"Agree strongly"},{"1":"133","2":"2","3":"39","4":"5","5":"NA","6":"Disagree"},{"1":"134","2":"1","3":"49","4":"5","5":"NA","6":"Agree"},{"1":"135","2":"2","3":"22","4":"3","5":"NA","6":"Disagree"},{"1":"136","2":"2","3":"55","4":"5","5":"NA","6":"Agree"},{"1":"137","2":"1","3":"31","4":"5","5":"2","6":"Neither agree nor disagree"},{"1":"138","2":"1","3":"68","4":"5","5":"2","6":"Neither agree nor disagree"},{"1":"139","2":"2","3":"80","4":"7","5":"1","6":"Disagree"},{"1":"140","2":"2","3":"55","4":"1","5":"4","6":"Neither agree nor disagree"},{"1":"141","2":"2","3":"41","4":"4","5":"3","6":"Disagree"},{"1":"142","2":"2","3":"22","4":"6","5":"NA","6":"Neither agree nor disagree"},{"1":"143","2":"1","3":"16","4":"6","5":"NA","6":"Disagree"},{"1":"144","2":"2","3":"70","4":"7","5":"1","6":"Disagree"},{"1":"145","2":"2","3":"20","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"146","2":"2","3":"42","4":"5","5":"1","6":"Agree"},{"1":"147","2":"2","3":"52","4":"2","5":"NA","6":"Neither agree nor disagree"},{"1":"148","2":"1","3":"40","4":"5","5":"2","6":"NA"},{"1":"149","2":"2","3":"74","4":"4","5":"NA","6":"Agree"},{"1":"150","2":"1","3":"70","4":"5","5":"2","6":"Disagree"},{"1":"151","2":"2","3":"16","4":"7","5":"5","6":"Neither agree nor disagree"},{"1":"152","2":"1","3":"52","4":"5","5":"4","6":"Disagree strongly"},{"1":"153","2":"2","3":"25","4":"3","5":"4","6":"Disagree"},{"1":"154","2":"2","3":"29","4":"2","5":"4","6":"Disagree strongly"},{"1":"155","2":"2","3":"70","4":"4","5":"2","6":"Disagree"},{"1":"156","2":"2","3":"50","4":"4","5":"2","6":"Disagree"},{"1":"157","2":"1","3":"72","4":"6","5":"NA","6":"Agree"},{"1":"158","2":"1","3":"58","4":"3","5":"2","6":"Disagree"},{"1":"159","2":"2","3":"43","4":"4","5":"2","6":"Disagree"},{"1":"160","2":"2","3":"46","4":"4","5":"4","6":"Disagree"},{"1":"161","2":"1","3":"39","4":"7","5":"NA","6":"Neither agree nor disagree"},{"1":"162","2":"2","3":"55","4":"NA","5":"NA","6":"Disagree strongly"},{"1":"163","2":"1","3":"55","4":"5","5":"2","6":"Disagree"},{"1":"164","2":"2","3":"18","4":"5","5":"NA","6":"Disagree"},{"1":"165","2":"1","3":"19","4":"6","5":"NA","6":"Neither agree nor disagree"},{"1":"166","2":"1","3":"49","4":"5","5":"NA","6":"Agree"},{"1":"167","2":"1","3":"49","4":"2","5":"3","6":"Disagree"},{"1":"168","2":"1","3":"68","4":"0","5":"9","6":"Disagree"},{"1":"169","2":"1","3":"18","4":"5","5":"NA","6":"Disagree"},{"1":"170","2":"1","3":"44","4":"5","5":"NA","6":"Agree"},{"1":"171","2":"1","3":"48","4":"4","5":"NA","6":"Disagree"},{"1":"172","2":"1","3":"17","4":"0","5":"4","6":"Neither agree nor disagree"},{"1":"173","2":"2","3":"56","4":"2","5":"NA","6":"Neither agree nor disagree"},{"1":"174","2":"2","3":"19","4":"1","5":"9","6":"Disagree"},{"1":"175","2":"1","3":"64","4":"4","5":"2","6":"Agree"},{"1":"176","2":"2","3":"38","4":"6","5":"NA","6":"Neither agree nor disagree"},{"1":"177","2":"1","3":"69","4":"7","5":"NA","6":"Disagree"},{"1":"178","2":"1","3":"76","4":"3","5":"NA","6":"Disagree"},{"1":"179","2":"2","3":"17","4":"7","5":"NA","6":"Disagree"},{"1":"180","2":"2","3":"16","4":"9","5":"NA","6":"Disagree"},{"1":"181","2":"1","3":"20","4":"7","5":"6","6":"Neither agree nor disagree"},{"1":"182","2":"2","3":"72","4":"4","5":"4","6":"Agree"},{"1":"183","2":"2","3":"47","4":"4","5":"NA","6":"Agree"},{"1":"184","2":"2","3":"65","4":"5","5":"NA","6":"Agree"},{"1":"185","2":"2","3":"74","4":"3","5":"2","6":"Neither agree nor disagree"},{"1":"186","2":"1","3":"45","4":"4","5":"NA","6":"Disagree"},{"1":"187","2":"2","3":"72","4":"5","5":"1","6":"Agree"},{"1":"188","2":"2","3":"21","4":"3","5":"NA","6":"Neither agree nor disagree"},{"1":"189","2":"2","3":"55","4":"2","5":"NA","6":"Neither agree nor disagree"},{"1":"190","2":"1","3":"34","4":"4","5":"1","6":"Neither agree nor disagree"},{"1":"191","2":"2","3":"34","4":"4","5":"NA","6":"Neither agree nor disagree"},{"1":"192","2":"2","3":"56","4":"2","5":"1","6":"Neither agree nor disagree"},{"1":"193","2":"1","3":"27","4":"5","5":"NA","6":"Agree"},{"1":"194","2":"2","3":"70","4":"3","5":"4","6":"Disagree"},{"1":"195","2":"2","3":"77","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"196","2":"2","3":"17","4":"4","5":"NA","6":"Neither agree nor disagree"},{"1":"197","2":"2","3":"49","4":"0","5":"2","6":"Disagree"},{"1":"198","2":"2","3":"23","4":"5","5":"NA","6":"Agree"},{"1":"199","2":"2","3":"67","4":"5","5":"1","6":"Agree"},{"1":"200","2":"2","3":"48","4":"5","5":"2","6":"Disagree"},{"1":"201","2":"1","3":"20","4":"3","5":"NA","6":"Disagree"},{"1":"202","2":"2","3":"64","4":"5","5":"1","6":"Disagree"},{"1":"203","2":"1","3":"23","4":"4","5":"2","6":"Disagree"},{"1":"204","2":"1","3":"36","4":"NA","5":"1","6":"Agree"},{"1":"205","2":"1","3":"24","4":"5","5":"NA","6":"Disagree"},{"1":"206","2":"1","3":"54","4":"0","5":"1","6":"Neither agree nor disagree"},{"1":"207","2":"1","3":"60","4":"3","5":"NA","6":"Neither agree nor disagree"},{"1":"208","2":"2","3":"20","4":"4","5":"NA","6":"Agree"},{"1":"209","2":"2","3":"27","4":"5","5":"NA","6":"Agree"},{"1":"210","2":"1","3":"19","4":"7","5":"NA","6":"NA"},{"1":"211","2":"1","3":"23","4":"NA","5":"NA","6":"NA"},{"1":"212","2":"1","3":"18","4":"NA","5":"NA","6":"NA"},{"1":"213","2":"2","3":"16","4":"0","5":"NA","6":"NA"},{"1":"214","2":"1","3":"33","4":"2","5":"2","6":"Neither agree nor disagree"},{"1":"215","2":"2","3":"53","4":"3","5":"2","6":"Agree"},{"1":"216","2":"2","3":"56","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"217","2":"2","3":"53","4":"NA","5":"NA","6":"Disagree"},{"1":"218","2":"1","3":"52","4":"2","5":"2","6":"Disagree"},{"1":"219","2":"1","3":"24","4":"2","5":"3","6":"Disagree"},{"1":"220","2":"1","3":"64","4":"NA","5":"1","6":"Neither agree nor disagree"},{"1":"221","2":"2","3":"36","4":"NA","5":"NA","6":"NA"},{"1":"222","2":"1","3":"48","4":"6","5":"NA","6":"NA"},{"1":"223","2":"1","3":"52","4":"4","5":"NA","6":"Agree"},{"1":"224","2":"2","3":"56","4":"4","5":"1","6":"Agree"},{"1":"225","2":"1","3":"54","4":"3","5":"NA","6":"Disagree"},{"1":"226","2":"1","3":"29","4":"5","5":"1","6":"Disagree"},{"1":"227","2":"1","3":"43","4":"5","5":"1","6":"Neither agree nor disagree"},{"1":"228","2":"1","3":"57","4":"2","5":"3","6":"Disagree"},{"1":"229","2":"2","3":"44","4":"4","5":"NA","6":"Neither agree nor disagree"},{"1":"230","2":"1","3":"69","4":"8","5":"5","6":"Neither agree nor disagree"},{"1":"231","2":"1","3":"63","4":"5","5":"9","6":"Disagree"},{"1":"232","2":"1","3":"31","4":"5","5":"NA","6":"Agree"},{"1":"233","2":"2","3":"57","4":"4","5":"2","6":"Agree"},{"1":"234","2":"1","3":"47","4":"2","5":"2","6":"Disagree strongly"},{"1":"235","2":"1","3":"60","4":"5","5":"1","6":"Neither agree nor disagree"},{"1":"236","2":"1","3":"77","4":"6","5":"1","6":"Agree"},{"1":"237","2":"1","3":"59","4":"0","5":"2","6":"Neither agree nor disagree"},{"1":"238","2":"1","3":"54","4":"0","5":"3","6":"Disagree"},{"1":"239","2":"2","3":"29","4":"3","5":"NA","6":"Disagree"},{"1":"240","2":"2","3":"49","4":"5","5":"2","6":"Neither agree nor disagree"},{"1":"241","2":"2","3":"72","4":"4","5":"4","6":"Disagree"},{"1":"242","2":"1","3":"40","4":"0","5":"NA","6":"Disagree"},{"1":"243","2":"1","3":"22","4":"3","5":"4","6":"Agree"},{"1":"244","2":"2","3":"76","4":"10","5":"NA","6":"NA"},{"1":"245","2":"1","3":"45","4":"3","5":"NA","6":"NA"},{"1":"246","2":"1","3":"55","4":"3","5":"4","6":"Disagree"},{"1":"247","2":"1","3":"41","4":"6","5":"5","6":"Neither agree nor disagree"},{"1":"248","2":"2","3":"17","4":"4","5":"NA","6":"Disagree"},{"1":"249","2":"1","3":"43","4":"NA","5":"1","6":"NA"},{"1":"250","2":"1","3":"60","4":"6","5":"NA","6":"Disagree"},{"1":"251","2":"2","3":"49","4":"4","5":"4","6":"Neither agree nor disagree"},{"1":"252","2":"1","3":"26","4":"3","5":"NA","6":"Disagree"},{"1":"253","2":"1","3":"65","4":"6","5":"2","6":"Disagree"},{"1":"254","2":"2","3":"28","4":"5","5":"1","6":"Neither agree nor disagree"},{"1":"255","2":"1","3":"18","4":"NA","5":"NA","6":"Disagree"},{"1":"256","2":"1","3":"48","4":"NA","5":"1","6":"Neither agree nor disagree"},{"1":"257","2":"1","3":"69","4":"7","5":"2","6":"Agree"},{"1":"258","2":"1","3":"39","4":"5","5":"NA","6":"NA"},{"1":"259","2":"1","3":"25","4":"4","5":"2","6":"NA"},{"1":"260","2":"1","3":"24","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"261","2":"1","3":"47","4":"NA","5":"NA","6":"Disagree"},{"1":"262","2":"2","3":"32","4":"5","5":"1","6":"Agree"},{"1":"263","2":"1","3":"46","4":"4","5":"NA","6":"Agree"},{"1":"264","2":"2","3":"49","4":"6","5":"NA","6":"Agree"},{"1":"265","2":"2","3":"52","4":"3","5":"4","6":"Disagree"},{"1":"266","2":"1","3":"67","4":"4","5":"2","6":"Agree"},{"1":"267","2":"1","3":"41","4":"2","5":"NA","6":"Disagree"},{"1":"268","2":"1","3":"78","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"269","2":"2","3":"39","4":"5","5":"NA","6":"Disagree"},{"1":"270","2":"2","3":"55","4":"4","5":"4","6":"Neither agree nor disagree"},{"1":"271","2":"2","3":"37","4":"1","5":"3","6":"Disagree"},{"1":"272","2":"2","3":"55","4":"5","5":"NA","6":"Agree"},{"1":"273","2":"2","3":"15","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"274","2":"2","3":"56","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"275","2":"2","3":"71","4":"4","5":"NA","6":"Agree"},{"1":"276","2":"1","3":"56","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"277","2":"2","3":"52","4":"3","5":"2","6":"Disagree"},{"1":"278","2":"1","3":"57","4":"3","5":"2","6":"Agree"},{"1":"279","2":"1","3":"77","4":"3","5":"2","6":"Agree"},{"1":"280","2":"1","3":"62","4":"0","5":"3","6":"Disagree"},{"1":"281","2":"2","3":"16","4":"3","5":"NA","6":"Neither agree nor disagree"},{"1":"282","2":"2","3":"35","4":"2","5":"2","6":"Disagree"},{"1":"283","2":"2","3":"37","4":"3","5":"NA","6":"Neither agree nor disagree"},{"1":"284","2":"1","3":"59","4":"5","5":"NA","6":"Disagree"},{"1":"285","2":"2","3":"75","4":"6","5":"1","6":"Disagree"},{"1":"286","2":"1","3":"75","4":"5","5":"2","6":"Agree"},{"1":"287","2":"2","3":"63","4":"8","5":"1","6":"Agree"},{"1":"288","2":"1","3":"33","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"289","2":"1","3":"28","4":"5","5":"NA","6":"Disagree"},{"1":"290","2":"1","3":"49","4":"6","5":"1","6":"Neither agree nor disagree"},{"1":"291","2":"2","3":"54","4":"5","5":"4","6":"Disagree"},{"1":"292","2":"2","3":"61","4":"2","5":"2","6":"Disagree"},{"1":"293","2":"1","3":"72","4":"5","5":"1","6":"Neither agree nor disagree"},{"1":"294","2":"1","3":"28","4":"0","5":"NA","6":"Agree strongly"},{"1":"295","2":"2","3":"18","4":"2","5":"NA","6":"Disagree"},{"1":"296","2":"1","3":"51","4":"5","5":"1","6":"Agree strongly"},{"1":"297","2":"1","3":"16","4":"NA","5":"NA","6":"Disagree"},{"1":"298","2":"1","3":"36","4":"5","5":"NA","6":"Disagree"},{"1":"299","2":"2","3":"36","4":"0","5":"NA","6":"Agree"},{"1":"300","2":"1","3":"63","4":"5","5":"1","6":"Agree"},{"1":"301","2":"1","3":"31","4":"4","5":"NA","6":"Agree"},{"1":"302","2":"2","3":"69","4":"5","5":"1","6":"Agree"},{"1":"303","2":"1","3":"66","4":"2","5":"2","6":"Neither agree nor disagree"},{"1":"304","2":"2","3":"56","4":"5","5":"NA","6":"NA"},{"1":"305","2":"1","3":"34","4":"4","5":"NA","6":"Agree"},{"1":"306","2":"1","3":"36","4":"5","5":"7","6":"Agree"},{"1":"307","2":"1","3":"54","4":"5","5":"4","6":"Disagree"},{"1":"308","2":"1","3":"51","4":"5","5":"NA","6":"Disagree"},{"1":"309","2":"2","3":"64","4":"5","5":"NA","6":"Agree"},{"1":"310","2":"2","3":"65","4":"5","5":"1","6":"Agree"},{"1":"311","2":"1","3":"21","4":"4","5":"NA","6":"Neither agree nor disagree"},{"1":"312","2":"2","3":"64","4":"5","5":"4","6":"Agree"},{"1":"313","2":"1","3":"22","4":"5","5":"NA","6":"NA"},{"1":"314","2":"1","3":"42","4":"5","5":"3","6":"Disagree strongly"},{"1":"315","2":"2","3":"68","4":"8","5":"1","6":"Agree strongly"},{"1":"316","2":"1","3":"56","4":"8","5":"1","6":"Agree strongly"},{"1":"317","2":"1","3":"52","4":"NA","5":"1","6":"Disagree"},{"1":"318","2":"2","3":"24","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"319","2":"2","3":"44","4":"5","5":"NA","6":"Agree"},{"1":"320","2":"1","3":"37","4":"5","5":"5","6":"Agree"},{"1":"321","2":"1","3":"65","4":"3","5":"3","6":"Neither agree nor disagree"},{"1":"322","2":"2","3":"22","4":"3","5":"NA","6":"Agree"},{"1":"323","2":"2","3":"17","4":"3","5":"2","6":"Disagree"},{"1":"324","2":"2","3":"22","4":"6","5":"NA","6":"Neither agree nor disagree"},{"1":"325","2":"2","3":"33","4":"3","5":"2","6":"Neither agree nor disagree"},{"1":"326","2":"1","3":"56","4":"4","5":"4","6":"Disagree"},{"1":"327","2":"2","3":"58","4":"2","5":"NA","6":"Neither agree nor disagree"},{"1":"328","2":"2","3":"61","4":"5","5":"2","6":"Disagree strongly"},{"1":"329","2":"1","3":"51","4":"2","5":"4","6":"Disagree"},{"1":"330","2":"1","3":"58","4":"5","5":"2","6":"Neither agree nor disagree"},{"1":"331","2":"1","3":"68","4":"4","5":"NA","6":"Agree"},{"1":"332","2":"2","3":"23","4":"2","5":"NA","6":"Neither agree nor disagree"},{"1":"333","2":"1","3":"68","4":"4","5":"3","6":"Neither agree nor disagree"},{"1":"334","2":"2","3":"70","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"335","2":"1","3":"46","4":"1","5":"NA","6":"Neither agree nor disagree"},{"1":"336","2":"1","3":"75","4":"4","5":"2","6":"Agree"},{"1":"337","2":"1","3":"16","4":"6","5":"1","6":"Disagree"},{"1":"338","2":"1","3":"41","4":"4","5":"9","6":"Neither agree nor disagree"},{"1":"339","2":"1","3":"50","4":"3","5":"4","6":"Neither agree nor disagree"},{"1":"340","2":"1","3":"59","4":"4","5":"1","6":"Disagree"},{"1":"341","2":"2","3":"31","4":"4","5":"2","6":"Neither agree nor disagree"},{"1":"342","2":"2","3":"56","4":"2","5":"4","6":"Disagree"},{"1":"343","2":"2","3":"42","4":"5","5":"NA","6":"Agree"},{"1":"344","2":"1","3":"80","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"345","2":"1","3":"47","4":"6","5":"NA","6":"Neither agree nor disagree"},{"1":"346","2":"1","3":"51","4":"6","5":"NA","6":"Neither agree nor disagree"},{"1":"347","2":"1","3":"71","4":"8","5":"NA","6":"Agree"},{"1":"348","2":"2","3":"55","4":"5","5":"2","6":"Agree"},{"1":"349","2":"2","3":"65","4":"3","5":"1","6":"Neither agree nor disagree"},{"1":"350","2":"2","3":"75","4":"3","5":"4","6":"Disagree"},{"1":"351","2":"2","3":"35","4":"5","5":"NA","6":"Agree"},{"1":"352","2":"2","3":"51","4":"7","5":"NA","6":"Agree strongly"},{"1":"353","2":"1","3":"24","4":"5","5":"NA","6":"Disagree"},{"1":"354","2":"2","3":"80","4":"6","5":"NA","6":"Agree"},{"1":"355","2":"2","3":"84","4":"7","5":"NA","6":"Agree"},{"1":"356","2":"1","3":"67","4":"7","5":"5","6":"Neither agree nor disagree"},{"1":"357","2":"2","3":"62","4":"7","5":"NA","6":"Agree strongly"},{"1":"358","2":"1","3":"42","4":"3","5":"NA","6":"Disagree"},{"1":"359","2":"1","3":"15","4":"NA","5":"NA","6":"Agree"},{"1":"360","2":"1","3":"52","4":"3","5":"NA","6":"Agree"},{"1":"361","2":"1","3":"56","4":"5","5":"NA","6":"Agree"},{"1":"362","2":"2","3":"37","4":"5","5":"NA","6":"Disagree"},{"1":"363","2":"2","3":"40","4":"7","5":"1","6":"Agree"},{"1":"364","2":"2","3":"42","4":"7","5":"NA","6":"Disagree"},{"1":"365","2":"1","3":"38","4":"NA","5":"NA","6":"Disagree"},{"1":"366","2":"2","3":"63","4":"10","5":"1","6":"Disagree"},{"1":"367","2":"1","3":"63","4":"2","5":"2","6":"Agree"},{"1":"368","2":"1","3":"86","4":"2","5":"2","6":"Agree"},{"1":"369","2":"2","3":"29","4":"4","5":"1","6":"Agree"},{"1":"370","2":"1","3":"33","4":"5","5":"3","6":"Agree strongly"},{"1":"371","2":"1","3":"37","4":"2","5":"4","6":"Agree strongly"},{"1":"372","2":"1","3":"67","4":"5","5":"2","6":"Agree"},{"1":"373","2":"1","3":"21","4":"4","5":"NA","6":"Neither agree nor disagree"},{"1":"374","2":"1","3":"62","4":"5","5":"2","6":"Disagree"},{"1":"375","2":"2","3":"48","4":"2","5":"NA","6":"Disagree"},{"1":"376","2":"1","3":"47","4":"5","5":"5","6":"Neither agree nor disagree"},{"1":"377","2":"2","3":"43","4":"5","5":"NA","6":"Disagree"},{"1":"378","2":"2","3":"23","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"379","2":"2","3":"25","4":"7","5":"NA","6":"Neither agree nor disagree"},{"1":"380","2":"2","3":"75","4":"3","5":"NA","6":"NA"},{"1":"381","2":"1","3":"71","4":"4","5":"NA","6":"Neither agree nor disagree"},{"1":"382","2":"1","3":"50","4":"2","5":"NA","6":"NA"},{"1":"383","2":"2","3":"35","4":"5","5":"1","6":"Neither agree nor disagree"},{"1":"384","2":"2","3":"56","4":"4","5":"NA","6":"Disagree"},{"1":"385","2":"1","3":"54","4":"0","5":"2","6":"Disagree"},{"1":"386","2":"1","3":"54","4":"3","5":"3","6":"NA"},{"1":"387","2":"2","3":"39","4":"2","5":"2","6":"Disagree"},{"1":"388","2":"2","3":"45","4":"7","5":"NA","6":"Neither agree nor disagree"},{"1":"389","2":"2","3":"44","4":"5","5":"NA","6":"Disagree"},{"1":"390","2":"2","3":"56","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"391","2":"2","3":"38","4":"8","5":"NA","6":"Agree"},{"1":"392","2":"2","3":"28","4":"4","5":"NA","6":"Disagree"},{"1":"393","2":"1","3":"43","4":"3","5":"NA","6":"Neither agree nor disagree"},{"1":"394","2":"1","3":"16","4":"5","5":"9","6":"Agree"},{"1":"395","2":"1","3":"75","4":"7","5":"NA","6":"Neither agree nor disagree"},{"1":"396","2":"1","3":"51","4":"0","5":"3","6":"Disagree"},{"1":"397","2":"1","3":"23","4":"6","5":"NA","6":"Disagree"},{"1":"398","2":"1","3":"55","4":"3","5":"NA","6":"Agree"},{"1":"399","2":"1","3":"59","4":"6","5":"1","6":"Neither agree nor disagree"},{"1":"400","2":"1","3":"79","4":"8","5":"1","6":"Disagree"},{"1":"401","2":"2","3":"69","4":"3","5":"NA","6":"Disagree"},{"1":"402","2":"1","3":"71","4":"5","5":"1","6":"NA"},{"1":"403","2":"1","3":"45","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"404","2":"1","3":"32","4":"3","5":"NA","6":"Disagree"},{"1":"405","2":"2","3":"39","4":"4","5":"NA","6":"Agree"},{"1":"406","2":"2","3":"19","4":"3","5":"4","6":"NA"},{"1":"407","2":"1","3":"66","4":"2","5":"2","6":"Agree"},{"1":"408","2":"2","3":"51","4":"4","5":"NA","6":"NA"},{"1":"409","2":"1","3":"60","4":"5","5":"NA","6":"Disagree strongly"},{"1":"410","2":"2","3":"35","4":"4","5":"1","6":"Agree"},{"1":"411","2":"2","3":"35","4":"3","5":"NA","6":"NA"},{"1":"412","2":"2","3":"82","4":"NA","5":"1","6":"Disagree"},{"1":"413","2":"1","3":"61","4":"7","5":"NA","6":"Neither agree nor disagree"},{"1":"414","2":"1","3":"59","4":"6","5":"1","6":"Agree"},{"1":"415","2":"1","3":"35","4":"5","5":"1","6":"Disagree strongly"},{"1":"416","2":"2","3":"17","4":"3","5":"NA","6":"Agree"},{"1":"417","2":"1","3":"31","4":"6","5":"1","6":"Disagree"},{"1":"418","2":"1","3":"64","4":"6","5":"1","6":"Neither agree nor disagree"},{"1":"419","2":"2","3":"21","4":"4","5":"NA","6":"Disagree"},{"1":"420","2":"1","3":"74","4":"10","5":"1","6":"Disagree"},{"1":"421","2":"1","3":"63","4":"5","5":"2","6":"Agree"},{"1":"422","2":"2","3":"51","4":"5","5":"2","6":"Agree"},{"1":"423","2":"1","3":"59","4":"7","5":"1","6":"NA"},{"1":"424","2":"2","3":"38","4":"5","5":"NA","6":"Disagree"},{"1":"425","2":"1","3":"29","4":"6","5":"NA","6":"Neither agree nor disagree"},{"1":"426","2":"1","3":"15","4":"3","5":"1","6":"Neither agree nor disagree"},{"1":"427","2":"1","3":"53","4":"4","5":"2","6":"Disagree"},{"1":"428","2":"1","3":"25","4":"5","5":"NA","6":"NA"},{"1":"429","2":"1","3":"19","4":"6","5":"NA","6":"Disagree"},{"1":"430","2":"2","3":"44","4":"3","5":"4","6":"Disagree"},{"1":"431","2":"1","3":"48","4":"2","5":"2","6":"Disagree"},{"1":"432","2":"1","3":"43","4":"NA","5":"NA","6":"Neither agree nor disagree"},{"1":"433","2":"2","3":"45","4":"5","5":"NA","6":"Agree"},{"1":"434","2":"2","3":"NA","4":"8","5":"1","6":"Agree"},{"1":"435","2":"2","3":"39","4":"4","5":"NA","6":"NA"},{"1":"436","2":"2","3":"27","4":"5","5":"NA","6":"Disagree"},{"1":"437","2":"1","3":"24","4":"4","5":"2","6":"Neither agree nor disagree"},{"1":"438","2":"1","3":"44","4":"5","5":"NA","6":"Disagree strongly"},{"1":"439","2":"2","3":"24","4":"3","5":"2","6":"NA"},{"1":"440","2":"2","3":"36","4":"5","5":"NA","6":"Agree"},{"1":"441","2":"1","3":"29","4":"5","5":"NA","6":"Agree"},{"1":"442","2":"1","3":"62","4":"1","5":"2","6":"Neither agree nor disagree"},{"1":"443","2":"1","3":"66","4":"5","5":"2","6":"Disagree"},{"1":"444","2":"1","3":"76","4":"7","5":"NA","6":"Agree"},{"1":"445","2":"1","3":"65","4":"6","5":"6","6":"Neither agree nor disagree"},{"1":"446","2":"2","3":"51","4":"5","5":"2","6":"Disagree"},{"1":"447","2":"1","3":"30","4":"3","5":"NA","6":"Neither agree nor disagree"},{"1":"448","2":"2","3":"48","4":"5","5":"1","6":"Disagree"},{"1":"449","2":"1","3":"49","4":"6","5":"1","6":"Disagree"},{"1":"450","2":"1","3":"77","4":"4","5":"2","6":"Disagree"},{"1":"451","2":"2","3":"68","4":"NA","5":"NA","6":"Disagree"},{"1":"452","2":"2","3":"64","4":"5","5":"2","6":"Neither agree nor disagree"},{"1":"453","2":"1","3":"60","4":"0","5":"3","6":"Neither agree nor disagree"},{"1":"454","2":"1","3":"67","4":"0","5":"2","6":"Neither agree nor disagree"},{"1":"455","2":"2","3":"62","4":"4","5":"4","6":"Disagree"},{"1":"456","2":"2","3":"58","4":"1","5":"NA","6":"Neither agree nor disagree"},{"1":"457","2":"1","3":"62","4":"6","5":"2","6":"Agree"},{"1":"458","2":"1","3":"17","4":"0","5":"NA","6":"Agree"},{"1":"459","2":"2","3":"51","4":"3","5":"4","6":"Disagree strongly"},{"1":"460","2":"2","3":"70","4":"2","5":"3","6":"Neither agree nor disagree"},{"1":"461","2":"2","3":"84","4":"NA","5":"2","6":"Neither agree nor disagree"},{"1":"462","2":"2","3":"35","4":"3","5":"NA","6":"Agree strongly"},{"1":"463","2":"1","3":"25","4":"4","5":"NA","6":"Disagree"},{"1":"464","2":"1","3":"54","4":"5","5":"NA","6":"Agree"},{"1":"465","2":"1","3":"37","4":"2","5":"1","6":"Neither agree nor disagree"},{"1":"466","2":"1","3":"36","4":"4","5":"NA","6":"Agree"},{"1":"467","2":"2","3":"65","4":"NA","5":"NA","6":"Disagree strongly"},{"1":"468","2":"2","3":"16","4":"5","5":"NA","6":"Disagree"},{"1":"469","2":"2","3":"64","4":"2","5":"NA","6":"Neither agree nor disagree"},{"1":"470","2":"1","3":"58","4":"7","5":"6","6":"Disagree"},{"1":"471","2":"1","3":"48","4":"NA","5":"NA","6":"Agree"},{"1":"472","2":"2","3":"23","4":"NA","5":"NA","6":"Neither agree nor disagree"},{"1":"473","2":"1","3":"94","4":"4","5":"2","6":"Neither agree nor disagree"},{"1":"474","2":"2","3":"28","4":"2","5":"1","6":"Disagree"},{"1":"475","2":"1","3":"76","4":"5","5":"NA","6":"NA"},{"1":"476","2":"2","3":"74","4":"4","5":"2","6":"Neither agree nor disagree"},{"1":"477","2":"1","3":"36","4":"4","5":"5","6":"Neither agree nor disagree"},{"1":"478","2":"1","3":"45","4":"6","5":"2","6":"Agree"},{"1":"479","2":"2","3":"56","4":"4","5":"NA","6":"Disagree strongly"},{"1":"480","2":"1","3":"55","4":"5","5":"NA","6":"Agree"},{"1":"481","2":"1","3":"31","4":"3","5":"NA","6":"Disagree"},{"1":"482","2":"1","3":"59","4":"5","5":"5","6":"Agree"},{"1":"483","2":"2","3":"65","4":"3","5":"2","6":"Disagree"},{"1":"484","2":"2","3":"77","4":"4","5":"4","6":"Neither agree nor disagree"},{"1":"485","2":"2","3":"57","4":"6","5":"1","6":"Agree"},{"1":"486","2":"2","3":"34","4":"7","5":"5","6":"Neither agree nor disagree"},{"1":"487","2":"2","3":"33","4":"5","5":"NA","6":"Disagree"},{"1":"488","2":"2","3":"51","4":"4","5":"NA","6":"Disagree"},{"1":"489","2":"1","3":"49","4":"3","5":"2","6":"Neither agree nor disagree"},{"1":"490","2":"1","3":"23","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"491","2":"1","3":"63","4":"7","5":"1","6":"Agree"},{"1":"492","2":"2","3":"45","4":"NA","5":"NA","6":"Agree"},{"1":"493","2":"2","3":"43","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"494","2":"2","3":"49","4":"4","5":"2","6":"Disagree"},{"1":"495","2":"2","3":"46","4":"5","5":"1","6":"Neither agree nor disagree"},{"1":"496","2":"2","3":"55","4":"3","5":"4","6":"Disagree strongly"},{"1":"497","2":"2","3":"59","4":"5","5":"6","6":"Agree"},{"1":"498","2":"1","3":"47","4":"3","5":"4","6":"Disagree strongly"},{"1":"499","2":"1","3":"43","4":"6","5":"1","6":"Agree"},{"1":"500","2":"2","3":"79","4":"3","5":"2","6":"Neither agree nor disagree"},{"1":"501","2":"2","3":"76","4":"9","5":"1","6":"Neither agree nor disagree"},{"1":"502","2":"1","3":"55","4":"5","5":"NA","6":"Disagree"},{"1":"503","2":"1","3":"44","4":"5","5":"1","6":"Disagree"},{"1":"504","2":"2","3":"73","4":"8","5":"1","6":"NA"},{"1":"505","2":"2","3":"31","4":"5","5":"1","6":"Disagree strongly"},{"1":"506","2":"2","3":"17","4":"NA","5":"2","6":"Disagree"},{"1":"507","2":"1","3":"34","4":"NA","5":"2","6":"Disagree"},{"1":"508","2":"2","3":"82","4":"5","5":"1","6":"Agree"},{"1":"509","2":"2","3":"58","4":"5","5":"2","6":"Disagree"},{"1":"510","2":"2","3":"64","4":"5","5":"1","6":"Agree"},{"1":"511","2":"1","3":"88","4":"7","5":"2","6":"Neither agree nor disagree"},{"1":"512","2":"2","3":"48","4":"5","5":"1","6":"Disagree strongly"},{"1":"513","2":"1","3":"71","4":"6","5":"2","6":"Agree"},{"1":"514","2":"2","3":"38","4":"8","5":"NA","6":"Agree strongly"},{"1":"515","2":"1","3":"31","4":"2","5":"2","6":"Neither agree nor disagree"},{"1":"516","2":"1","3":"27","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"517","2":"1","3":"39","4":"3","5":"NA","6":"Disagree"},{"1":"518","2":"1","3":"79","4":"5","5":"NA","6":"Disagree"},{"1":"519","2":"1","3":"46","4":"3","5":"NA","6":"Disagree"},{"1":"520","2":"2","3":"31","4":"0","5":"NA","6":"Disagree"},{"1":"521","2":"1","3":"30","4":"5","5":"2","6":"Neither agree nor disagree"},{"1":"522","2":"2","3":"68","4":"5","5":"NA","6":"NA"},{"1":"523","2":"1","3":"49","4":"2","5":"2","6":"Disagree"},{"1":"524","2":"1","3":"23","4":"5","5":"NA","6":"Disagree"},{"1":"525","2":"2","3":"49","4":"3","5":"2","6":"Disagree"},{"1":"526","2":"2","3":"51","4":"4","5":"NA","6":"Disagree"},{"1":"527","2":"1","3":"32","4":"5","5":"NA","6":"Agree"},{"1":"528","2":"1","3":"64","4":"7","5":"6","6":"Agree"},{"1":"529","2":"2","3":"24","4":"4","5":"NA","6":"Neither agree nor disagree"},{"1":"530","2":"2","3":"17","4":"5","5":"NA","6":"Disagree"},{"1":"531","2":"1","3":"53","4":"6","5":"2","6":"Neither agree nor disagree"},{"1":"532","2":"2","3":"52","4":"7","5":"1","6":"Neither agree nor disagree"},{"1":"533","2":"2","3":"36","4":"5","5":"NA","6":"Agree"},{"1":"534","2":"1","3":"18","4":"2","5":"NA","6":"Disagree"},{"1":"535","2":"1","3":"17","4":"5","5":"2","6":"Disagree"},{"1":"536","2":"1","3":"15","4":"5","5":"NA","6":"Agree"},{"1":"537","2":"2","3":"21","4":"5","5":"1","6":"Neither agree nor disagree"},{"1":"538","2":"2","3":"60","4":"0","5":"4","6":"Disagree strongly"},{"1":"539","2":"2","3":"31","4":"5","5":"2","6":"Neither agree nor disagree"},{"1":"540","2":"1","3":"58","4":"2","5":"NA","6":"Agree"},{"1":"541","2":"1","3":"19","4":"NA","5":"NA","6":"NA"},{"1":"542","2":"2","3":"83","4":"5","5":"1","6":"Neither agree nor disagree"},{"1":"543","2":"2","3":"38","4":"10","5":"NA","6":"Agree strongly"},{"1":"544","2":"2","3":"79","4":"5","5":"NA","6":"NA"},{"1":"545","2":"1","3":"65","4":"5","5":"5","6":"Disagree strongly"},{"1":"546","2":"2","3":"17","4":"5","5":"2","6":"Neither agree nor disagree"},{"1":"547","2":"1","3":"78","4":"5","5":"NA","6":"Agree strongly"},{"1":"548","2":"2","3":"54","4":"5","5":"2","6":"Disagree"},{"1":"549","2":"1","3":"22","4":"4","5":"NA","6":"Agree"},{"1":"550","2":"1","3":"72","4":"8","5":"6","6":"Agree strongly"},{"1":"551","2":"2","3":"18","4":"5","5":"NA","6":"Disagree"},{"1":"552","2":"2","3":"27","4":"7","5":"NA","6":"Agree"},{"1":"553","2":"1","3":"16","4":"NA","5":"NA","6":"Neither agree nor disagree"},{"1":"554","2":"1","3":"65","4":"4","5":"NA","6":"Neither agree nor disagree"},{"1":"555","2":"1","3":"27","4":"5","5":"NA","6":"Agree"},{"1":"556","2":"1","3":"17","4":"4","5":"1","6":"Disagree"},{"1":"557","2":"2","3":"61","4":"3","5":"2","6":"Disagree"},{"1":"558","2":"1","3":"40","4":"8","5":"6","6":"Agree"},{"1":"559","2":"1","3":"36","4":"4","5":"NA","6":"Disagree"},{"1":"560","2":"1","3":"72","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"561","2":"1","3":"17","4":"5","5":"NA","6":"Agree"},{"1":"562","2":"1","3":"30","4":"6","5":"1","6":"Agree"},{"1":"563","2":"2","3":"31","4":"6","5":"NA","6":"Neither agree nor disagree"},{"1":"564","2":"2","3":"52","4":"3","5":"NA","6":"Neither agree nor disagree"},{"1":"565","2":"2","3":"20","4":"0","5":"1","6":"Neither agree nor disagree"},{"1":"566","2":"2","3":"55","4":"5","5":"NA","6":"Disagree"},{"1":"567","2":"2","3":"29","4":"6","5":"NA","6":"Agree"},{"1":"568","2":"2","3":"53","4":"0","5":"3","6":"Agree"},{"1":"569","2":"2","3":"58","4":"5","5":"1","6":"Disagree"},{"1":"570","2":"1","3":"21","4":"NA","5":"NA","6":"NA"},{"1":"571","2":"2","3":"39","4":"5","5":"1","6":"Disagree"},{"1":"572","2":"2","3":"17","4":"2","5":"1","6":"Neither agree nor disagree"},{"1":"573","2":"1","3":"70","4":"8","5":"1","6":"Agree"},{"1":"574","2":"1","3":"67","4":"3","5":"2","6":"Neither agree nor disagree"},{"1":"575","2":"1","3":"77","4":"5","5":"1","6":"Neither agree nor disagree"},{"1":"576","2":"2","3":"68","4":"5","5":"2","6":"Disagree"},{"1":"577","2":"1","3":"25","4":"3","5":"4","6":"Disagree"},{"1":"578","2":"1","3":"74","4":"5","5":"6","6":"Agree strongly"},{"1":"579","2":"1","3":"64","4":"2","5":"NA","6":"Disagree"},{"1":"580","2":"1","3":"17","4":"4","5":"4","6":"Disagree"},{"1":"581","2":"1","3":"38","4":"NA","5":"NA","6":"Agree"},{"1":"582","2":"1","3":"18","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"583","2":"1","3":"48","4":"7","5":"1","6":"Neither agree nor disagree"},{"1":"584","2":"1","3":"22","4":"8","5":"6","6":"Agree"},{"1":"585","2":"1","3":"20","4":"4","5":"1","6":"Disagree"},{"1":"586","2":"1","3":"28","4":"7","5":"NA","6":"Neither agree nor disagree"},{"1":"587","2":"2","3":"57","4":"2","5":"3","6":"Neither agree nor disagree"},{"1":"588","2":"2","3":"51","4":"5","5":"1","6":"Agree"},{"1":"589","2":"1","3":"69","4":"10","5":"NA","6":"Disagree"},{"1":"590","2":"1","3":"52","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"591","2":"2","3":"78","4":"7","5":"1","6":"Neither agree nor disagree"},{"1":"592","2":"1","3":"87","4":"6","5":"1","6":"Disagree"},{"1":"593","2":"2","3":"76","4":"10","5":"1","6":"Neither agree nor disagree"},{"1":"594","2":"2","3":"58","4":"5","5":"NA","6":"Agree"},{"1":"595","2":"2","3":"41","4":"5","5":"2","6":"Disagree"},{"1":"596","2":"2","3":"35","4":"0","5":"NA","6":"Disagree strongly"},{"1":"597","2":"1","3":"33","4":"5","5":"NA","6":"Disagree"},{"1":"598","2":"2","3":"32","4":"4","5":"2","6":"Disagree strongly"},{"1":"599","2":"2","3":"63","4":"3","5":"4","6":"Disagree"},{"1":"600","2":"2","3":"43","4":"5","5":"1","6":"Disagree"},{"1":"601","2":"1","3":"52","4":"3","5":"4","6":"Disagree strongly"},{"1":"602","2":"2","3":"62","4":"5","5":"2","6":"Agree"},{"1":"603","2":"1","3":"50","4":"0","5":"3","6":"NA"},{"1":"604","2":"1","3":"46","4":"4","5":"2","6":"Agree"},{"1":"605","2":"1","3":"67","4":"5","5":"4","6":"Agree"},{"1":"606","2":"1","3":"55","4":"7","5":"1","6":"Agree strongly"},{"1":"607","2":"1","3":"87","4":"4","5":"NA","6":"Disagree"},{"1":"608","2":"1","3":"24","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"609","2":"2","3":"49","4":"5","5":"1","6":"Disagree"},{"1":"610","2":"2","3":"66","4":"5","5":"2","6":"Neither agree nor disagree"},{"1":"611","2":"2","3":"16","4":"0","5":"NA","6":"Agree"},{"1":"612","2":"2","3":"66","4":"5","5":"2","6":"Agree"},{"1":"613","2":"1","3":"73","4":"1","5":"NA","6":"Agree"},{"1":"614","2":"1","3":"76","4":"6","5":"NA","6":"NA"},{"1":"615","2":"1","3":"53","4":"5","5":"2","6":"Neither agree nor disagree"},{"1":"616","2":"2","3":"33","4":"3","5":"NA","6":"Agree"},{"1":"617","2":"1","3":"77","4":"6","5":"1","6":"Agree"},{"1":"618","2":"1","3":"64","4":"4","5":"2","6":"Disagree"},{"1":"619","2":"1","3":"51","4":"6","5":"1","6":"Disagree"},{"1":"620","2":"1","3":"49","4":"8","5":"5","6":"Agree"},{"1":"621","2":"2","3":"53","4":"5","5":"1","6":"Agree"},{"1":"622","2":"2","3":"16","4":"5","5":"NA","6":"Agree"},{"1":"623","2":"2","3":"48","4":"8","5":"NA","6":"Agree"},{"1":"624","2":"1","3":"33","4":"3","5":"NA","6":"Agree strongly"},{"1":"625","2":"1","3":"36","4":"6","5":"NA","6":"Agree strongly"},{"1":"626","2":"1","3":"71","4":"10","5":"NA","6":"Disagree"},{"1":"627","2":"1","3":"37","4":"6","5":"1","6":"Agree"},{"1":"628","2":"2","3":"76","4":"6","5":"1","6":"Agree"},{"1":"629","2":"2","3":"70","4":"4","5":"2","6":"Agree"},{"1":"630","2":"1","3":"80","4":"3","5":"4","6":"Neither agree nor disagree"},{"1":"631","2":"2","3":"37","4":"5","5":"1","6":"Neither agree nor disagree"},{"1":"632","2":"1","3":"48","4":"3","5":"4","6":"Disagree"},{"1":"633","2":"1","3":"36","4":"2","5":"NA","6":"Disagree strongly"},{"1":"634","2":"1","3":"27","4":"1","5":"NA","6":"Agree"},{"1":"635","2":"2","3":"23","4":"4","5":"NA","6":"Disagree"},{"1":"636","2":"1","3":"26","4":"5","5":"7","6":"Disagree"},{"1":"637","2":"1","3":"45","4":"2","5":"NA","6":"Neither agree nor disagree"},{"1":"638","2":"2","3":"61","4":"5","5":"4","6":"Disagree"},{"1":"639","2":"2","3":"22","4":"5","5":"NA","6":"Agree"},{"1":"640","2":"1","3":"51","4":"3","5":"NA","6":"Disagree"},{"1":"641","2":"2","3":"57","4":"4","5":"NA","6":"Agree"},{"1":"642","2":"1","3":"46","4":"6","5":"NA","6":"Neither agree nor disagree"},{"1":"643","2":"1","3":"40","4":"6","5":"1","6":"Disagree"},{"1":"644","2":"2","3":"71","4":"8","5":"NA","6":"Disagree"},{"1":"645","2":"1","3":"55","4":"4","5":"NA","6":"Agree"},{"1":"646","2":"1","3":"45","4":"6","5":"1","6":"Disagree"},{"1":"647","2":"1","3":"18","4":"5","5":"4","6":"Disagree"},{"1":"648","2":"1","3":"53","4":"7","5":"NA","6":"Disagree"},{"1":"649","2":"2","3":"61","4":"5","5":"NA","6":"Agree"},{"1":"650","2":"2","3":"64","4":"8","5":"1","6":"Neither agree nor disagree"},{"1":"651","2":"2","3":"40","4":"7","5":"1","6":"Disagree"},{"1":"652","2":"1","3":"70","4":"5","5":"3","6":"Agree"},{"1":"653","2":"2","3":"37","4":"4","5":"NA","6":"Agree"},{"1":"654","2":"2","3":"58","4":"3","5":"6","6":"Agree"},{"1":"655","2":"2","3":"78","4":"10","5":"1","6":"Disagree"},{"1":"656","2":"2","3":"60","4":"5","5":"1","6":"Agree"},{"1":"657","2":"1","3":"57","4":"7","5":"1","6":"Agree"},{"1":"658","2":"2","3":"17","4":"5","5":"NA","6":"Agree"},{"1":"659","2":"2","3":"55","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"660","2":"1","3":"32","4":"8","5":"6","6":"Agree strongly"},{"1":"661","2":"2","3":"60","4":"5","5":"2","6":"Agree"},{"1":"662","2":"2","3":"57","4":"4","5":"2","6":"Disagree"},{"1":"663","2":"2","3":"48","4":"8","5":"2","6":"Agree"},{"1":"664","2":"2","3":"53","4":"9","5":"2","6":"Agree strongly"},{"1":"665","2":"2","3":"70","4":"7","5":"1","6":"Disagree"},{"1":"666","2":"2","3":"55","4":"5","5":"NA","6":"Disagree"},{"1":"667","2":"1","3":"35","4":"3","5":"3","6":"Neither agree nor disagree"},{"1":"668","2":"2","3":"15","4":"3","5":"NA","6":"Agree"},{"1":"669","2":"1","3":"35","4":"5","5":"NA","6":"Agree"},{"1":"670","2":"1","3":"23","4":"5","5":"NA","6":"Agree"},{"1":"671","2":"2","3":"36","4":"5","5":"NA","6":"Agree"},{"1":"672","2":"1","3":"55","4":"5","5":"6","6":"Disagree"},{"1":"673","2":"1","3":"55","4":"1","5":"2","6":"Agree"},{"1":"674","2":"1","3":"67","4":"3","5":"2","6":"Agree"},{"1":"675","2":"2","3":"59","4":"1","5":"NA","6":"Agree"},{"1":"676","2":"2","3":"41","4":"0","5":"1","6":"Disagree"},{"1":"677","2":"2","3":"51","4":"5","5":"2","6":"Agree"},{"1":"678","2":"1","3":"48","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"679","2":"1","3":"41","4":"NA","5":"9","6":"Agree"},{"1":"680","2":"1","3":"27","4":"3","5":"4","6":"Disagree"},{"1":"681","2":"2","3":"49","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"682","2":"1","3":"37","4":"5","5":"4","6":"Disagree"},{"1":"683","2":"2","3":"54","4":"8","5":"1","6":"Agree"},{"1":"684","2":"2","3":"24","4":"2","5":"NA","6":"Agree"},{"1":"685","2":"2","3":"53","4":"5","5":"9","6":"Agree"},{"1":"686","2":"2","3":"59","4":"4","5":"2","6":"Agree"},{"1":"687","2":"1","3":"39","4":"5","5":"NA","6":"Agree"},{"1":"688","2":"2","3":"51","4":"2","5":"NA","6":"Neither agree nor disagree"},{"1":"689","2":"2","3":"17","4":"8","5":"NA","6":"Disagree"},{"1":"690","2":"1","3":"64","4":"5","5":"NA","6":"Agree"},{"1":"691","2":"2","3":"46","4":"7","5":"NA","6":"Neither agree nor disagree"},{"1":"692","2":"2","3":"69","4":"3","5":"1","6":"Disagree"},{"1":"693","2":"2","3":"69","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"694","2":"1","3":"46","4":"3","5":"4","6":"Neither agree nor disagree"},{"1":"695","2":"1","3":"36","4":"3","5":"NA","6":"Disagree"},{"1":"696","2":"2","3":"40","4":"4","5":"NA","6":"Neither agree nor disagree"},{"1":"697","2":"2","3":"38","4":"5","5":"NA","6":"Disagree strongly"},{"1":"698","2":"2","3":"39","4":"5","5":"NA","6":"Agree"},{"1":"699","2":"2","3":"17","4":"5","5":"NA","6":"Agree"},{"1":"700","2":"1","3":"15","4":"0","5":"NA","6":"Neither agree nor disagree"},{"1":"701","2":"1","3":"57","4":"4","5":"2","6":"Disagree"},{"1":"702","2":"1","3":"18","4":"4","5":"NA","6":"Disagree"},{"1":"703","2":"1","3":"24","4":"4","5":"7","6":"Agree"},{"1":"704","2":"2","3":"21","4":"5","5":"2","6":"Disagree"},{"1":"705","2":"2","3":"49","4":"6","5":"1","6":"Disagree"},{"1":"706","2":"1","3":"36","4":"4","5":"1","6":"Neither agree nor disagree"},{"1":"707","2":"2","3":"22","4":"0","5":"2","6":"Disagree"},{"1":"708","2":"1","3":"44","4":"5","5":"4","6":"Neither agree nor disagree"},{"1":"709","2":"2","3":"54","4":"5","5":"2","6":"Neither agree nor disagree"},{"1":"710","2":"1","3":"70","4":"2","5":"2","6":"Agree"},{"1":"711","2":"2","3":"47","4":"4","5":"4","6":"Disagree strongly"},{"1":"712","2":"1","3":"30","4":"5","5":"2","6":"Agree"},{"1":"713","2":"2","3":"82","4":"5","5":"NA","6":"Agree"},{"1":"714","2":"1","3":"55","4":"5","5":"NA","6":"Agree"},{"1":"715","2":"1","3":"72","4":"5","5":"NA","6":"Agree"},{"1":"716","2":"1","3":"76","4":"5","5":"1","6":"Agree"},{"1":"717","2":"2","3":"64","4":"6","5":"1","6":"Disagree"},{"1":"718","2":"2","3":"67","4":"5","5":"2","6":"Agree"},{"1":"719","2":"1","3":"53","4":"2","5":"4","6":"Disagree"},{"1":"720","2":"1","3":"49","4":"3","5":"4","6":"Disagree strongly"},{"1":"721","2":"1","3":"49","4":"5","5":"1","6":"Agree"},{"1":"722","2":"1","3":"75","4":"5","5":"NA","6":"Disagree"},{"1":"723","2":"2","3":"38","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"724","2":"2","3":"60","4":"7","5":"NA","6":"Neither agree nor disagree"},{"1":"725","2":"1","3":"54","4":"5","5":"NA","6":"Agree"},{"1":"726","2":"1","3":"38","4":"6","5":"NA","6":"Agree"},{"1":"727","2":"2","3":"61","4":"4","5":"1","6":"Agree"},{"1":"728","2":"1","3":"23","4":"NA","5":"2","6":"Agree"},{"1":"729","2":"1","3":"15","4":"NA","5":"NA","6":"Neither agree nor disagree"},{"1":"730","2":"2","3":"70","4":"5","5":"6","6":"Agree strongly"},{"1":"731","2":"1","3":"68","4":"5","5":"NA","6":"Disagree"},{"1":"732","2":"1","3":"48","4":"6","5":"NA","6":"Neither agree nor disagree"},{"1":"733","2":"2","3":"54","4":"5","5":"4","6":"Disagree"},{"1":"734","2":"2","3":"76","4":"7","5":"1","6":"Agree"},{"1":"735","2":"1","3":"43","4":"3","5":"2","6":"Disagree"},{"1":"736","2":"1","3":"25","4":"4","5":"NA","6":"Disagree"},{"1":"737","2":"1","3":"81","4":"0","5":"2","6":"NA"},{"1":"738","2":"2","3":"33","4":"3","5":"4","6":"Disagree"},{"1":"739","2":"1","3":"27","4":"3","5":"4","6":"Disagree"},{"1":"740","2":"2","3":"65","4":"5","5":"NA","6":"Agree"},{"1":"741","2":"2","3":"52","4":"4","5":"4","6":"Disagree"},{"1":"742","2":"1","3":"61","4":"4","5":"2","6":"Neither agree nor disagree"},{"1":"743","2":"1","3":"69","4":"3","5":"4","6":"Disagree"},{"1":"744","2":"2","3":"51","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"745","2":"1","3":"80","4":"5","5":"2","6":"Disagree"},{"1":"746","2":"2","3":"34","4":"2","5":"NA","6":"Disagree strongly"},{"1":"747","2":"2","3":"34","4":"5","5":"5","6":"Neither agree nor disagree"},{"1":"748","2":"2","3":"22","4":"3","5":"3","6":"Disagree strongly"},{"1":"749","2":"1","3":"55","4":"6","5":"NA","6":"Disagree"},{"1":"750","2":"1","3":"18","4":"NA","5":"NA","6":"Disagree"},{"1":"751","2":"1","3":"25","4":"3","5":"4","6":"Disagree"},{"1":"752","2":"1","3":"79","4":"3","5":"2","6":"Disagree"},{"1":"753","2":"2","3":"19","4":"3","5":"4","6":"Disagree"},{"1":"754","2":"2","3":"36","4":"1","5":"4","6":"Disagree strongly"},{"1":"755","2":"2","3":"54","4":"5","5":"2","6":"Neither agree nor disagree"},{"1":"756","2":"2","3":"57","4":"5","5":"2","6":"Disagree"},{"1":"757","2":"1","3":"24","4":"4","5":"4","6":"Neither agree nor disagree"},{"1":"758","2":"1","3":"33","4":"2","5":"2","6":"Neither agree nor disagree"},{"1":"759","2":"2","3":"23","4":"4","5":"NA","6":"Agree"},{"1":"760","2":"2","3":"31","4":"6","5":"1","6":"Agree strongly"},{"1":"761","2":"2","3":"40","4":"8","5":"NA","6":"Agree"},{"1":"762","2":"1","3":"37","4":"3","5":"NA","6":"Disagree"},{"1":"763","2":"1","3":"57","4":"7","5":"NA","6":"Agree"},{"1":"764","2":"2","3":"62","4":"3","5":"3","6":"Disagree"},{"1":"765","2":"2","3":"77","4":"4","5":"NA","6":"Disagree"},{"1":"766","2":"2","3":"48","4":"7","5":"6","6":"Neither agree nor disagree"},{"1":"767","2":"2","3":"31","4":"5","5":"NA","6":"Disagree"},{"1":"768","2":"1","3":"68","4":"5","5":"2","6":"Neither agree nor disagree"},{"1":"769","2":"1","3":"45","4":"7","5":"5","6":"Agree"},{"1":"770","2":"2","3":"59","4":"8","5":"NA","6":"Agree"},{"1":"771","2":"1","3":"25","4":"7","5":"NA","6":"Neither agree nor disagree"},{"1":"772","2":"1","3":"19","4":"5","5":"7","6":"Disagree strongly"},{"1":"773","2":"2","3":"23","4":"4","5":"2","6":"Disagree"},{"1":"774","2":"1","3":"62","4":"3","5":"2","6":"Disagree"},{"1":"775","2":"1","3":"82","4":"7","5":"1","6":"Agree"},{"1":"776","2":"1","3":"50","4":"7","5":"5","6":"Neither agree nor disagree"},{"1":"777","2":"1","3":"75","4":"5","5":"1","6":"Neither agree nor disagree"},{"1":"778","2":"2","3":"46","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"779","2":"2","3":"55","4":"5","5":"NA","6":"NA"},{"1":"780","2":"2","3":"24","4":"5","5":"NA","6":"Disagree"},{"1":"781","2":"1","3":"70","4":"5","5":"3","6":"NA"},{"1":"782","2":"1","3":"44","4":"7","5":"9","6":"Agree"},{"1":"783","2":"1","3":"23","4":"6","5":"NA","6":"Neither agree nor disagree"},{"1":"784","2":"1","3":"25","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"785","2":"2","3":"26","4":"7","5":"NA","6":"Neither agree nor disagree"},{"1":"786","2":"2","3":"35","4":"5","5":"NA","6":"Agree"},{"1":"787","2":"2","3":"32","4":"7","5":"NA","6":"Agree strongly"},{"1":"788","2":"2","3":"26","4":"2","5":"NA","6":"Neither agree nor disagree"},{"1":"789","2":"1","3":"60","4":"6","5":"NA","6":"Neither agree nor disagree"},{"1":"790","2":"1","3":"27","4":"3","5":"2","6":"Disagree"},{"1":"791","2":"2","3":"48","4":"3","5":"2","6":"Agree"},{"1":"792","2":"1","3":"31","4":"3","5":"2","6":"Disagree"},{"1":"793","2":"2","3":"33","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"794","2":"2","3":"23","4":"5","5":"NA","6":"Disagree"},{"1":"795","2":"2","3":"49","4":"5","5":"NA","6":"NA"},{"1":"796","2":"2","3":"53","4":"5","5":"NA","6":"Agree"},{"1":"797","2":"1","3":"66","4":"6","5":"NA","6":"Agree"},{"1":"798","2":"2","3":"18","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"799","2":"2","3":"46","4":"6","5":"1","6":"Neither agree nor disagree"},{"1":"800","2":"2","3":"33","4":"3","5":"NA","6":"Agree"},{"1":"801","2":"2","3":"22","4":"3","5":"2","6":"Disagree"},{"1":"802","2":"2","3":"21","4":"7","5":"1","6":"Disagree"},{"1":"803","2":"1","3":"52","4":"4","5":"NA","6":"Disagree"},{"1":"804","2":"1","3":"68","4":"3","5":"NA","6":"Agree"},{"1":"805","2":"2","3":"35","4":"5","5":"NA","6":"Disagree"},{"1":"806","2":"1","3":"44","4":"7","5":"NA","6":"Neither agree nor disagree"},{"1":"807","2":"1","3":"74","4":"4","5":"2","6":"Neither agree nor disagree"},{"1":"808","2":"1","3":"66","4":"7","5":"1","6":"Agree"},{"1":"809","2":"1","3":"66","4":"2","5":"4","6":"Neither agree nor disagree"},{"1":"810","2":"2","3":"47","4":"4","5":"NA","6":"Disagree strongly"},{"1":"811","2":"1","3":"55","4":"6","5":"1","6":"Disagree"},{"1":"812","2":"2","3":"60","4":"8","5":"1","6":"Agree"},{"1":"813","2":"1","3":"65","4":"4","5":"4","6":"Neither agree nor disagree"},{"1":"814","2":"2","3":"51","4":"6","5":"6","6":"Neither agree nor disagree"},{"1":"815","2":"2","3":"67","4":"5","5":"2","6":"Neither agree nor disagree"},{"1":"816","2":"1","3":"37","4":"4","5":"2","6":"Disagree"},{"1":"817","2":"2","3":"30","4":"2","5":"4","6":"Disagree strongly"},{"1":"818","2":"1","3":"52","4":"5","5":"4","6":"Disagree strongly"},{"1":"819","2":"1","3":"66","4":"5","5":"5","6":"Agree"},{"1":"820","2":"2","3":"56","4":"5","5":"9","6":"Disagree"},{"1":"821","2":"1","3":"35","4":"8","5":"NA","6":"Agree"},{"1":"822","2":"2","3":"50","4":"4","5":"2","6":"Neither agree nor disagree"},{"1":"823","2":"1","3":"46","4":"0","5":"NA","6":"Agree"},{"1":"824","2":"1","3":"74","4":"1","5":"2","6":"Neither agree nor disagree"},{"1":"825","2":"1","3":"19","4":"5","5":"NA","6":"Agree"},{"1":"826","2":"2","3":"37","4":"5","5":"NA","6":"Agree"},{"1":"827","2":"1","3":"80","4":"5","5":"1","6":"Disagree"},{"1":"828","2":"2","3":"43","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"829","2":"2","3":"82","4":"5","5":"1","6":"Agree"},{"1":"830","2":"1","3":"39","4":"6","5":"1","6":"Neither agree nor disagree"},{"1":"831","2":"2","3":"31","4":"3","5":"4","6":"Neither agree nor disagree"},{"1":"832","2":"2","3":"75","4":"NA","5":"NA","6":"Neither agree nor disagree"},{"1":"833","2":"2","3":"65","4":"4","5":"2","6":"Agree"},{"1":"834","2":"1","3":"47","4":"5","5":"1","6":"Agree strongly"},{"1":"835","2":"1","3":"65","4":"2","5":"2","6":"Disagree"},{"1":"836","2":"2","3":"22","4":"4","5":"2","6":"Disagree"},{"1":"837","2":"2","3":"20","4":"7","5":"NA","6":"Neither agree nor disagree"},{"1":"838","2":"1","3":"53","4":"5","5":"2","6":"Agree"},{"1":"839","2":"1","3":"49","4":"6","5":"1","6":"Neither agree nor disagree"},{"1":"840","2":"2","3":"24","4":"2","5":"NA","6":"Disagree strongly"},{"1":"841","2":"2","3":"79","4":"7","5":"2","6":"Neither agree nor disagree"},{"1":"842","2":"1","3":"51","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"843","2":"1","3":"49","4":"4","5":"NA","6":"Neither agree nor disagree"},{"1":"844","2":"1","3":"30","4":"4","5":"2","6":"Neither agree nor disagree"},{"1":"845","2":"1","3":"76","4":"7","5":"1","6":"Disagree"},{"1":"846","2":"2","3":"21","4":"4","5":"4","6":"Disagree"},{"1":"847","2":"1","3":"38","4":"5","5":"NA","6":"Disagree"},{"1":"848","2":"2","3":"61","4":"6","5":"1","6":"Agree"},{"1":"849","2":"1","3":"62","4":"2","5":"3","6":"Disagree"},{"1":"850","2":"1","3":"37","4":"1","5":"3","6":"Disagree"},{"1":"851","2":"1","3":"65","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"852","2":"2","3":"47","4":"7","5":"6","6":"Agree"},{"1":"853","2":"2","3":"43","4":"4","5":"1","6":"Agree"},{"1":"854","2":"1","3":"66","4":"4","5":"2","6":"Neither agree nor disagree"},{"1":"855","2":"2","3":"49","4":"5","5":"2","6":"Agree strongly"},{"1":"856","2":"2","3":"39","4":"3","5":"4","6":"Neither agree nor disagree"},{"1":"857","2":"2","3":"54","4":"5","5":"NA","6":"Disagree"},{"1":"858","2":"1","3":"36","4":"0","5":"3","6":"Disagree"},{"1":"859","2":"1","3":"56","4":"3","5":"4","6":"Neither agree nor disagree"},{"1":"860","2":"1","3":"62","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"861","2":"2","3":"61","4":"5","5":"NA","6":"Agree"},{"1":"862","2":"2","3":"64","4":"5","5":"NA","6":"Agree strongly"},{"1":"863","2":"2","3":"57","4":"5","5":"1","6":"Disagree"},{"1":"864","2":"2","3":"81","4":"3","5":"2","6":"Disagree"},{"1":"865","2":"2","3":"70","4":"5","5":"1","6":"Disagree"},{"1":"866","2":"1","3":"52","4":"5","5":"2","6":"Disagree"},{"1":"867","2":"1","3":"17","4":"3","5":"NA","6":"Neither agree nor disagree"},{"1":"868","2":"1","3":"23","4":"6","5":"2","6":"Agree"},{"1":"869","2":"1","3":"35","4":"8","5":"1","6":"Agree"},{"1":"870","2":"1","3":"52","4":"4","5":"NA","6":"Neither agree nor disagree"},{"1":"871","2":"2","3":"27","4":"3","5":"4","6":"Disagree strongly"},{"1":"872","2":"1","3":"18","4":"3","5":"2","6":"Disagree strongly"},{"1":"873","2":"1","3":"20","4":"3","5":"9","6":"Neither agree nor disagree"},{"1":"874","2":"1","3":"32","4":"5","5":"2","6":"Neither agree nor disagree"},{"1":"875","2":"1","3":"34","4":"4","5":"NA","6":"Neither agree nor disagree"},{"1":"876","2":"2","3":"51","4":"2","5":"2","6":"Disagree"},{"1":"877","2":"1","3":"22","4":"6","5":"NA","6":"Agree"},{"1":"878","2":"1","3":"79","4":"5","5":"4","6":"Agree"},{"1":"879","2":"1","3":"48","4":"5","5":"NA","6":"Disagree"},{"1":"880","2":"1","3":"39","4":"5","5":"1","6":"Neither agree nor disagree"},{"1":"881","2":"1","3":"62","4":"6","5":"6","6":"Agree strongly"},{"1":"882","2":"1","3":"66","4":"4","5":"NA","6":"Neither agree nor disagree"},{"1":"883","2":"1","3":"76","4":"8","5":"1","6":"Neither agree nor disagree"},{"1":"884","2":"1","3":"29","4":"2","5":"NA","6":"Disagree"},{"1":"885","2":"2","3":"46","4":"3","5":"NA","6":"Neither agree nor disagree"},{"1":"886","2":"2","3":"15","4":"5","5":"NA","6":"Disagree strongly"},{"1":"887","2":"1","3":"20","4":"4","5":"5","6":"Neither agree nor disagree"},{"1":"888","2":"1","3":"62","4":"7","5":"NA","6":"Neither agree nor disagree"},{"1":"889","2":"1","3":"43","4":"7","5":"1","6":"Neither agree nor disagree"},{"1":"890","2":"1","3":"20","4":"0","5":"2","6":"Disagree"},{"1":"891","2":"1","3":"56","4":"5","5":"1","6":"Neither agree nor disagree"},{"1":"892","2":"2","3":"75","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"893","2":"1","3":"41","4":"4","5":"2","6":"Neither agree nor disagree"},{"1":"894","2":"1","3":"59","4":"2","5":"4","6":"Neither agree nor disagree"},{"1":"895","2":"2","3":"74","4":"6","5":"2","6":"Agree"},{"1":"896","2":"1","3":"49","4":"7","5":"1","6":"Neither agree nor disagree"},{"1":"897","2":"1","3":"46","4":"8","5":"NA","6":"Neither agree nor disagree"},{"1":"898","2":"1","3":"63","4":"3","5":"1","6":"Agree"},{"1":"899","2":"2","3":"31","4":"2","5":"NA","6":"Neither agree nor disagree"},{"1":"900","2":"2","3":"20","4":"5","5":"2","6":"Disagree"},{"1":"901","2":"2","3":"26","4":"7","5":"6","6":"Neither agree nor disagree"},{"1":"902","2":"1","3":"50","4":"3","5":"2","6":"Disagree strongly"},{"1":"903","2":"2","3":"23","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"904","2":"2","3":"75","4":"5","5":"2","6":"Neither agree nor disagree"},{"1":"905","2":"2","3":"27","4":"5","5":"1","6":"Neither agree nor disagree"},{"1":"906","2":"1","3":"41","4":"7","5":"1","6":"Neither agree nor disagree"},{"1":"907","2":"2","3":"50","4":"5","5":"9","6":"Neither agree nor disagree"},{"1":"908","2":"1","3":"58","4":"5","5":"2","6":"Neither agree nor disagree"},{"1":"909","2":"2","3":"49","4":"5","5":"NA","6":"Agree"},{"1":"910","2":"2","3":"65","4":"4","5":"2","6":"Agree"},{"1":"911","2":"1","3":"26","4":"NA","5":"NA","6":"Neither agree nor disagree"},{"1":"912","2":"1","3":"40","4":"5","5":"NA","6":"Agree"},{"1":"913","2":"1","3":"42","4":"7","5":"NA","6":"Agree strongly"},{"1":"914","2":"2","3":"17","4":"3","5":"NA","6":"Disagree strongly"},{"1":"915","2":"2","3":"79","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"916","2":"2","3":"50","4":"7","5":"NA","6":"NA"},{"1":"917","2":"2","3":"36","4":"5","5":"NA","6":"Agree"},{"1":"918","2":"2","3":"21","4":"NA","5":"NA","6":"Neither agree nor disagree"},{"1":"919","2":"1","3":"22","4":"3","5":"NA","6":"Neither agree nor disagree"},{"1":"920","2":"1","3":"31","4":"6","5":"9","6":"Agree"},{"1":"921","2":"1","3":"62","4":"5","5":"NA","6":"Agree"},{"1":"922","2":"1","3":"20","4":"5","5":"2","6":"Disagree"},{"1":"923","2":"1","3":"56","4":"3","5":"NA","6":"Disagree"},{"1":"924","2":"1","3":"46","4":"4","5":"NA","6":"NA"},{"1":"925","2":"2","3":"33","4":"3","5":"NA","6":"Neither agree nor disagree"},{"1":"926","2":"1","3":"74","4":"NA","5":"1","6":"Agree"},{"1":"927","2":"2","3":"52","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"928","2":"1","3":"80","4":"6","5":"5","6":"Agree"},{"1":"929","2":"1","3":"19","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"930","2":"2","3":"28","4":"4","5":"NA","6":"Agree"},{"1":"931","2":"1","3":"53","4":"3","5":"2","6":"Disagree strongly"},{"1":"932","2":"2","3":"40","4":"5","5":"1","6":"NA"},{"1":"933","2":"1","3":"35","4":"3","5":"NA","6":"Disagree"},{"1":"934","2":"1","3":"53","4":"2","5":"2","6":"Neither agree nor disagree"},{"1":"935","2":"2","3":"62","4":"4","5":"4","6":"Agree"},{"1":"936","2":"2","3":"19","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"937","2":"1","3":"31","4":"2","5":"NA","6":"Disagree strongly"},{"1":"938","2":"2","3":"64","4":"1","5":"NA","6":"Neither agree nor disagree"},{"1":"939","2":"1","3":"30","4":"5","5":"1","6":"Agree strongly"},{"1":"940","2":"1","3":"70","4":"8","5":"5","6":"Disagree"},{"1":"941","2":"2","3":"23","4":"3","5":"NA","6":"Disagree strongly"},{"1":"942","2":"1","3":"74","4":"5","5":"NA","6":"Disagree strongly"},{"1":"943","2":"2","3":"58","4":"3","5":"NA","6":"Neither agree nor disagree"},{"1":"944","2":"2","3":"63","4":"4","5":"1","6":"Disagree"},{"1":"945","2":"2","3":"82","4":"5","5":"2","6":"Agree"},{"1":"946","2":"1","3":"39","4":"5","5":"NA","6":"Disagree"},{"1":"947","2":"1","3":"36","4":"3","5":"NA","6":"Disagree"},{"1":"948","2":"2","3":"27","4":"4","5":"2","6":"Disagree strongly"},{"1":"949","2":"1","3":"46","4":"6","5":"1","6":"Neither agree nor disagree"},{"1":"950","2":"1","3":"52","4":"0","5":"2","6":"Neither agree nor disagree"},{"1":"951","2":"2","3":"53","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"952","2":"1","3":"45","4":"4","5":"NA","6":"Neither agree nor disagree"},{"1":"953","2":"2","3":"46","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"954","2":"2","3":"32","4":"4","5":"NA","6":"Disagree"},{"1":"955","2":"2","3":"30","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"956","2":"1","3":"16","4":"6","5":"1","6":"Neither agree nor disagree"},{"1":"957","2":"1","3":"47","4":"8","5":"2","6":"Agree strongly"},{"1":"958","2":"2","3":"81","4":"7","5":"1","6":"Neither agree nor disagree"},{"1":"959","2":"1","3":"18","4":"3","5":"7","6":"Neither agree nor disagree"},{"1":"960","2":"2","3":"24","4":"4","5":"1","6":"Agree"},{"1":"961","2":"1","3":"66","4":"6","5":"1","6":"Agree"},{"1":"962","2":"2","3":"18","4":"1","5":"9","6":"NA"},{"1":"963","2":"1","3":"33","4":"5","5":"4","6":"Neither agree nor disagree"},{"1":"964","2":"1","3":"52","4":"7","5":"6","6":"Neither agree nor disagree"},{"1":"965","2":"1","3":"59","4":"3","5":"2","6":"Disagree"},{"1":"966","2":"1","3":"55","4":"6","5":"NA","6":"Agree"},{"1":"967","2":"2","3":"56","4":"NA","5":"NA","6":"Neither agree nor disagree"},{"1":"968","2":"1","3":"69","4":"5","5":"1","6":"Agree"},{"1":"969","2":"1","3":"21","4":"2","5":"3","6":"Neither agree nor disagree"},{"1":"970","2":"2","3":"37","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"971","2":"2","3":"35","4":"8","5":"6","6":"Agree"},{"1":"972","2":"2","3":"44","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"973","2":"2","3":"59","4":"3","5":"4","6":"Disagree"},{"1":"974","2":"2","3":"25","4":"4","5":"1","6":"Agree"},{"1":"975","2":"2","3":"55","4":"4","5":"NA","6":"NA"},{"1":"976","2":"1","3":"36","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"977","2":"1","3":"55","4":"7","5":"1","6":"NA"},{"1":"978","2":"2","3":"15","4":"5","5":"NA","6":"Disagree"},{"1":"979","2":"2","3":"51","4":"6","5":"NA","6":"Agree"},{"1":"980","2":"2","3":"65","4":"5","5":"1","6":"Neither agree nor disagree"},{"1":"981","2":"1","3":"67","4":"5","5":"1","6":"Disagree"},{"1":"982","2":"2","3":"17","4":"5","5":"NA","6":"Agree"},{"1":"983","2":"2","3":"51","4":"3","5":"1","6":"Agree"},{"1":"984","2":"2","3":"48","4":"6","5":"6","6":"Agree strongly"},{"1":"985","2":"2","3":"76","4":"8","5":"1","6":"Neither agree nor disagree"},{"1":"986","2":"2","3":"19","4":"2","5":"4","6":"Disagree"},{"1":"987","2":"2","3":"74","4":"5","5":"1","6":"Disagree"},{"1":"988","2":"1","3":"76","4":"2","5":"6","6":"Disagree strongly"},{"1":"989","2":"1","3":"54","4":"4","5":"NA","6":"Neither agree nor disagree"},{"1":"990","2":"2","3":"57","4":"NA","5":"NA","6":"Agree"},{"1":"991","2":"1","3":"66","4":"5","5":"1","6":"Disagree"},{"1":"992","2":"1","3":"71","4":"5","5":"NA","6":"Neither agree nor disagree"},{"1":"993","2":"2","3":"17","4":"2","5":"9","6":"Neither agree nor disagree"},{"1":"994","2":"2","3":"60","4":"2","5":"NA","6":"Neither agree nor disagree"},{"1":"995","2":"2","3":"28","4":"5","5":"6","6":"Agree"},{"1":"996","2":"2","3":"34","4":"2","5":"NA","6":"Disagree"},{"1":"997","2":"2","3":"73","4":"3","5":"2","6":"Neither agree nor disagree"},{"1":"998","2":"2","3":"31","4":"5","5":"NA","6":"Agree strongly"},{"1":"999","2":"2","3":"74","4":"3","5":"5","6":"Disagree"},{"1":"1000","2":"2","3":"25","4":"5","5":"NA","6":"Disagree"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>Möglicherweise habt ihr bemerkt, dass R Buchstabenabkürzungen unter den Spaltennamen des Datensatzes <code>ess_ger</code> anzeigt. Diese Abkürzungen beschreiben den Typ der Variablen, die in jeder Spalte gespeichert sind:</p>
+<ul>
+<li><p><code>int</code> steht für ganze Zahlen (integers).</p></li>
+<li><p><code>dbl</code> steht für Doubles oder reelle Zahlen.</p></li>
+<li><p><code>chr</code> steht für Zeichenvektoren oder Zeichenfolgen.</p></li>
+<li><p><code>fctr</code> steht für Faktoren, die R verwendet, um kategoriale Variablen darzustellen.</p></li>
+</ul>
+<p><strong>Codebook</strong></p>
+<p>Was bedeuten all diese Werte? Mit der Funktion <code>view_df</code> aus dem <code>sjPlot</code> package können wir uns ein sehr schönes <strong>Codebook</strong> zeigen lassen! (Funktioniert nur mit SPSS Datensätzen)</p>
+<center>
+<table style="border-collapse:collapse; border:none;">
+<caption>Data frame: ess_ger3</caption>
+<tr>
+<th style="border-bottom:double; font-style:italic; font-weight:normal; padding:0.2cm; text-align:left; vertical-align:top;">ID</th><th style="border-bottom:double; font-style:italic; font-weight:normal; padding:0.2cm; text-align:left; vertical-align:top;">Name</th><th style="border-bottom:double; font-style:italic; font-weight:normal; padding:0.2cm; text-align:left; vertical-align:top;">Label</th><th style="border-bottom:double; font-style:italic; font-weight:normal; padding:0.2cm; text-align:left; vertical-align:top;">Values</th><th style="border-bottom:double; font-style:italic; font-weight:normal; padding:0.2cm; text-align:left; vertical-align:top;">Value Labels</th>
+</tr>
+<tr>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">1</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">id</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;"></td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;" colspan="2"><em>range: 1-2852</em></td>
+</tr>
+<tr>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">2</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">gender</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">Gender</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">1<br>2<br>9</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">Male<br>Female<br>No answer</td>
+</tr>
+<tr>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">3</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">age</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">Age of respondent, calculated</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">999</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">Not available</td>
+</tr>
+<tr>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">4</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">left_right</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">Placement on left right scale</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">0<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>77<br>88<br>99</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">Left<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>Right<br>Refusal<br>Don't know<br>No answer</td>
+</tr>
+<tr>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">5</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">party_ger</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">Which party feel closer to, Germany</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>66<br>77<br>88<br>99</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top;">CDU/CSU<br>SPD<br>Die Linke<br>Bündnis 90/ Die Grünen<br>FDP<br>AfD<br>Piratenpartei<br>NPD<br>Andere Partei<br>Not applicable<br>Refusal<br>Don't know<br>No answer</td>
+</tr>
+<tr>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">6</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">fake_refugee</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">Most refugee applicants not in real fear of<br>persecution own countries</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">1<br>2<br>3<br>4<br>5<br>7<br>8<br>9</td>
+<td style="padding:0.2cm; text-align:left; vertical-align:top; background-color:#eeeeee">Agree strongly<br>Agree<br>Neither agree nor disagree<br>Disagree<br>Disagree strongly<br>Refusal<br>Don't know<br>No answer</td>
+</tr>
+
+</table>
+</center>
+<p><br> <br></p>
+<p><strong>Datenzugriff</strong></p>
+<p>Sehr Angenehm kann man auf einzelne Variablen mit Hilfe des Dollarzeichens in der Form <code>data$variable</code> zugegriffen werden. Mit der Funktion <code>table()</code> können wir uns die Häufigkeiten der Variable ausgeben lassen.</p>
+<div class="tutorial-exercise" data-label="dat" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>table(ess_ger$gender)    #zeige Häufigkeiten von Geschlecht
+table(ess_ger$party_ger) #zeige Häufigkeiten von Parteiidentifikation
+table(ess_ger$fake_refugee) #zeige die Häufigkeiten von fake_refugee</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
+</div>
+<p>Das Ganze macht so natürlich noch nicht so viel Sinn, da die Werte nicht gelabelled sind. Daher müssen wir die Variablen <strong>rekodieren</strong></p>
+<div id="section-rekodieren" class="section level3">
+<h3>Rekodieren</h3>
+<p>Eine sehr hilfreiche Funktion für das rekodieren von Variablen ist <code>Recode()</code> von dem package <code>car</code>. Lasst uns zunächst die Gender Variable rekodieren. Aus dem Codebuch erfahren wir, dass Männer als <code>1</code> und Frauen als <code>2</code> kodiert sind.</p>
+<p><strong>Hier ein Beispiel:</strong></p>
+<div class="tutorial-exercise" data-label="reec1" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>gender_rec &lt;- Recode(ess_ger$gender, 
+                  &#39;1 = &quot;Männlich&quot;;
+                   2 = &quot;Weiblich&quot;&#39;)
+
+table(gender_rec)</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
+</div>
+<p><img src="images/light.png" width="30" /> <strong>Aufgabe</strong></p>
+<p>Generiere eine neue Variable <code>partei_ident</code> mit den folgenden Ausprägungen:</p>
+<ul>
+<li>1 = “CDU/CSU”</li>
+<li>2 = “SPD”</li>
+<li>3 = “Die Linke”</li>
+<li>4 = “Bündnis 90/ Die Grünen”</li>
+<li>5 = “FDP”</li>
+<li>6 = “AfD”</li>
+<li>7:9 = NA (kennzeichnet 7 bis 9 als fehlende Werte)</li>
+</ul>
+<p>Zeige die Häufigkeiten mit Hilfe der <code>table()</code> Funktion.</p>
+<div class="tutorial-exercise" data-label="abc" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
+</div>
+<div class="tutorial-exercise-support" data-label="abc-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>partei_ident &lt;- Recode(ess_ger$party_ger, 
+                  &#39;1 = &quot;CDU/CSU&quot;;
+                   2 = &quot;SPD&quot;;
+                   3 = &quot;Die Linke&quot;;
+                   4 = &quot;Bündnis 90/ Die Grünen&quot;;
+                   5 = &quot;FDP&quot;;
+                   6 = &quot;AfD&quot;;
+                   7:9 = NA&#39;)
+
+table(partei_ident)</code></pre>
+</div>
+</div>
+</div>
+<div id="section-das-tidyverse" class="section level2">
+<h2>Das <strong><code>tidyverse</code></strong></h2>
+<div class="figure">
+<img src="images/tidyverse.png" style="width:100.0%" />
+
+</div>
+<p>Neben <code>Base R</code> gibt es allerdings nonch das <code>tidyverse</code>, dass viele mächtige Packages enthält!</p>
+<p>Hier eine kleine übersicht von relevanten Funktionen, die wir brauchen werden:</p>
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;border-color:#999;margin:0px auto;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#fff;background-color:#26ADE4;}
+.tg .tg-94ly{font-family:"Lucida Console", Monaco, monospace !important;;vertical-align:top}
+.tg .tg-pl96{font-weight:bold;font-size:18px;vertical-align:top}
+.tg .tg-bn4o{font-weight:bold;font-size:18px;text-align:center;vertical-align:top}
+.tg .tg-yw4l{vertical-align:top}
+@media screen and (max-width: 767px) {.tg {width: auto !important;}.tg col {width: auto !important;}.tg-wrap {overflow-x: auto;-webkit-overflow-scrolling: touch;margin: auto 0px;}}</style>
+<div class="tg-wrap"><table class="tg">
+  <tr>
+    <th class="tg-pl96">Inhalt</th>
+    <th class="tg-bn4o">tidyverse - Befehle</th>
+  </tr>
+  <tr>
+    <td class="tg-031e">Variablen auswählen</td>
+    <td class="tg-94ly">select()</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Neue Variable erstellen</td>
+    <td class="tg-94ly">mutate()</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Variable rekodieren</td>
+    <td class="tg-94ly">recode()</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Subset erstellen <br>(Spalten auswählen)</td>
+    <td class="tg-94ly">filter()</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Variablennamen ändern</td>
+    <td class="tg-94ly">rename()</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">pipe operator</td>
+    <td class="tg-94ly">%&gt;%</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Datensatz gruppieren</td>
+    <td class="tg-94ly">group_by()</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Zusammenfassen</td>
+    <td class="tg-94ly">summary()</td>
+  </tr>
+</table></div>
+<div id="section-spalten-auswahlen-mit-select" class="section level3">
+<h3>Spalten auswählen mit <code>select()</code></h3>
+<div class="figure">
+<img src="images/select.png" width="200" />
+
+</div>
+<p>Mit <code>select</code> werden Spalten (=Vektoren/Variablen) mittels dem Variablennamen oder einer Hilfsfunktion ausgewählt.</p>
+<p>Wählen wir wieder nur die zwei folgenden Variables aus:</p>
+<ul>
+<li><code>age</code></li>
+<li><code>fake_refugee</code></li>
+</ul>
+<div class="tutorial-exercise" data-label="sel" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>select(ess_ger , age, fake_refugee)</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
+</div>
+<p><code>Select</code> eignet sich auch dafür Variablen aus einem bestehenden dataframe zu entfernen. Dies ist ganz einfach zu lösen mit einem <code>-</code> (Minus).</p>
+<p><img src="images/light.png" width="30" /> <strong>Aufgaben</strong></p>
+<ol style="list-style-type: decimal">
+<li>Wähle die folgende Variablen aus:</li>
+</ol>
+<ul>
+<li><code>gender_rec</code></li>
+<li><code>left_right</code></li>
+<li><code>partei_ident</code></li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li>Wähle alle Variablen <strong>außer</strong> <code>fake_refugee</code> und <code>age</code>.</li>
+</ol>
+<div class="tutorial-exercise" data-label="ddd" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
+</div>
+<div class="tutorial-exercise-support" data-label="ddd-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>select(ess_ger, gender_rec, left_right, partei_ident)
+select(ess_ger, -fake_refugee, -age)</code></pre>
+</div>
+</div>
+<div id="section-zeilen-auswahlen-mit-filter" class="section level3">
+<h3>Zeilen auswählen mit <code>filter()</code></h3>
+<div class="figure">
+<img src="images/filter.png" width="200" />
+
+</div>
+<p>Mit <code>filter()</code> behält man oder selektiert man Zeilen eines Datensatzes, welche bestimmte logische Kriterien oder Konditionen erfüllen. Damit wird ein Subset (Untergruppe) gebildet. Wir wählen jetzt nur die Fälle aus, welche unser Kriterium erfüllen. Jetzt zeigen wir uns Personen an, welchse sich mit der <em>FDP</em> identifizieren.</p>
+<p><strong>Beispiel:</strong></p>
+<div class="tutorial-exercise" data-label="filt" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>filter(ess_ger, partei_ident == &quot;FDP&quot;)</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
+</div>
+<p><img src="images/light.png" width="30" /> <strong>Aufgaben</strong></p>
+<ol style="list-style-type: decimal">
+<li><p>Filtere den Datensatz und zeige nur die Personen, welche sich mit der AfD identifizieren.</p></li>
+<li><p>Filtere den Datensatz und zeige nur die Personen, welche unter 30 Jahre alt sind und sich als eher ganz rechts (größer gleich 8) einstufen.</p></li>
+<li><p>Filtere den Datensatz und zeige nur die Personen, welche sich mit der FDP identifizieren und die Mehrheit der Flüchtlinge als nicht wirklich politisch verfolgt ansehen (“Agree” und “Agree strongly”).</p></li>
+</ol>
+<div class="tutorial-exercise" data-label="bbb" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
+</div>
+<div class="tutorial-exercise-support" data-label="bbb-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>filter(ess_ger, partei_ident == &quot;AfD&quot;)
+filter(ess_ger, age &lt; 30 &amp; left_right &gt;= 8)
+filter(ess_ger, partei_ident == &quot;AfD&quot; &amp; (fake_refugee == &quot;Agree&quot; | fake_refugee == &quot;Agree strongly&quot;))</code></pre>
+</div>
+<p><em>Hier nochmal die Operatoren zum spicken ;)</em></p>
+<ul>
+<li><code>==</code> (logisch) ist gleich</li>
+<li><code>!=</code> (logisch) ist ungleich</li>
+<li><code>&gt;</code> größer als</li>
+<li><code>&lt;</code> kleiner als</li>
+<li><code>&gt;=</code> größer gleich</li>
+<li><code>&lt;=</code> kleiner gleich</li>
+</ul>
+</div>
+<div id="section-neue-variablen-erstellen-mit-mutate" class="section level3">
+<h3>Neue Variablen erstellen mit <code>mutate()</code></h3>
+<p><img src="images/mutate.png" width="200" /> <img src="images/mutate_2.png" width="200" /></p>
+<p>Der <code>Recode()</code> Befehl aus dem vorherigen Kapitel lässt sich auch in Kombination mit <code>mutate()</code> verwenden. Mit <code>mutate()</code> wird/werden eine oder mehrere neue Variable(n) erzeugt und an den Datensatz hinten angefügt.</p>
+<p><strong>Beispiel</strong></p>
+<p>Statt dem Alter wollen wir nun das Geburstjahr haben. Einfacherweise ziehen wir das jetzige Jahr (2017) vom Alter ab um das Geburtsjahr zu erhalten. Die neue Variable nennen wir <code>birth</code>.</p>
+<div class="tutorial-exercise" data-label="reec22" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>mutate(ess_ger, birth = 2017 - age)</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
+</div>
+<p><img src="images/light.png" width="30" /> <strong>Aufgabe</strong></p>
+<p>Die Links-Rechts Skala geht von 0 - 10. Teile die Variable durch 10 um einen Range von 0 - 1 zu erhalten. Nenne die Variable <code>lr01</code>. Mit <code>mutate()</code> wird die Variable hinten angehangen.</p>
+<div class="tutorial-exercise" data-label="waswas" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
+</div>
+<div class="tutorial-exercise-support" data-label="waswas-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>mutate(ess_ger, lr01 = left_right / 10 )</code></pre>
+</div>
+<p>Nehmen wir an, dass wir die Altervariable als eine dummy Variable (zwei Ausprägungen) benutzen wollen. Am besten geht das mit <code>ifelse()</code>. Kodieren wir doch einmal die 18-40 Jährigen als eine Gruppe und über 40 Jährige als eine andere Gruppe.</p>
+<p>Die Funktion <code>ifelse()</code> testet eine logische Bedingung in ihrem ersten Argument. Wenn der Test <code>TRUE</code> ist, gibt <code>ifelse()</code> das zweite Argument zurück. Wenn der Test <code>FALSE</code> ist, gibt <code>ifelse()</code> das dritte Argument zurück.</p>
+<p>Also in folgender Form: <code>ifelse(logischer Test, was passiert wenn zutrifft, was passiert wenn nicht zutrifft)</code></p>
+<p><strong>Beispiel:</strong></p>
+<p>Eine Variable <code>u40</code> erstellen welche die 18 bis 40 Jährigen und die über 40 Jährigen in eine Gruppe teilt.</p>
+<div class="tutorial-exercise" data-label="ifelse" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>mutate(ess_ger, u40 = ifelse(age &lt;= 40, &quot;18 - 40&quot; ,&quot;&lt; 40&quot;))
+#darauf achten, dass bei strings (Wörtern) Anführungsstriche gemacht werden müssen!</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
+</div>
+<p><img src="images/light.png" width="30" /> <strong>Aufgabe</strong></p>
+<p>Kodiere <code>partei_ident</code> AfD (=1) und alle anderen Parteien (=0) und zeige den Datensatz!</p>
+<div class="tutorial-exercise" data-label="mlo" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
+</div>
+<div class="tutorial-exercise-support" data-label="mlo-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>mutate(ess_ger, afd = ifelse(partei_ident==&quot;AfD&quot;, 1, 0)) # denk an die Charaktere!</code></pre>
+</div>
+<p>Die logische Operatoren <code>&amp;</code>(und), <code>|</code> (oder) können zwei oder mehr Bedingungen miteinander verknüpfen.</p>
+<p><img src="images/light.png" width="30" /> <strong>Aufgabe</strong></p>
+<p>Kodieren wir eine Variable mit 2 Bedingungen: die Variable <strong>groko</strong>, welche SPD und CDU/CSU (=1) und restliche Parteien (=0) angibt.</p>
+<div class="tutorial-exercise" data-label="mlp" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
+</div>
+<div class="tutorial-exercise-support" data-label="mlp-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>mutate(ess_ger, groko = ifelse(partei_ident == &quot;CDU/CSU&quot; | ess_ger$partei_ident == &quot;SPD&quot; , 1, 0))</code></pre>
+</div>
+</div>
+<div id="section-variablen-umbennen-mit-rename" class="section level3">
+<h3>Variablen umbennen mit <code>rename()</code></h3>
+<p>Mit <code>rename()</code> lassen sich die Variablen umbennen. Beispielhaft übersetzen wir <code>age</code>, <code>gender</code> und <code>links_rechts</code> Variablennamen ins Deutsche.</p>
+<p><strong>Beispiel:</strong></p>
+<div class="tutorial-exercise" data-label="ren" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>rename(ess_ger,
+    alter = age,
+    geschl = gender,
+    links_rechts = left_right)</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
+</div>
+</div>
+<div id="section-der-sexy-pipe-operator" class="section level3">
+<h3>Der sexy pipe operator <code>%&gt;%</code></h3>
+<p><img src="images/pipe.png" width="100" /> Mit der Hilfe von <code>%&gt;%</code> können alle diese Operationen auf einmal ausgeführt werden!</p>
+<p>[Prozent größer Prozent] wird pipe operator genannt. Diese Pipe ermöglicht es Daten einfacher, verständlicher und lesbarer und ohne Verlust von Flexibilität zu transformieren. Den pipe operator kann man sich als “danach” vorstellen.</p>
+<p><strong>Hier ein Beispiel:</strong></p>
+<div class="tutorial-exercise" data-label="piped" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="19">
+<pre class="text"><code>ess_ger %&gt;%
+  select(age, gender, left_right, party_ger) %&gt;%
+  mutate(gender_rec = Recode(gender, 
+                  &#39;1 = &quot;Männlich&quot;;
+                   2 = &quot;Weiblich&quot;&#39;)) %&gt;%
+  mutate(partei_ident = Recode(party_ger, 
+                  &#39;1 = &quot;CDU/CSU&quot;;
+                   2 = &quot;SPD&quot;;
+                   3 = &quot;Die Linke&quot;;
+                   4 = &quot;Bündnis 90/ Die Grünen&quot;;
+                   5 = &quot;FDP&quot;;
+                   6 = &quot;AfD&quot;;
+                   7:9 = NA&#39;)) %&gt;%
+  filter(partei_ident == &quot;AfD&quot;) %&gt;%
+  rename(alter = age,
+    geschl = gender_rec,
+    links_rechts = left_right) %&gt;%
+  select(geschl, alter, links_rechts, partei_ident)</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
+</div>
+<p><img src="images/light.png" width="30" /> Jetzt seid ihr dran!</p>
+<p>Benutzt die pipe für folgende Aufgaben:</p>
+<p><strong>1. Selektiere die folgenden Variablen</strong></p>
+<ul>
+<li><code>gender_rec</code></li>
+<li><code>age</code></li>
+<li><code>left_right</code></li>
+<li><code>partei_ident</code></li>
+<li><code>fake_refugee</code></li>
+</ul>
+<p><strong>2. Filtere die Variable und zeige nur Fälle mit der Ausprägung <code>Männlich</code></strong></p>
+<p><strong>3. Erstelle eine neue Variable namens <code>links</code> mit der Ausprägung <code>1</code> für die Werte 0, 1, 2, 3 und <code>0</code> für alle anderen. </strong></p>
+<p><strong>4. Benenne die Variable <code>fake_refugee</code> in <code>anti_refugee</code> um.</strong></p>
+<p><strong>5. Selektiere die folgenden Variablen</strong></p>
+<ul>
+<li><code>gender_rec</code></li>
+<li><code>age</code></li>
+<li><code>links</code></li>
+<li><code>anti_refugee</code></li>
+</ul>
+<div class="tutorial-exercise" data-label="pop" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
+</div>
+<div class="tutorial-exercise-support" data-label="pop-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>ess_ger %&gt;%
+  select(gender_rec, age, left_right, partei_ident, fake_refugee) %&gt;%
+  filter(gender_rec == &quot;Männlich&quot;) %&gt;%
+  mutate(links = ifelse(left_right == 0:3, 1, 0)) %&gt;%
+  rename(anti_refugee = fake_refugee) %&gt;%
+  select(gender_rec, age, links, anti_refugee)</code></pre>
+</div>
+</div>
+<div id="section-gruppieren-und-summaries" class="section level3">
+<h3>Gruppieren und Summaries</h3>
+<p><strong><code>group_by</code> + <code>summary</code></strong></p>
+<p><img src="images/summarise_1.png"></p>
+<p><img src="images/summarise_2.png"></p>
+<p>Mit <code>group_by()</code> werden die nachfolgden Operationen gruppenweise ausgeführt. Mit <code>summarise()</code> werden die gruppierten Variablen aggregiert</p>
+<div class="tutorial-exercise" data-label="fuu1" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>ess_ger %&gt;%
+  group_by(partei_ident) %&gt;% # Gruppenvariable
+  summarise(mean_age = mean(age, na.rm = T))</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
+</div>
+<p><img src="images/light.png" width="30" /> <strong>Aufgabe</strong></p>
+<p>Gruppiere <code>ess_ger</code> nach <code>gender_rec</code> und rechne den Mittelwerte der Links-Rechts Skala (<code>left_right</code>) per Geschlecht aus. Vergiss nicht <code>na.rm = T</code> zu spezifizieren!</p>
+<div class="tutorial-exercise" data-label="fuu2" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
+</div>
+<div class="tutorial-exercise-support" data-label="fuu2-solution" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>ess_ger %&gt;%
+  group_by(gender_rec) %&gt;% # Gruppenvariable
+  summarise(mean_lr = mean(left_right, na.rm = T))</code></pre>
+</div>
+<p><strong><code>group_by</code> + <code>tally</code></strong></p>
+<p>Um die Fälle innerhalb einer Gruppe zu zählen wird <code>tally()</code> eingesetzt.</p>
+<div class="tutorial-exercise" data-label="fuc1" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>ess_ger %&gt;%
+  group_by(fake_refugee) %&gt;%
+  tally</code></pre>
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
+</div>
+</div>
+</div>
+<div id="section-datenimport-und--export" class="section level2">
+<h2>Datenimport und -export</h2>
+<p>Für den Datenimport muss als erstes der Ordnerpfad für das <em>working directory</em> festgelegt werden. Das geht am besten durch einen Rechtsklick auf <strong>Datensatz -&gt; Ordnerpfad</strong>. Bei Windows müssen die Slashes von <code>\</code> zu <code>/</code> geändert werden.</p>
+<pre class="r"><code>#speichere Pfad in path_data
+path_data &lt;- &quot;C:/Users/Fabio/Dropbox/9. Semester Master/Tutorium&quot;
+#setwd() setzt den working directory zu path_data
+setwd(path_data) 
+#getwd() zeigt an wo das jetzige working directory sich befindet
+getwd()          </code></pre>
+<p><strong>Rdata</strong></p>
+<p>Ist das R-native Datenformat.</p>
+<pre class="r"><code>#Import
+dat &lt;- get(load(&quot;file_name.Rdata&quot;))  #lade Datensatz und weise ihn dat zu
+#Export
+save(dat, file = &quot;file_name.Rdata&quot;)  #speichere Datensatz</code></pre>
+<p><strong>SPSS</strong></p>
+<p>Das package <code>haven</code> erlaubt es Datensätze zwischen den gängigsten Statistik-Programmen zu transportieren.</p>
+<pre class="r"><code># install.packages(&quot;haven&quot;)        #installiere package &quot;haven&quot;
+library(haven)                     #lade package haven
+
+#Import
+dat &lt;- read_sav(&quot;file_name.sav&quot;)   #lade Datensatz und weise ihn dat zu
+#Export
+write_sav(dat, &quot;file_name.sav&quot;)    #speichere Datensatz</code></pre>
+<p><strong>CSV</strong></p>
+<p>Wenn ein Excel-Datensatz (.xlsx) vorliegt kann dieser einfach in csv (comma sperated values) abgespeichert werden.</p>
+<pre class="r"><code>#Import
+dat &lt;- read.csv(file_name = &quot;file.csv&quot;,  #lade Datensatz und weise ihn dat zu
+               header = T, 
+               sep = &quot;,&quot;, 
+               dec = &quot;.&quot;, 
+               stringsAsFactors = F)
+#Export
+write.csv(dat, file = &quot;file_name.csv&quot;, row.names = F) #speichere Datensatz</code></pre>
+<p><strong>Stata</strong></p>
+<pre class="r"><code># install.packages(&quot;haven&quot;)         #installiere package &quot;haven&quot;
+library(haven)                      #lade package haven
+
+#Import
+dat &lt;- read_dta(&quot;file_name.dta&quot;)  #lade Datensatz und weise ihn dat zu
+#Export
+write_dta(dat, &quot;file_name.dta&quot;)   #speichere Datensatz</code></pre>
+<p><strong>SAS</strong></p>
+<pre class="r"><code># install.packages(&quot;haven&quot;)          #installiere package &quot;haven&quot;
+library(haven)                       #lade package haven
+
+#Import
+dat &lt;- read_sas(&quot;file_name.sas7bdat&quot;)  #lade Datensatz und weise ihn dat zu
+#Export
+write_sas(d, &quot;file_name.sas7bdat&quot;)     #speichere Datensatz</code></pre>
+
+<script type="application/shiny-prerendered" data-context="server-start">
+#devtools::install_github("favstats/favstats", dependcies = T, force = T)
+library(knitr)
+library(learnr)
+library(tidyverse)
+library(haven)
+library(car)
+library(htmltools)
+
+normalize <- function(x){round((x - min(x, na.rm = T)) / (max(x, na.rm = T) - min(x, na.rm = T)) * 100, 2)}
+
+
+vektor <- c(1,2,3,4,5) #definiere Vektor mit den Werten 1,2,3,4 und 5
+
+char <- c("Männlich", "Weiblich")
+fac <- factor(c("Männlich", "Weiblich"))
+num <- c(1, 2, 3)
+
+#ess <- read_spss("ess_round8.sav")
+
+##var_names(ess, "income")
+##sjPlot::view_df(select(ess, freehms), show.frq = F)
+##ess$idno
+#ess_ger <- ess %>%
+#  filter(cntry == "DE") %>%
+#  select(idno,
+#         gndr,
+#         agea,
+#         lrscale,
+#         prtclede,
+#         rfgfrpc) %>%
+#  rename(
+#    id            = idno,
+#    party_ger     = prtclede,
+#    left_right    = lrscale,
+#    fake_refugee  = rfgfrpc,	
+#    gender        = gndr,
+#    age           = agea) %>%
+##  mutate(fake_refugee2 = 6-fake_refugee) %>%
+#  mutate(fake_refugee = to_label(fake_refugee) %>% #as.character) %>%
+#  mutate(id = 1:2852) %>%
+##  mutate(gay_tolerance = to_label(gay_tolerance) %>% #as.character) %>%
+#  mutate_if(.predicate = is.double, .funs = #as.numeric) %>%
+#  mutate_if(.predicate = is.character, .funs = #as.character) %>%
+#  mutate_if(.predicate = is.factor, .funs = as.factor) #%>%
+#  mutate(gender_rec = Recode(gender, 
+#                  '1 = "Männlich";
+#                   2 = "Weiblich"')) %>%
+#  mutate(partei_ident = Recode(party_ger, 
+#                  '1 = "CDU/CSU";
+#                   2 = "SPD";
+#                   3 = "Die Linke";
+#                   4 = "Bündnis 90/ Die Grünen";
+#                   5 = "FDP";
+#                   6 = "AfD";
+#                   7:9 = NA'))
+#save(ess_ger, file="ess_ger.Rdata")
+
+load("ess_ger.Rdata")
+
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+learnr:::register_http_handlers(session, metadata = NULL)
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-zzz-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-zzz-code-editor`)), session)
+output$`tutorial-exercise-zzz-output` <- renderUI({
+  `tutorial-exercise-zzz-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-obj1-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-obj1-code-editor`)), session)
+output$`tutorial-exercise-obj1-output` <- renderUI({
+  `tutorial-exercise-obj1-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-obj2-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-obj2-code-editor`)), session)
+output$`tutorial-exercise-obj2-output` <- renderUI({
+  `tutorial-exercise-obj2-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-com-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-com-code-editor`)), session)
+output$`tutorial-exercise-com-output` <- renderUI({
+  `tutorial-exercise-com-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-vec1-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-vec1-code-editor`)), session)
+output$`tutorial-exercise-vec1-output` <- renderUI({
+  `tutorial-exercise-vec1-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-vec2-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-vec2-code-editor`)), session)
+output$`tutorial-exercise-vec2-output` <- renderUI({
+  `tutorial-exercise-vec2-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-flu-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-flu-code-editor`)), session)
+output$`tutorial-exercise-flu-output` <- renderUI({
+  `tutorial-exercise-flu-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-function1-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-function1-code-editor`)), session)
+output$`tutorial-exercise-function1-output` <- renderUI({
+  `tutorial-exercise-function1-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-function2-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-function2-code-editor`)), session)
+output$`tutorial-exercise-function2-output` <- renderUI({
+  `tutorial-exercise-function2-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-func1-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-func1-code-editor`)), session)
+output$`tutorial-exercise-func1-output` <- renderUI({
+  `tutorial-exercise-func1-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-func2-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-func2-code-editor`)), session)
+output$`tutorial-exercise-func2-output` <- renderUI({
+  `tutorial-exercise-func2-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-character-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-character-code-editor`)), session)
+output$`tutorial-exercise-character-output` <- renderUI({
+  `tutorial-exercise-character-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-ascharacter-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-ascharacter-code-editor`)), session)
+output$`tutorial-exercise-ascharacter-output` <- renderUI({
+  `tutorial-exercise-ascharacter-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-dat-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-dat-code-editor`)), session)
+output$`tutorial-exercise-dat-output` <- renderUI({
+  `tutorial-exercise-dat-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-reec1-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-reec1-code-editor`)), session)
+output$`tutorial-exercise-reec1-output` <- renderUI({
+  `tutorial-exercise-reec1-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-abc-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-abc-code-editor`)), session)
+output$`tutorial-exercise-abc-output` <- renderUI({
+  `tutorial-exercise-abc-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-sel-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-sel-code-editor`)), session)
+output$`tutorial-exercise-sel-output` <- renderUI({
+  `tutorial-exercise-sel-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-ddd-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-ddd-code-editor`)), session)
+output$`tutorial-exercise-ddd-output` <- renderUI({
+  `tutorial-exercise-ddd-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-filt-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-filt-code-editor`)), session)
+output$`tutorial-exercise-filt-output` <- renderUI({
+  `tutorial-exercise-filt-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-bbb-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-bbb-code-editor`)), session)
+output$`tutorial-exercise-bbb-output` <- renderUI({
+  `tutorial-exercise-bbb-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-reec22-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-reec22-code-editor`)), session)
+output$`tutorial-exercise-reec22-output` <- renderUI({
+  `tutorial-exercise-reec22-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-waswas-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-waswas-code-editor`)), session)
+output$`tutorial-exercise-waswas-output` <- renderUI({
+  `tutorial-exercise-waswas-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-ifelse-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-ifelse-code-editor`)), session)
+output$`tutorial-exercise-ifelse-output` <- renderUI({
+  `tutorial-exercise-ifelse-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-mlo-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-mlo-code-editor`)), session)
+output$`tutorial-exercise-mlo-output` <- renderUI({
+  `tutorial-exercise-mlo-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-mlp-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-mlp-code-editor`)), session)
+output$`tutorial-exercise-mlp-output` <- renderUI({
+  `tutorial-exercise-mlp-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-ren-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-ren-code-editor`)), session)
+output$`tutorial-exercise-ren-output` <- renderUI({
+  `tutorial-exercise-ren-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-piped-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-piped-code-editor`)), session)
+output$`tutorial-exercise-piped-output` <- renderUI({
+  `tutorial-exercise-piped-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-pop-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-pop-code-editor`)), session)
+output$`tutorial-exercise-pop-output` <- renderUI({
+  `tutorial-exercise-pop-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-fuu1-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-fuu1-code-editor`)), session)
+output$`tutorial-exercise-fuu1-output` <- renderUI({
+  `tutorial-exercise-fuu1-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-fuu2-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-fuu2-code-editor`)), session)
+output$`tutorial-exercise-fuu2-output` <- renderUI({
+  `tutorial-exercise-fuu2-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-fuc1-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-fuc1-code-editor`)), session)
+output$`tutorial-exercise-fuc1-output` <- renderUI({
+  `tutorial-exercise-fuc1-result`()
+})
+</script>
+ <!--html_preserve-->
+<script type="application/shiny-prerendered" data-context="dependencies">
+{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["1.11.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/jquery-1.11.3"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["jquery.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["rmarkdown"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bootstrap"]},{"type":"character","attributes":{},"value":["3.3.5"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/bootstrap-3.3.5"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["viewport"]}},"value":[{"type":"character","attributes":{},"value":["width=device-width, initial-scale=1"]}]},{"type":"character","attributes":{},"value":["js/bootstrap.min.js","shim/html5shiv.min.js","shim/respond.min.js"]},{"type":"character","attributes":{},"value":["css/yeti.min.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["rmarkdown"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["pagedtable"]},{"type":"character","attributes":{},"value":["1.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/pagedtable-1.1"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["js/pagedtable.js"]},{"type":"character","attributes":{},"value":["css/pagedtable.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["rmarkdown"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["highlightjs"]},{"type":"character","attributes":{},"value":["1.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["href"]}},"value":[{"type":"character","attributes":{},"value":["workshop_files/highlightjs-1.1"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["highlight.js"]},{"type":"character","attributes":{},"value":["textmate.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial.js"]},{"type":"character","attributes":{},"value":["tutorial.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial-autocompletion"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial-autocompletion.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial-diagnostics"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial-diagnostics.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial-format"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmarkdown/templates/tutorial/resources"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial-format.js"]},{"type":"character","attributes":{},"value":["tutorial-format.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["1.11.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/jquery-1.11.3"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["jquery.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["rmarkdown"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["font-awesome"]},{"type":"character","attributes":{},"value":["4.5.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/font-awesome-4.5.0"]}]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["css/font-awesome.min.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["rmarkdown"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bootbox"]},{"type":"character","attributes":{},"value":["4.4.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/bootbox"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["bootbox.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["localforage"]},{"type":"character","attributes":{},"value":["1.5"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/localforage"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["localforage.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial.js"]},{"type":"character","attributes":{},"value":["tutorial.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial-autocompletion"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial-autocompletion.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial-diagnostics"]},{"type":"character","attributes":{},"value":["0.9"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial-diagnostics.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]}]}
+</script>
+<!--/html_preserve-->
+</div>
+
+</div> <!-- topics -->
+
+<div class="topicsContainer">
+<div class="topicsPositioner">
+<div class="band">
+<div class="bandContent topicsListContainer">
+
+<!-- begin doc-metadata -->
+<div id="doc-metadata">
+<h2 class="title toc-ignore" style="display:none;">R-Workshop</h2>
+</div>
+<!-- end doc-metadata -->
+
+</div> <!-- bandContent.topicsListContainer -->
+</div> <!-- band -->
+</div> <!-- topicsPositioner -->
+</div> <!-- topicsContainer -->
+
+
+</div> <!-- bandContent page -->
+</div> <!-- pageContent band -->
+
+
+
+
+<script>
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+</script>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+
+</html>

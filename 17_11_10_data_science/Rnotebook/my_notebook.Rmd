@@ -1,0 +1,384 @@
+---
+title: "Populismus in Europa"
+subtitle: "Einführung in Data Science"
+author: "Simon Roth"
+date: "10.11.2017"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: yeti
+---
+
+```{r setup, include = F}
+knitr::opts_chunk$set(
+  echo = T, 
+  warning = F, 
+  error = F, 
+  message = F)
+```
+
+```{r}
+# install.packages("devtools")
+# devtools::install_github("Espanta/lubripack")
+lubripack::lubripack("dplyr", "ggplot2", "ggthemes", "viridis", silent = T)
+```
+
+
+## Variablen 
+
+<img src="http://www.uni-bielefeld.de/soz/ess/images/logos/ESS_LOGO.JPG" align = "right" width = "20%">
+
+Der original ESS-Datensatz der mittlerweile 8 Erhebungswelle kann [Hier](http://www.europeansocialsurvey.org/) herunter geladen werden. Zu Übungszwecken wurden bereits eine Vorauswahl an Variablen schon bearbeitet.
+
+* `country`: Land der Befragung
+* `gender`: Geschlecht [Weiblich, Männlich]
+* `age`: Lebensalter   
+* `edu`: Höchster Bildungsabschluss (ISCED) [1-7]
+* `income`: Neto Haushaltseinkommen in Dezentilen (1-10 Kategorien zu einkommen in 10% Schritten)
+* `pol_inter`: Politisches Interesse [1: überhaupt nicht interessiert; 4: sehr interessiert]
+
+* `left_right`: Selbsteinschätzung Links-Rechtsskala [1: Links, 10: Rechts]
+* `gay_tolerance`: Lesben und Schwule können sich frei entfalten [1: lehne ab; 5: stimme zu]
+* `religious`: Religiösität [1: gar nicht, 5: sehr]
+* `imm_poor`: Armutsmigration von außerhalb Europa's [1: Keine, 4: Viele]
+* `imm_econ`: Ist Einwanderung gut oder schlecht für die Wirtschaft? [0: schlecht, 10: gut]
+* `fake_refugee`: Meisten Flüchtlinge sind nicht wirklich verfolgt [1: Stimme nicht zu, 5: Stimme zu]
+* `safety`: Fühlst du dich nachts sicher? [1: Sehr unsicher; 4: Sehr sicher]
+
+* `party_right`: Idenifikation mit einer populistischen Partei (europaweit) [...]
+* `vote_right`: Indikator - Idenifikation mit einer populistischen Partei (europaweit) [0, 1]
+* `party_ger`: Parteiidentifikation (DE) [Linke, Grüne, SPD, Union, AfD]
+* `EU_accession`: Jahr des EU-Beitritts (eines Landes)
+* `pc`: Post-kommunistische Staaten
+
+
+## Deutschland und die AfD
+
+<img src = "light.png" align = "left" width = "3%" hspace="10" vspace="3" >
+
+Filtere die Daten `ess` nur nach Personen aus Deutschland und speichere diesen Subset als `ess_ger` ab. 
+
+
+```{r}
+load("data/ess_workshop.Rdata")
+
+
+```
+
+
+<img src = "light.png" align = "left" width = "3%" hspace="10" vspace="3" >
+
+Visualisiere die Häufigkeiten für `gay_tolerance` mit Hilfe eines Bar Charts. 
+
+```{r}
+# Aufgabe 1
+
+
+
+```
+
+Da das Standard Layout nicht sehr hübsch ist, können wir es durch `ggthemr` für alle folgenden Grafiken auf einmal ändern. Nachträglich kann ein Theme oder die farben immer noch gewechselt werden. 
+
+```{r}
+library(ggthemr)
+ggthemr('flat')
+```
+
+Als nächstes greifen wir auf unsere dplyr Kenntnisse zurück und zählen die Personen und ihre Parteidenifikationen in Deutschalnd.
+
+```{r}
+ess_ger %>%
+  group_by(party_ger) %>%
+  tally %>%
+  ggplot(aes(x = factor(1), y = n, fill = party_ger)) +
+  geom_bar(width = 1, colour = "black", stat = "identity") + 
+  coord_polar(theta = "y")
+```
+
+
+<img src = "light.png" align = "left" width = "3%" hspace="10" vspace="3" >
+
+Wähle `ess_ger` und filtere alle Personen heraus die rechts-populisten gewählt haben (`vote_right == 1`). Dann visualisiere via Pie Chart die Häufigkeiten der Variable `gender` (Code der vorherigen Aufgabe).
+
+```{r}
+# Aufgabe 2
+
+
+
+
+```
+
+
+
+<img src = "light.png" align = "left" width = "3%" hspace="10" vspace="3" >
+
+Visualisiere die Variable `imm_econ` mit Hilfe eines Histogramms. 
+
+```{r}
+# Aufgabe 3
+
+
+
+```
+
+Die Stärke von ggplot2 ist, dass verschieden Dimesnionen auf einmal dargestellt werden können. Eine dieser Dimension/ Facette der Daten kann durch `facet_grid(~group)` aufgedeckt werden.
+
+```{r}
+ess_ger %>%
+  ggplot(aes(imm_econ, fill = vote_right)) + 
+  geom_histogram(binwidth = 1) +
+  facet_wrap(~vote_right, scales = "free_y")
+```
+
+
+<img src = "light.png" align = "left" width = "3%" hspace="10" vspace="3" >
+
+Erstelle einen Boxplot von der Variable `imm_econ`.
+
+```{r}
+# Aufgabe 4 
+
+
+
+```
+
+
+<img src = "light.png" align = "left" width = "3%" hspace="10" vspace="3" >
+
+Kopieren den vorherigen Code und tausche die X Achse durch `vote_right` aus.
+
+```{r}
+# Aufgabe 5
+
+
+
+```
+
+
+## Europa und die Rechten
+
+<img src = "light.png" align = "left" width = "3%" hspace="10" vspace="3" >
+
+Wir wechseln den Datensatz an dieser Stelle und greifen auf die europaweiten Daten (`ess`) zurück. Dadurch wird eine Betrachtung pro Land durch `facet_wrap(~country)` zum Kinderspiel. Visualsiere den obigen Boxplot von `imm_econ` pro Land. 
+
+```{r}
+# Aufgabe 6
+
+
+
+```
+
+<img src = "light.png" align = "left" width = "3%" hspace="10" vspace="3" >
+
+Kopiere den vorherigen Code und ergänze die Grafik um eine Legende und passende Farben. 
+
+```{r}
+# Aufgabe 7
+
+
+
+
+```
+
+Nun kommen wir zum Format Vilion Plot. Das Alter pro Land lässt sich so sehr intuitiv darstellen. Ein Zwider aus Density Plot und Box plot.
+
+```{r}
+ess %>%
+  ggplot(aes(x = 1, y = age)) + 
+  geom_violin() +
+  facet_wrap(~country, nrow = 3)
+```
+
+
+<img src = "light.png" align = "left" width = "3%" hspace="10" vspace="3" >
+
+Tausche die Variable `age` durch `imm_econ` und füge eine Farbe (`fill`) für Post-Kommunistische Länder zum vorherigen Plot hinzu.
+
+```{r}
+# Aufgabe 8
+
+
+```
+
+
+## Deutschlands Parteienlandschaft
+
+Nun lernen wir das neue Package `ggpubr` kennen. `ggboxplot` liefert ...
+
+```{r party_afd}
+library(ggpubr)
+
+party_colors  <- c(
+  "Linke" = "#8B1A1A", 
+  "SPD" = "#E2001A", 
+  "Grüne" = "#46962b", 
+  "Union" = "black", 
+  "FDP" = "#ffed00",
+  "AfD" = "#1E90FF"
+)
+
+gg1 <- ess %>%
+  ggboxplot(
+    x = "party_ger", 
+    y = "left_right",
+    color = "party_ger", 
+    palette = party_colors, 
+    title = "Parteizugehörigkeit nach Links-Rechtsskala (Selbsteinschätzung)", 
+    xlab = "",
+    ylab = "Links-Rechtsskala",
+    remove = NA
+    #add = "jitter"
+  ) +
+  coord_flip()
+
+gg1
+
+
+plotly::ggplotly(gg1, width = 700, height = 400)
+```
+
+
+Als nächstes wird ein Vektor für die richtigen Parteifarben bestimmt. Dieser wird dann an die bestehende Grafik mittels `scale_colour_manual` integriert. Außerdem werden noch `jitter` hinzugefügt und die Achsen mittels `coord_flip` getauscht.
+
+<img src = "light.png" align = "left" width = "3%" hspace="10" vspace="3" >
+
+Wie Hoch ist die Bildung der jeweiligen Partei-Anhänger? Nutze dazu den Code der voherigen Grafik und ändere die Variable. Interessant wäre dieser Plot auch mit folgenden y Variablen:
+
+* `imm_econ`: Ausländerablehnung
+* `religious`: Religiösität
+
+```{r, echo = F}
+# Aufgabe 9
+
+```
+
+
+## Die Rechten im Parlament
+
+```{r}
+# devtools::install_github("leeper/ggparliament")
+library("ggplot2")
+library("ggparliament")
+
+# example data 
+d <- data.frame(
+  party = factor(c("Linke", "SPD", "Grüne", "Union", "FDP", "AfD")),
+  seats13 =  c(64, 193, 63, 311, 0, 0),
+  seats17 = c(69, 153, 67, 246, 80, 94)
+)
+
+
+party_colors  <- c(
+  "Linke" = "#8B1A1A", 
+  "SPD" = "#E2001A", 
+  "Grüne" = "#46962b", 
+  "Union" = "black", 
+  "FDP" = "#ffed00",
+  "AfD" = "#1E90FF"
+)
+
+
+ggparliament(d, party = party, 
+             seats1 = seats17, style = "dots", portion = 0.5, 
+             nrows = 10, size = 1) + 
+  scale_fill_manual(values = party_colors) +
+  scale_colour_manual(values = party_colors) +
+  ggtitle("18. Deutscher Bundestag") +
+  theme_void()  +
+  theme(legend.position = "none")
+
+ggparliament(d, party = party, 
+             seats1 = seats17, seats2 = seats13, style = "arc", 
+             portion = 0.5, nrows = 10, size = 1, label = "seats") +
+  scale_fill_manual(values = party_colors) +
+  scale_colour_manual(values = party_colors) +
+  ggtitle("18. Deutscher Bundestag") +
+  theme_void()  +
+  geom_segment(aes(x = 0.25, xend = 0.25, y = 0.5, yend = 2), linetype = "dashed")
+
+```
+
+
+<img src = "light.png" align = "left" width = "3%" hspace="10" vspace="3" >
+
+Wie hoch ist der Sitzanteil für jede Partei in der *National Assembly* in Frankreich die dieses Jahr neu gewählt worden ist? Wie stark ist der FN? 
+
+National Assembly political groups
+
+* REM	La République En Marche	310	
+* LR	The Republicans	95
+* MoDem	Democratic Movement and affiliated	42
+* LC	The Constructives: Republicans, UDI, and Independents	34
+* NG	New Left	28
+* FI	La France Insoumise	17	
+* GDR	Democratic and Republican Left	16
+
+```{r}
+# AUfgabe
+
+
+```
+
+
+
+## Kausalität? Wirkmechanismus?
+
+```{r}
+ess_ger %>%
+  filter(!is.na(party_ger)) %>%
+  ggscatter(
+    x = "edu", 
+    y = "left_right",
+    color = "party_ger",
+    point = F,
+    remove = NA
+  ) + 
+  geom_jitter(aes(colour = party_ger), alpha = 0.3) +
+  facet_wrap(~party_ger)
+```
+
+
+```{r}
+
+plot_function <- function(x, y){
+  # Der Datensatz
+  ess_ger %>%
+    filter(!is.na(party_ger)) %>%
+    # Die Grafik
+    ggscatter(
+      x = x, 
+      y = y,
+      color = "party_ger",
+      fill = "party_ger",
+      palette = party_colors,
+      point = F, 
+      remove = NA
+    ) +
+    facet_wrap(~party_ger)+ 
+    geom_smooth(aes(colour = party_ger), method = "lm")+ 
+    geom_jitter(aes(colour = party_ger), alpha = 0.3) + 
+    stat_cor(aes(color = party_ger), method = "pearson", label.x = 3, label.y = 11) +
+    theme(legend.position = "none")
+}
+
+plot_function("left_right", "edu")
+plot_function("left_right", "income")
+plot_function("left_right", "safety") + ylim(0,5)
+plot_function("left_right", "gay_tolerance") + ylim(0,5)
+plot_function("left_right", "imm_poor") + ylim(0,5)
+plot_function("left_right", "imm_econ") + ylim(0,5)
+plot_function("left_right", "religious") 
+plot_function("left_right", "fake_refugee") + ylim(0,5)
+```
+
+## Noch Zeit?
+
+1. Du könntest irgendwelche Variablen zu visualisieren um ein Gefühl und besseres Verständnis von ggplot2 argumenten `colour` und `fill` zu bekommen. 
+
+2. GGplot2 bietet unzählige Möglichkeiten bivariate und multivariate Daten darzustellen
+    + Hast du schon in den Katalog geschaut?
+    + `exploR::gg_heatmap` kann sehr nützlich sein
+    
+3. Eigene Daten? Gerne!
+

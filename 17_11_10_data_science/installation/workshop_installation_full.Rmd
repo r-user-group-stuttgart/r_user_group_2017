@@ -1,0 +1,49 @@
+---
+title: "Package Installation"
+subtitle: "R-Einführungsworkshop"
+output: html_document
+---
+
+
+# Hey!
+
+Um am Workshop teilnehemen zu können braucht ihr ein bisschen an Software. **R und Rstudio** sind beide Open Source und damit komplett kostenlos.
+
+# Download
+
+Unter folgendem Link kann R und Rstudio heruntergeladen werden (klicke auf die Logos)
+
+<a href="https://cloud.r-project.org/">
+<img src = "https://www.r-project.org/Rlogo.png" width="100px"> 
+<p> 
+<a href="https://www.rstudio.com/products/rstudio/download/">
+<img src = "https://www.rstudio.com/wp-content/uploads/2014/07/RStudio-Logo-Blue-Gray.png" width="200px"> 
+</a>
+
+<br>
+
+__Latex zum Erstellen von .pdf Reports__ jeweils für Windows und Mac PCs.
+
+<a href="https://miktex.org/download">
+<img src = "http://www.mathematik.uni-kl.de/~boehm/miktex-logo-slogan.png" width="200px"> 
+</a>
+
+<a href="https://tug.org/mactex/mactex-download.html">
+<img src = "http://www.tug.org/mactex/images/mactexlogoX5.png" width="150px"> 
+</a>
+
+
+# In Rstudio
+
+1. R installieren
+2. Rstudio installieren 
+3. Öffne das File workshop_installation**.Rmd** in Rstudio.
+4. Drücke den rechten Grünen Pfeil (rechts oberhalb des Codes). Jetzt werden alle diese Packages installiert, was einiges an Zeit braucht. Wenn Probleme auftauchen, werden wir das morgen früh kurz beheben. 
+
+![](install.png)
+
+```{r}
+needed_packages <- c("rmarkdown", "knitr", "learnr", "shiny", "haven", "tidyverse", "car", "htmltools", "ggthemes", "ggpubr", "sjPlot", "sjmisc", "sjstats", "ggdendro", "waffle", "ggparliament", "tabplot", "tidyr", "ggfortify", "viridis")
+install.packages(needed_packages)
+```
+

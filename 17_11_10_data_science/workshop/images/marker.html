@@ -1,0 +1,36 @@
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;border-color:#ccc;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#f0f0f0;}
+.tg .tg-yw4l{vertical-align:top}
+</style>
+<table class="tg">
+  <tr>
+    <th class="tg-yw4l">Inhalt</th>
+    <th class="tg-yw4l">R - Funktion/Befehl</th>
+  </tr>
+  <tr>
+    <td class="tg-031e">Schnelle Häufigkeiten</td>
+    <td class="tg-yw4l">table(euroGER_sub$dem_sat)</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Variablen Namen eines Datensatzes</td>
+    <td class="tg-yw4l">names(euroGER_sub)<br>colnames(euroGER_sub)</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Schnelle deskriptive Statistik</td>
+    <td class="tg-yw4l">summary(euroGER_sub)<br>summary(euroGER_sub$dem_sat)</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Skalenlimits</td>
+    <td class="tg-yw4l">min(euroGER_sub$dem_sat)<br>max(euroGER_sub$dem_sat)<br>range(euroGER_sub$dem_sat)</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Schwerpunkte einer Verteilung</td>
+    <td class="tg-yw4l">mean(euroGER_sub$dem_sat)<br>median(euroGER_sub$dem_sat)<br>sd(euroGER_sub$dem_sat)<br>var(euroGER_sub$dem_sat)</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">Quantile</td>
+    <td class="tg-yw4l">quantile(euroGER_sub$dem_sat)<br>quantile(euroGER_sub$dem_sat, probs = seq(0,1, by = 0.1))</td>
+  </tr>
+</table>

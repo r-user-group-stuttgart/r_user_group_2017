@@ -1,0 +1,13 @@
+name: linear_model
+title: linear_model
+username:
+account: syro
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 236234
+bundleId: 1079108
+url: https://syro.shinyapps.io/linear_model/
+when: 1510846959.97358
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .dropbox|Icon|R-Workshop.pptx|images/.DS_Store
