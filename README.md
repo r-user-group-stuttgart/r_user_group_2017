@@ -2,7 +2,9 @@
 
 Hallo liebe R User!
 
-Ein schönes Jahr voller spannender Workshops geht zu Ende. Hier haben wir für euch einmal alle R User Treffen dieses Jahres zusammengetragen, damit ihr diese alle im Überblick habt :)
+Ein schönes Jahr voller spannender Workshops geht zu Ende. Danke an alle die bei einem der Treffen dabei waren.
+
+ Hier haben wir für euch einmal alle R User Treffen dieses Jahres zusammengetragen, damit ihr diese alle im Überblick habt :)
 
 ### R User Group Treffen am 17.05.2017
 
