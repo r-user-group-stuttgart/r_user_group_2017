@@ -8,8 +8,6 @@ Ein schönes Jahr voller spannender Workshops geht zu Ende. Hier haben wir für 
 
 __Einführungsworskhop in R__
 
-Hier geht es zum Repository:
-
 [Hier geht es zum Repository](https://github.com/r-user-group-stuttgart/17_05_12_rworkshop)
 
 ### R User Group Treffen am 17.06.2017
